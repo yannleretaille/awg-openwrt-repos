@@ -1,0 +1,15 @@
+{
+  "upstream_repo": "Slava-Shchipunov/awg-openwrt",
+  "api_base": "https://api.github.com",
+  "publish_branch": "published-repos",
+  "output_root": "output",
+  "download_root": "output/downloads",
+  "manifest_root": "output/manifests",
+  "state_file": "state/processed_release_ids.json",
+  "release_detection": {
+    "ignore_snapshot": true,
+    "openwrt_version_patterns": [
+      "v?((?:22|23|24|25|26)\\.\\d+\\.\\d+)"
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+name: Sync Releases
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Sync mode"
+        type: choice
+        required: true
+        default: incremental
+        options:
+          - incremental
+          - backfill
+          - clean-rebuild
+      publish_branch:
+        description: "Destination branch name used by sync state/output conventions"
+        required: true
+        default: published-repos
+      dry_run:
+        description: "Skip downloads and manifest writes"
+        type: boolean
+        required: true
+        default: false
+  schedule:
+    - cron: "19 * * * *"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODE: ${{ github.event_name == 'schedule' && 'incremental' || inputs.mode }}
+          PUBLISH_BRANCH: ${{ github.event_name == 'schedule' && 'published-repos' || inputs.publish_branch }}
+          DRY_RUN: ${{ github.event_name == 'schedule' && 'false' || inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          ARGS=(--mode "$MODE" --publish-branch "$PUBLISH_BRANCH")
+          if [[ "$DRY_RUN" == "true" ]]; then
+            ARGS+=(--dry-run)
+          fi
+          ./scripts/sync_releases.py "${ARGS[@]}"
+
+      - name: Upload output artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: sync-output
+          path: |
+            output/
+            state/
+          if-no-files-found: warn
