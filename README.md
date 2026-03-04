@@ -11,6 +11,12 @@ Implemented scope currently covers Phase 1 + Phase 2:
 - sync modes: `incremental`, `backfill`, `clean-rebuild`
 - resumable state and release manifests
 
+Implemented scope now also includes core Phase 3:
+- materialize `opkg` feed trees (immutable release-scoped and rolling OpenWrt-version scoped)
+- generate `Packages` and `Packages.gz` indexes per architecture
+- optional `Packages` signing support via `usign`
+- consistency checks for arch/metadata/index generation
+
 ## Configuration
 Default config is [`config/settings.json`](config/settings.json).
 
@@ -47,6 +53,18 @@ Optional token (recommended for API limits):
 
 ```bash
 GITHUB_TOKEN=... ./scripts/sync_releases.py --mode incremental
+```
+
+Target a specific release id (useful for testing):
+
+```bash
+./scripts/sync_releases.py --mode incremental --release-id 170097744
+```
+
+Build `opkg` repositories from synced manifests/assets:
+
+```bash
+./scripts/build_opkg_repo.py --clean
 ```
 
 ## Local workflow testing with act

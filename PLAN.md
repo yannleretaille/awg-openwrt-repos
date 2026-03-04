@@ -16,10 +16,10 @@
 - [x] Support three modes: `backfill` (all eligible historical), `incremental` (new only), and `clean-rebuild` (clear+rebuild).
 
 ## Phase 3: OPKG Feed Generation
-- [ ] Materialize `.ipk` assets into deterministic feed directories.
-- [ ] Generate `Packages` and compressed index (`Packages.gz`).
-- [ ] Add optional feed signatures (`Packages.sig`) with managed key handling.
-- [ ] Validate feed integrity and index/package consistency.
+- [x] Materialize `.ipk` assets into deterministic feed directories.
+- [x] Generate `Packages` and compressed index (`Packages.gz`).
+- [x] Add optional feed signatures (`Packages.sig`) with managed key handling.
+- [x] Validate feed integrity and index/package consistency.
 
 ## Phase 4: APK Feed Generation
 - [ ] Materialize `.apk` assets into deterministic feed directories.

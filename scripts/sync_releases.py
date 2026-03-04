@@ -253,36 +253,58 @@ def extract_ar_members(data: bytes) -> Iterable[Tuple[str, bytes]]:
 
 
 def extract_ipk_metadata(path: Path) -> Dict[str, Optional[str]]:
-    data = path.read_bytes()
-    control_data: Optional[bytes] = None
-    for member_name, payload in extract_ar_members(data):
-        if member_name.startswith("control.tar"):
-            control_data = payload
-            break
-
-    if control_data is None:
-        raise SyncError("control archive not found in ipk")
-
-    with tarfile.open(fileobj=io.BytesIO(control_data), mode="r:*") as tf:
-        control_member = next(
-            (
-                m
-                for m in tf.getmembers()
-                if m.isfile() and (m.name == "control" or m.name.endswith("/control"))
-            ),
-            None,
-        )
-        if control_member is None:
-            raise SyncError("control metadata file not found in ipk control archive")
-        raw = tf.extractfile(control_member)
-        if raw is None:
-            raise SyncError("failed reading ipk control metadata")
-        fields = parse_control_blob(raw.read().decode("utf-8", errors="replace"))
+    fields = read_ipk_control_fields(path)
 
     arch = fields.get("Architecture")
     name = fields.get("Package")
     version = fields.get("Version")
     return {"arch": arch, "package_name": name, "package_version": version}
+
+
+def read_ipk_control_fields(path: Path) -> Dict[str, str]:
+    data = path.read_bytes()
+    control_data: Optional[bytes] = None
+
+    if len(data) >= 8 and data[:8] == b"!<arch>\n":
+        for member_name, payload in extract_ar_members(data):
+            if member_name.startswith("control.tar"):
+                control_data = payload
+                break
+    else:
+        with tarfile.open(fileobj=io.BytesIO(data), mode="r:*") as outer:
+            control_member = next(
+                (
+                    m
+                    for m in outer.getmembers()
+                    if m.isfile() and m.name.lstrip("./").startswith("control.tar")
+                ),
+                None,
+            )
+            if control_member is None:
+                raise SyncError("control archive not found in ipk outer tar")
+            raw = outer.extractfile(control_member)
+            if raw is None:
+                raise SyncError("failed reading ipk control archive from outer tar")
+            control_data = raw.read()
+
+    if control_data is None:
+        raise SyncError("control archive not found in ipk")
+
+    with tarfile.open(fileobj=io.BytesIO(control_data), mode="r:*") as control_tar:
+        control_meta = next(
+            (
+                m
+                for m in control_tar.getmembers()
+                if m.isfile() and (m.name == "control" or m.name.endswith("/control"))
+            ),
+            None,
+        )
+        if control_meta is None:
+            raise SyncError("control metadata file not found in ipk control archive")
+        raw_meta = control_tar.extractfile(control_meta)
+        if raw_meta is None:
+            raise SyncError("failed reading ipk control metadata")
+        return parse_control_blob(raw_meta.read().decode("utf-8", errors="replace"))
 
 
 def extract_apk_metadata(path: Path) -> Dict[str, Optional[str]]:
@@ -517,6 +539,13 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument("--output-root", default=None, help="override output root path")
     parser.add_argument("--publish-branch", default=None, help="override publish branch name")
     parser.add_argument("--github-token", default=os.getenv("GITHUB_TOKEN"), help="GitHub token")
+    parser.add_argument(
+        "--release-id",
+        action="append",
+        type=int,
+        default=[],
+        help="optional release id filter (repeatable)",
+    )
     parser.add_argument("--dry-run", action="store_true", help="discover only, no downloads/writes")
     return parser.parse_args(argv)
 
@@ -544,6 +573,7 @@ def main(argv: List[str]) -> int:
 
         patterns = build_detection_patterns(cfg)
         releases = fetch_all_releases(api_base=api_base, repo=repo, token=args.github_token)
+        release_filter = set(args.release_id or [])
         processed_ids = {int(rid) for rid in state.get("processed_release_ids", [])}
 
         run_stats = {
@@ -556,6 +586,8 @@ def main(argv: List[str]) -> int:
         for rel in releases:
             rel_id = rel.get("id")
             if not isinstance(rel_id, int):
+                continue
+            if release_filter and rel_id not in release_filter:
                 continue
             run_stats["seen_releases"] += 1
             if not should_process_release(args.mode, rel_id, processed_ids):

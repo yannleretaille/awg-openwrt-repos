@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Runtime state/artifacts
+output/downloads/
+output/manifests/
+output/repos/
+state/processed_release_ids.json
+state/*.tmp
+
+# Act temp files
+.actrc.local

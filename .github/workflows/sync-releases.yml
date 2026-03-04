@@ -52,6 +52,12 @@ jobs:
           fi
           ./scripts/sync_releases.py "${ARGS[@]}"
 
+      - name: Build OPKG repos
+        if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
+        run: |
+          set -euo pipefail
+          ./scripts/build_opkg_repo.py --clean
+
       - name: Upload output artifact
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
