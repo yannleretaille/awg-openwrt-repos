@@ -31,6 +31,7 @@ The system must:
 - OpenWrt version must be detected from release metadata (tag/title/body) with strict validation.
 - Ignore snapshot releases/assets entirely.
 - Support both immutable per-release outputs and rolling per-OpenWrt-version outputs.
+- For OPKG, preserve target/subtarget and kernel-hash payload separation while also providing a top-level aggregate `Packages(.gz)` view per target/subtarget for easier client configuration.
 
 ## Version Detection Rules
 - For `.ipk`, read package version from control metadata field `Version` (plus related identity fields).
@@ -49,6 +50,15 @@ The system must:
 - If same identity and different checksum: mark as conflict and fail promotion to rolling alias by default.
 - Optional override mode may force promotion, but must emit a high-severity warning and conflict report.
 - Do not mutate package metadata to fabricate a package `-rN` release value; for binary assets this would require rebuild/repack and is out of scope for v1.
+
+## OPKG Layout Policy
+- Maintain target-first OPKG tree with split payload locations:
+- `targets/<target>/<subtarget>/packages/*.ipk`
+- `targets/<target>/<subtarget>/kmods/<kernel-release-hash>/*.ipk`
+- Generate a top-level aggregate index per target/subtarget:
+- `targets/<target>/<subtarget>/Packages` and `Packages.gz`
+- Aggregate index entries must use nested `Filename` paths (for example `packages/...` and `kmods/<kernel-hash>/...`).
+- Keep `kmod-*` packages isolated by kernel-hash path on disk; do not flatten kmods across hashes.
 
 ## Rebuild and Recovery Modes
 - Incremental mode: process only unseen/changed upstream releases.

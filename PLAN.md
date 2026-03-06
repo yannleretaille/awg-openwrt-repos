@@ -20,6 +20,9 @@
 - [x] Generate `Packages` and compressed index (`Packages.gz`).
 - [x] Add optional feed signatures (`Packages.sig`) with managed key handling.
 - [x] Validate feed integrity and index/package consistency.
+- [x] Restructure OPKG output to target-first layout (`targets/<target>/<subtarget>/...`) aligned with OpenWrt conventions.
+- [x] Keep payloads split as `packages/` and `kmods/<kernel-release-hash>/` directories.
+- [x] Generate aggregate top-level `Packages(.gz)` per target/subtarget with nested `Filename` references to split payload paths.
 
 ## Phase 4: APK Feed Generation
 - [ ] Materialize `.apk` assets into deterministic feed directories.
@@ -38,6 +41,7 @@
 ## Phase 6: CI/CD Automation
 - [x] Add GitHub Actions workflow for scheduled incremental sync.
 - [x] Add manual workflow dispatch for full backfill/rebuild.
+- [x] Generate immutable release-scoped feeds plus rolling aliases per OpenWrt version during repo build.
 - [ ] Add workflow caching/artifact strategy to reduce runtime.
 - [ ] Publish immutable release-scoped feeds plus rolling aliases per OpenWrt version.
 - [ ] Publish generated output to `published-repos`.
