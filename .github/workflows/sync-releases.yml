@@ -93,6 +93,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     env:
       PUBLISH_BRANCH: ${{ github.event_name == 'schedule' && 'published-repos' || inputs.publish_branch }}
     steps:
@@ -107,7 +108,7 @@ jobs:
           name: sync-output
           path: .
 
-      - name: Publish generated repos to branch
+      - name: Prepare publish PR branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -122,6 +123,9 @@ jobs:
             exit 0
           fi
 
+          safe_publish_branch="$(echo "${PUBLISH_BRANCH}" | tr '/ ' '--')"
+          HEAD_BRANCH="publish-staging-${safe_publish_branch}"
+
           publish_dir="$(mktemp -d)"
           trap 'rm -rf "$publish_dir"' EXIT
           cd "$publish_dir"
@@ -132,9 +136,9 @@ jobs:
           git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 
           if git fetch --depth=1 origin "${PUBLISH_BRANCH}"; then
-            git checkout -B "${PUBLISH_BRANCH}" "origin/${PUBLISH_BRANCH}"
+            git checkout -B "${HEAD_BRANCH}" "origin/${PUBLISH_BRANCH}"
           else
-            git checkout --orphan "${PUBLISH_BRANCH}"
+            git checkout --orphan "${HEAD_BRANCH}"
           fi
 
           find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
@@ -163,4 +167,24 @@ jobs:
           fi
 
           git commit -m "chore(publish): update generated repos"
-          git push origin "${PUBLISH_BRANCH}"
+          git push --force-with-lease origin "${HEAD_BRANCH}"
+
+          existing_pr="$(gh pr list \
+            --base "${PUBLISH_BRANCH}" \
+            --head "${HEAD_BRANCH}" \
+            --state open \
+            --json number \
+            --jq '.[0].number')"
+
+          if [[ -n "${existing_pr}" ]]; then
+            gh pr edit "${existing_pr}" \
+              --title "chore(publish): update generated repos for ${PUBLISH_BRANCH}" \
+              --body "Automated publish update from workflow run ${GITHUB_RUN_ID}."
+            echo "Updated PR #${existing_pr}"
+          else
+            gh pr create \
+              --base "${PUBLISH_BRANCH}" \
+              --head "${HEAD_BRANCH}" \
+              --title "chore(publish): update generated repos for ${PUBLISH_BRANCH}" \
+              --body "Automated publish update from workflow run ${GITHUB_RUN_ID}."
+          fi

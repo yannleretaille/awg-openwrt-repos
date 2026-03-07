@@ -50,7 +50,8 @@
 - [x] Generate immutable release-scoped feeds plus rolling aliases per OpenWrt version during repo build.
 - [ ] Add workflow caching/artifact strategy to reduce runtime.
 - [x] Add publish job to push generated trees (immutable + rolling + `REPOS.md`) to configured `publish_branch`.
-- [ ] Add protected publish flow (PR or branch protection compatible) and rollback procedure.
+- [x] Add basic protected publish flow (staging branch + PR into `publish_branch`).
+- [ ] Add rollback procedure documentation.
 
 ## Phase 7: Operations and Documentation
 - [x] Generate `output/REPOS.md` index with combined feed URLs (rolling + immutable), prefixed by config `public_base_url`.

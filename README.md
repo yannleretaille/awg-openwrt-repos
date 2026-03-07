@@ -94,7 +94,7 @@ Generate feed URL index markdown:
 ```
 
 ## CI Publishing
-The GitHub workflow now has a `publish` job that pushes generated repository output to the configured destination branch:
+The GitHub workflow now has a `publish` job that prepares a staging branch and opens/updates a PR into the configured destination branch:
 - published content:
   - `repos/`
   - `REPOS.md`
@@ -104,7 +104,8 @@ The GitHub workflow now has a `publish` job that pushes generated repository out
     - `apk_repo_report.json`
     - `opkg_coverage_report.json`
     - `apk_coverage_report.json`
-- branch source: `publish_branch` workflow input (or `published-repos` on schedule)
+- PR base branch: `publish_branch` workflow input (or `published-repos` on schedule)
+- PR head branch: `publish-staging-<publish_branch>`
 - publish is skipped when `dry_run=true`
 
 ## Local workflow testing with act
