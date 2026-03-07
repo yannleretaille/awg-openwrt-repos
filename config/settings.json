@@ -2,6 +2,7 @@
   "upstream_repo": "Slava-Shchipunov/awg-openwrt",
   "api_base": "https://api.github.com",
   "publish_branch": "published-repos",
+  "public_base_url": "",
   "output_root": "output",
   "download_root": "output/downloads",
   "manifest_root": "output/manifests",

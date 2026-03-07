@@ -32,6 +32,7 @@ The system must:
 - Ignore snapshot releases/assets entirely.
 - Support both immutable per-release outputs and rolling per-OpenWrt-version outputs.
 - For OPKG, preserve target/subtarget and kernel-hash payload separation while also providing a top-level aggregate `Packages(.gz)` view per target/subtarget for easier client configuration.
+- For APK, preserve target/subtarget and kernel-hash payload separation while also providing a top-level aggregate `packages.adb` view per target/subtarget for easier single-URL client configuration.
 
 ## Version Detection Rules
 - For `.ipk`, read package version from control metadata field `Version` (plus related identity fields).

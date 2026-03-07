@@ -13,12 +13,14 @@ Phase 1/2 scope:
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import datetime as dt
 import io
 import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 import tarfile
 import urllib.error
@@ -308,27 +310,43 @@ def read_ipk_control_fields(path: Path) -> Dict[str, str]:
 
 
 def extract_apk_metadata(path: Path) -> Dict[str, Optional[str]]:
-    with path.open("rb") as fh:
-        # .apk is gzip-compressed tar with .PKGINFO metadata.
-        with tarfile.open(fileobj=fh, mode="r:*") as tf:
-            pkginfo = next(
-                (
-                    m
-                    for m in tf.getmembers()
-                    if m.isfile() and (m.name == ".PKGINFO" or m.name.endswith("/.PKGINFO"))
-                ),
-                None,
-            )
-            if pkginfo is None:
-                raise SyncError(".PKGINFO not found in apk")
-            raw = tf.extractfile(pkginfo)
-            if raw is None:
-                raise SyncError("failed reading .PKGINFO")
-            fields = parse_kv_blob(raw.read().decode("utf-8", errors="replace"))
+    # OpenWrt/APK v3 packages are ADB-based; use apk-tools metadata dump.
+    cmd = ["apk", "adbdump", str(path)]
+    try:
+        proc = subprocess.run(cmd, check=True, capture_output=True, text=True)
+    except FileNotFoundError as exc:
+        raise SyncError("apk binary not found on PATH") from exc
+    except subprocess.CalledProcessError as exc:
+        detail = (exc.stderr or exc.stdout or "").strip()
+        raise SyncError(f"apk adbdump failed: {detail}") from exc
 
-    arch = fields.get("arch")
-    name = fields.get("pkgname")
-    version = fields.get("pkgver")
+    name: Optional[str] = None
+    version: Optional[str] = None
+    arch: Optional[str] = None
+
+    in_info = False
+    for line in proc.stdout.splitlines():
+        if not in_info:
+            if line.strip() == "info:":
+                in_info = True
+            continue
+        if not line.startswith("  "):
+            break
+        body = line[2:]
+        if ":" not in body:
+            continue
+        key, val = body.split(":", 1)
+        key = key.strip()
+        val = val.strip()
+        if not val or val.startswith("#"):
+            continue
+        if key == "name":
+            name = val
+        elif key == "version":
+            version = val
+        elif key == "arch":
+            arch = val
+
     return {"arch": arch, "package_name": name, "package_version": version}
 
 
@@ -397,6 +415,7 @@ def process_release(
     download_root: Path,
     manifest_root: Path,
     dry_run: bool,
+    max_workers: int,
 ) -> Tuple[str, Dict[str, Any]]:
     rel_id = rel.get("id")
     rel_tag = rel.get("tag_name")
@@ -417,18 +436,29 @@ def process_release(
 
     assets: List[AssetMetadata] = []
     errors: List[str] = []
-    for asset in rel.get("assets", []):
+    candidates: List[Tuple[int, Dict[str, Any], str, str]] = []
+    for idx, asset in enumerate(rel.get("assets", [])):
         name = asset.get("name")
         url = asset.get("browser_download_url")
         if not isinstance(name, str) or not isinstance(url, str):
             continue
-
         file_type = classify_asset(name)
         if file_type is None:
             continue
+        candidates.append((idx, asset, name, file_type))
 
-        source_size = int(asset.get("size") or 0)
-        source_updated_at = asset.get("updated_at")
+    def process_asset_candidate(
+        idx: int,
+        raw_asset: Dict[str, Any],
+        name: str,
+        file_type: str,
+    ) -> Tuple[int, Optional[AssetMetadata], Optional[str]]:
+        url = raw_asset.get("browser_download_url")
+        if not isinstance(url, str):
+            return idx, None, f"asset {name}: missing browser_download_url"
+
+        source_size = int(raw_asset.get("size") or 0)
+        source_updated_at = raw_asset.get("updated_at")
         target_path = download_root / str(rel_id) / name
 
         metadata: Dict[str, Optional[str]] = {
@@ -448,10 +478,10 @@ def process_release(
             else:
                 sha256 = "dry-run"
         except Exception as exc:
-            errors.append(f"asset {name}: {exc}")
-            continue
+            return idx, None, f"asset {name}: {exc}"
 
-        assets.append(
+        return (
+            idx,
             AssetMetadata(
                 file_name=name,
                 file_type=file_type,
@@ -462,8 +492,35 @@ def process_release(
                 source_url=url,
                 source_size=source_size,
                 source_updated_at=source_updated_at,
-            )
+            ),
+            None,
         )
+
+    processed_assets: List[Tuple[int, AssetMetadata]] = []
+    if max_workers <= 1 or len(candidates) <= 1:
+        for idx, raw_asset, name, file_type in candidates:
+            pos, item, err = process_asset_candidate(idx, raw_asset, name, file_type)
+            if err:
+                errors.append(err)
+                continue
+            if item is not None:
+                processed_assets.append((pos, item))
+    else:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as pool:
+            futures = [
+                pool.submit(process_asset_candidate, idx, raw_asset, name, file_type)
+                for idx, raw_asset, name, file_type in candidates
+            ]
+            for fut in concurrent.futures.as_completed(futures):
+                pos, item, err = fut.result()
+                if err:
+                    errors.append(err)
+                    continue
+                if item is not None:
+                    processed_assets.append((pos, item))
+
+    for _idx, item in sorted(processed_assets, key=lambda x: x[0]):
+        assets.append(item)
 
     if errors:
         status = "error"
@@ -546,6 +603,12 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         default=[],
         help="optional release id filter (repeatable)",
     )
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        default=6,
+        help="max parallel asset workers per release (default: 6)",
+    )
     parser.add_argument("--dry-run", action="store_true", help="discover only, no downloads/writes")
     return parser.parse_args(argv)
 
@@ -564,6 +627,9 @@ def main(argv: List[str]) -> int:
         manifest_root = Path(cfg.get("manifest_root", output_root / "manifests"))
         publish_branch = args.publish_branch or str(cfg.get("publish_branch", "published-repos"))
         state_path = Path(args.state_file or cfg.get("state_file", "state/processed_release_ids.json"))
+        jobs = int(cfg.get("sync", {}).get("jobs", args.jobs))
+        if jobs < 1:
+            raise SyncError("jobs must be >= 1")
 
         state = load_state(state_path, repo=repo, publish_branch=publish_branch)
         if args.mode == "clean-rebuild":
@@ -602,6 +668,7 @@ def main(argv: List[str]) -> int:
                     download_root=download_root,
                     manifest_root=manifest_root,
                     dry_run=args.dry_run,
+                    max_workers=jobs,
                 )
             except Exception as exc:
                 status = "error"

@@ -58,6 +58,25 @@ jobs:
           set -euo pipefail
           ./scripts/build_opkg_repo.py --clean
 
+      - name: Build APK repos
+        if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
+        run: |
+          set -euo pipefail
+          docker run --rm \
+            -v "$PWD:/work" \
+            -w /work \
+            alpine:3.22 \
+            sh -euxc '
+              apk add --no-cache python3 apk-tools
+              ./scripts/build_apk_repo.py --clean
+            '
+
+      - name: Generate REPOS.md
+        if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
+        run: |
+          set -euo pipefail
+          ./scripts/generate_repos_md.py
+
       - name: Upload output artifact
         if: ${{ always() }}
         uses: actions/upload-artifact@v4

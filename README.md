@@ -17,12 +17,21 @@ Implemented scope now also includes core Phase 3:
 - optional `Packages` signing support via `usign`
 - consistency checks for arch/metadata/index generation
 
+Implemented scope now also includes core Phase 4:
+- materialize `apk` feed trees (immutable release-scoped and rolling OpenWrt-version scoped)
+- generate top-level aggregate `packages.adb` per target/subtarget for single-URL client setup
+- preserve split payload trees (`packages/` and `kmods/<kernel-hash>/`) with optional split compatibility indexes
+- optional `packages.adb` signing support via `apk mkndx --sign`
+
 ## Configuration
 Default config is [`config/settings.json`](config/settings.json).
 
 `publish_branch` is configurable in two ways:
 - config value: `publish_branch`
 - CLI override: `--publish-branch <branch>`
+
+`public_base_url` controls URL prefixing in generated `output/REPOS.md`.
+Example: `https://<user>.github.io/<repo>`
 
 ## Usage
 Run incremental sync:
@@ -65,6 +74,18 @@ Build `opkg` repositories from synced manifests/assets:
 
 ```bash
 ./scripts/build_opkg_repo.py --clean
+```
+
+Build `apk` repositories from synced manifests/assets:
+
+```bash
+./scripts/build_apk_repo.py --clean
+```
+
+Generate feed URL index markdown:
+
+```bash
+./scripts/generate_repos_md.py
 ```
 
 ## Local workflow testing with act
