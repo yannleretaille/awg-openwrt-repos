@@ -86,3 +86,81 @@ jobs:
             output/
             state/
           if-no-files-found: warn
+
+  publish:
+    needs: sync
+    if: ${{ needs.sync.result == 'success' && (github.event_name == 'schedule' || inputs.dry_run != true) }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      PUBLISH_BRANCH: ${{ github.event_name == 'schedule' && 'published-repos' || inputs.publish_branch }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: sync-output
+          path: .
+
+      - name: Publish generated repos to branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if [[ ! -d output/repos ]]; then
+            echo "output/repos not found, nothing to publish"
+            exit 0
+          fi
+          if [[ ! -f output/REPOS.md ]]; then
+            echo "output/REPOS.md not found, nothing to publish"
+            exit 0
+          fi
+
+          publish_dir="$(mktemp -d)"
+          trap 'rm -rf "$publish_dir"' EXIT
+          cd "$publish_dir"
+
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+          if git fetch --depth=1 origin "${PUBLISH_BRANCH}"; then
+            git checkout -B "${PUBLISH_BRANCH}" "origin/${PUBLISH_BRANCH}"
+          else
+            git checkout --orphan "${PUBLISH_BRANCH}"
+          fi
+
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          mkdir -p repos
+          mkdir -p meta
+          cp -a "${GITHUB_WORKSPACE}/output/repos/." repos/
+          cp "${GITHUB_WORKSPACE}/output/REPOS.md" REPOS.md
+
+          for f in \
+            openwrt_versions.json \
+            opkg_repo_report.json \
+            apk_repo_report.json \
+            opkg_coverage_report.json \
+            apk_coverage_report.json
+          do
+            src="${GITHUB_WORKSPACE}/output/manifests/index/${f}"
+            if [[ -f "${src}" ]]; then
+              cp "${src}" "meta/${f}"
+            fi
+          done
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No publish changes detected"
+            exit 0
+          fi
+
+          git commit -m "chore(publish): update generated repos"
+          git push origin "${PUBLISH_BRANCH}"

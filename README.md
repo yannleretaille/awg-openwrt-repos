@@ -93,6 +93,20 @@ Generate feed URL index markdown:
 ./scripts/generate_repos_md.py
 ```
 
+## CI Publishing
+The GitHub workflow now has a `publish` job that pushes generated repository output to the configured destination branch:
+- published content:
+  - `repos/`
+  - `REPOS.md`
+  - curated `meta/` reports from `output/manifests/index/`:
+    - `openwrt_versions.json`
+    - `opkg_repo_report.json`
+    - `apk_repo_report.json`
+    - `opkg_coverage_report.json`
+    - `apk_coverage_report.json`
+- branch source: `publish_branch` workflow input (or `published-repos` on schedule)
+- publish is skipped when `dry_run=true`
+
 ## Local workflow testing with act
 List jobs:
 
