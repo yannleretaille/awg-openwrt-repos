@@ -42,7 +42,7 @@
 - [ ] Detect package collisions `(name, arch, version)` and compare checksums.
 - [ ] On checksum mismatch for same package identity, block rolling-feed promotion and emit conflict report.
 - [ ] Add upstream checksum verification when available; otherwise enforce strict internal consistency checks.
-- [ ] Add retry logic and partial-failure handling for network/API issues.
+- [x] Add retry logic and partial-failure handling for network/API issues.
 
 ## Phase 6: CI/CD Automation
 - [x] Add GitHub Actions workflow for scheduled incremental sync.

@@ -23,6 +23,7 @@ import shutil
 import subprocess
 import sys
 import tarfile
+import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
@@ -50,6 +51,15 @@ class AssetMetadata:
     source_updated_at: Optional[str]
 
 
+@dataclass
+class NetworkRetryConfig:
+    max_retries: int = 4
+    backoff_initial_seconds: float = 1.0
+    backoff_max_seconds: float = 20.0
+    timeout_api_seconds: int = 60
+    timeout_asset_seconds: int = 180
+
+
 def read_json(path: Path, fallback: Any) -> Any:
     if not path.exists():
         return fallback
@@ -75,7 +85,47 @@ def load_config(path: Path) -> Dict[str, Any]:
     return cfg
 
 
-def http_json(url: str, token: Optional[str]) -> Any:
+def load_network_retry_config(cfg: Dict[str, Any]) -> NetworkRetryConfig:
+    net = cfg.get("sync", {}).get("network", {})
+    if not isinstance(net, dict):
+        net = {}
+    return NetworkRetryConfig(
+        max_retries=max(0, int(net.get("max_retries", 4))),
+        backoff_initial_seconds=max(0.1, float(net.get("backoff_initial_seconds", 1.0))),
+        backoff_max_seconds=max(0.1, float(net.get("backoff_max_seconds", 20.0))),
+        timeout_api_seconds=max(1, int(net.get("timeout_api_seconds", 60))),
+        timeout_asset_seconds=max(1, int(net.get("timeout_asset_seconds", 180))),
+    )
+
+
+def is_retryable_network_error(exc: Exception) -> bool:
+    if isinstance(exc, urllib.error.HTTPError):
+        code = getattr(exc, "code", None)
+        return isinstance(code, int) and code in {408, 409, 425, 429, 500, 502, 503, 504}
+    if isinstance(exc, urllib.error.URLError):
+        return True
+    if isinstance(exc, TimeoutError):
+        return True
+    return False
+
+
+def run_with_retries(fn, retry_cfg: NetworkRetryConfig):
+    attempt = 0
+    while True:
+        try:
+            return fn()
+        except Exception as exc:
+            if attempt >= retry_cfg.max_retries or not is_retryable_network_error(exc):
+                raise
+            sleep_for = min(
+                retry_cfg.backoff_max_seconds,
+                retry_cfg.backoff_initial_seconds * (2 ** attempt),
+            )
+            time.sleep(sleep_for)
+            attempt += 1
+
+
+def http_json(url: str, token: Optional[str], retry_cfg: NetworkRetryConfig) -> Any:
     req = urllib.request.Request(url)
     req.add_header("Accept", "application/vnd.github+json")
     req.add_header("User-Agent", "awg-openwrt-reops-sync")
@@ -83,8 +133,11 @@ def http_json(url: str, token: Optional[str]) -> Any:
         req.add_header("Authorization", f"Bearer {token}")
 
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            raw = resp.read()
+        def do_request():
+            with urllib.request.urlopen(req, timeout=retry_cfg.timeout_api_seconds) as resp:
+                return resp.read()
+
+        raw = run_with_retries(do_request, retry_cfg)
     except urllib.error.HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")
         raise SyncError(f"GitHub API error {exc.code}: {body[:400]}") from exc
@@ -94,12 +147,17 @@ def http_json(url: str, token: Optional[str]) -> Any:
     return json.loads(raw.decode("utf-8"))
 
 
-def fetch_all_releases(api_base: str, repo: str, token: Optional[str]) -> List[Dict[str, Any]]:
+def fetch_all_releases(
+    api_base: str,
+    repo: str,
+    token: Optional[str],
+    retry_cfg: NetworkRetryConfig,
+) -> List[Dict[str, Any]]:
     releases: List[Dict[str, Any]] = []
     page = 1
     while True:
         url = f"{api_base}/repos/{repo}/releases?per_page=100&page={page}"
-        page_payload = http_json(url, token)
+        page_payload = http_json(url, token, retry_cfg)
         if not isinstance(page_payload, list):
             raise SyncError("Unexpected GitHub API payload for releases")
         if not page_payload:
@@ -176,7 +234,7 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def download_asset(url: str, dst: Path, token: Optional[str]) -> None:
+def download_asset(url: str, dst: Path, token: Optional[str], retry_cfg: NetworkRetryConfig) -> None:
     dst.parent.mkdir(parents=True, exist_ok=True)
     req = urllib.request.Request(url)
     req.add_header("Accept", "application/octet-stream")
@@ -184,14 +242,22 @@ def download_asset(url: str, dst: Path, token: Optional[str]) -> None:
     if token:
         req.add_header("Authorization", f"Bearer {token}")
 
+    tmp_dst = dst.with_suffix(f"{dst.suffix}.part")
     try:
-        with urllib.request.urlopen(req, timeout=180) as resp, dst.open("wb") as out:
-            shutil.copyfileobj(resp, out)
+        def do_download():
+            with urllib.request.urlopen(req, timeout=retry_cfg.timeout_asset_seconds) as resp, tmp_dst.open("wb") as out:
+                shutil.copyfileobj(resp, out)
+            tmp_dst.replace(dst)
+
+        run_with_retries(do_download, retry_cfg)
     except urllib.error.HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")
         raise SyncError(f"Asset download error {exc.code} for {url}: {body[:300]}") from exc
     except urllib.error.URLError as exc:
         raise SyncError(f"Asset download connection failed for {url}: {exc}") from exc
+    finally:
+        if tmp_dst.exists():
+            tmp_dst.unlink(missing_ok=True)
 
 
 def parse_control_blob(raw: str) -> Dict[str, str]:
@@ -416,6 +482,7 @@ def process_release(
     manifest_root: Path,
     dry_run: bool,
     max_workers: int,
+    retry_cfg: NetworkRetryConfig,
 ) -> Tuple[str, Dict[str, Any]]:
     rel_id = rel.get("id")
     rel_tag = rel.get("tag_name")
@@ -471,7 +538,7 @@ def process_release(
         try:
             if not dry_run:
                 if not target_path.exists():
-                    download_asset(url, target_path, token)
+                    download_asset(url, target_path, token, retry_cfg)
                 sha256 = sha256_file(target_path)
                 parsed = extract_metadata_for_asset(target_path, file_type)
                 metadata.update({k: v for k, v in parsed.items() if v})
@@ -638,7 +705,13 @@ def main(argv: List[str]) -> int:
         ensure_dirs([output_root, download_root, manifest_root, state_path.parent])
 
         patterns = build_detection_patterns(cfg)
-        releases = fetch_all_releases(api_base=api_base, repo=repo, token=args.github_token)
+        retry_cfg = load_network_retry_config(cfg)
+        releases = fetch_all_releases(
+            api_base=api_base,
+            repo=repo,
+            token=args.github_token,
+            retry_cfg=retry_cfg,
+        )
         release_filter = set(args.release_id or [])
         processed_ids = {int(rid) for rid in state.get("processed_release_ids", [])}
 
@@ -669,6 +742,7 @@ def main(argv: List[str]) -> int:
                     manifest_root=manifest_root,
                     dry_run=args.dry_run,
                     max_workers=jobs,
+                    retry_cfg=retry_cfg,
                 )
             except Exception as exc:
                 status = "error"

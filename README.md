@@ -38,6 +38,11 @@ Example: `https://<user>.github.io/<repo>`
 - `required_package_names`: package names expected for every target/subtarget
 - `optional_package_names`: tracked in coverage reports but not required
 
+`sync.network` controls API/download resilience:
+- `max_retries`: retry count for retryable network/API errors
+- `backoff_initial_seconds` / `backoff_max_seconds`: exponential backoff window
+- `timeout_api_seconds` / `timeout_asset_seconds`: request timeouts
+
 ## Usage
 Run incremental sync:
 

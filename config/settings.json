@@ -7,6 +7,16 @@
   "download_root": "output/downloads",
   "manifest_root": "output/manifests",
   "state_file": "state/processed_release_ids.json",
+  "sync": {
+    "jobs": 6,
+    "network": {
+      "max_retries": 4,
+      "backoff_initial_seconds": 1.0,
+      "backoff_max_seconds": 20.0,
+      "timeout_api_seconds": 60,
+      "timeout_asset_seconds": 180
+    }
+  },
   "coverage_policy": {
     "strict": true,
     "required_package_names": [
