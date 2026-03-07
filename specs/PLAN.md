@@ -49,7 +49,7 @@
 - [x] Add manual workflow dispatch for full backfill/rebuild.
 - [x] Generate immutable release-scoped feeds plus rolling aliases per OpenWrt version during repo build.
 - [ ] Add workflow caching/artifact strategy to reduce runtime.
-- [ ] Add publish job to push generated trees (immutable + rolling + `REPOS.md`) to configured `publish_branch`.
+- [x] Add publish job to push generated trees (immutable + rolling + `REPOS.md`) to configured `publish_branch`.
 - [ ] Add protected publish flow (PR or branch protection compatible) and rollback procedure.
 
 ## Phase 7: Operations and Documentation
