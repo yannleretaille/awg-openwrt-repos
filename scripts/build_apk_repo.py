@@ -64,6 +64,25 @@ def load_release_manifests(manifest_root: Path) -> List[Dict[str, Any]]:
     return manifests
 
 
+def load_coverage_policy(cfg: Dict[str, Any]) -> Tuple[bool, set[str], set[str]]:
+    policy = cfg.get("coverage_policy", {})
+    if not isinstance(policy, dict):
+        return True, set(), set()
+
+    strict = bool(policy.get("strict", True))
+    required = {
+        str(x).strip()
+        for x in policy.get("required_package_names", [])
+        if isinstance(x, str) and x.strip()
+    }
+    optional = {
+        str(x).strip()
+        for x in policy.get("optional_package_names", [])
+        if isinstance(x, str) and x.strip()
+    }
+    return strict, required, optional
+
+
 def normalize_release_key(release_id: int, release_tag: str) -> str:
     tag = (release_tag or "").strip()
     safe = "".join(ch if ch.isalnum() or ch in (".", "-", "_") else "_" for ch in tag)
@@ -291,15 +310,18 @@ def collect_apk_artifacts(
                 )
             )
 
-    known_pairs: set[Tuple[str, str]] = set()
+    known_pairs_by_release: Dict[int, set[Tuple[str, str]]] = {}
     for cand in candidates:
         if cand.pkg_name.startswith("kmod-") and cand.target and cand.subtarget:
-            known_pairs.add((cand.target, cand.subtarget))
-    known_targets = {target for target, _ in known_pairs}
-
+            known_pairs_by_release.setdefault(cand.release_id, set()).add((cand.target, cand.subtarget))
     for cand in candidates:
+        known_pairs = known_pairs_by_release.get(cand.release_id, set())
         target, subtarget = cand.target, cand.subtarget
-        if not target or not subtarget or (known_targets and target not in known_targets):
+        if (
+            not target
+            or not subtarget
+            or (known_pairs and (target, subtarget) not in known_pairs)
+        ):
             t2, s2 = infer_target_subtarget_from_pairs(cand.suffix_after_version, known_pairs)
             if t2 and s2:
                 target, subtarget = t2, s2
@@ -385,11 +407,16 @@ def materialize_variant(
     keys_dir: Optional[Path],
     include_release_key: bool,
     split_indexes: bool,
-) -> Tuple[List[str], int]:
+    strict_coverage: bool,
+    required_packages: set[str],
+    optional_packages: set[str],
+) -> Tuple[List[str], int, List[Dict[str, Any]]]:
     errors: List[str] = []
+    coverage_rows: List[Dict[str, Any]] = []
 
     aggregate_index_inputs: Dict[Path, Dict[str, str]] = {}
     split_index_inputs: Dict[Path, Dict[str, str]] = {}
+    packages_by_target: Dict[Path, set[str]] = {}
 
     for item in artifacts:
         if include_release_key:
@@ -424,6 +451,7 @@ def materialize_variant(
             errors.append(f"canonical apk collision in {target_root}: {cfile}")
         else:
             agg_map[cfile] = item.source_sha256
+        packages_by_target.setdefault(target_root, set()).add(item.pkg_name)
 
         if split_indexes:
             split_dir = target_root / item.payload_dir_rel
@@ -463,7 +491,23 @@ def materialize_variant(
             continue
         indexed_dirs += 1
 
-    return errors, indexed_dirs
+    for target_root, present in sorted(packages_by_target.items(), key=lambda x: str(x[0])):
+        missing_required = sorted(required_packages - present)
+        present_optional = sorted(optional_packages & present)
+        coverage_rows.append(
+            {
+                "target_root": str(target_root),
+                "present_count": len(present),
+                "missing_required": missing_required,
+                "present_optional": present_optional,
+            }
+        )
+        if strict_coverage and missing_required:
+            errors.append(
+                f"coverage check failed at {target_root}: missing required packages {missing_required}"
+            )
+
+    return errors, indexed_dirs, coverage_rows
 
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
@@ -503,6 +547,7 @@ def main(argv: List[str]) -> int:
     manifest_root = Path(args.manifest_root or cfg.get("manifest_root", output_root / "manifests"))
     download_root = Path(args.download_root or cfg.get("download_root", output_root / "downloads"))
     repo_root = Path(args.repo_root or (output_root / "repos"))
+    strict_coverage, required_packages, optional_packages = load_coverage_policy(cfg)
 
     sign_key = Path(args.sign_key) if args.sign_key else None
     keys_dir = Path(args.keys_dir) if args.keys_dir else None
@@ -531,7 +576,7 @@ def main(argv: List[str]) -> int:
 
     rolling_latest = select_latest_release_per_version(artifacts)
 
-    release_errors, release_indexed_dirs = materialize_variant(
+    release_errors, release_indexed_dirs, release_coverage = materialize_variant(
         artifacts=artifacts,
         variant_root=repo_root / "apk" / "releases",
         apk_bin=args.apk_bin,
@@ -539,11 +584,14 @@ def main(argv: List[str]) -> int:
         keys_dir=keys_dir,
         include_release_key=True,
         split_indexes=args.split_indexes,
+        strict_coverage=strict_coverage,
+        required_packages=required_packages,
+        optional_packages=optional_packages,
     )
     errors.extend(release_errors)
 
     rolling_artifacts = [a for a in artifacts if rolling_latest.get(a.openwrt_version) == a.release_id]
-    rolling_errors, rolling_indexed_dirs = materialize_variant(
+    rolling_errors, rolling_indexed_dirs, rolling_coverage = materialize_variant(
         artifacts=rolling_artifacts,
         variant_root=repo_root / "apk" / "openwrt",
         apk_bin=args.apk_bin,
@@ -551,8 +599,21 @@ def main(argv: List[str]) -> int:
         keys_dir=keys_dir,
         include_release_key=False,
         split_indexes=args.split_indexes,
+        strict_coverage=strict_coverage,
+        required_packages=required_packages,
+        optional_packages=optional_packages,
     )
     errors.extend(rolling_errors)
+
+    coverage = {
+        "strict": strict_coverage,
+        "required_package_names": sorted(required_packages),
+        "optional_package_names": sorted(optional_packages),
+        "release_targets_checked": len(release_coverage),
+        "rolling_targets_checked": len(rolling_coverage),
+        "release_missing_required_count": sum(1 for row in release_coverage if row["missing_required"]),
+        "rolling_missing_required_count": sum(1 for row in rolling_coverage if row["missing_required"]),
+    }
 
     report = {
         "generated_at": sync.now_iso(),
@@ -561,11 +622,21 @@ def main(argv: List[str]) -> int:
         "indexed_dirs": release_indexed_dirs + rolling_indexed_dirs,
         "split_indexes": args.split_indexes,
         "rolling_latest_release_by_openwrt": rolling_latest,
+        "coverage": coverage,
         "errors": errors,
     }
 
     report_path = manifest_root / "index" / "apk_repo_report.json"
     sync.write_json(report_path, report)
+    sync.write_json(
+        manifest_root / "index" / "apk_coverage_report.json",
+        {
+            "generated_at": sync.now_iso(),
+            "policy": coverage,
+            "rolling_targets": rolling_coverage,
+            "release_targets": release_coverage,
+        },
+    )
 
     print(json.dumps({"status": "ok", **report}, indent=2))
     return 2 if errors and args.strict else 0

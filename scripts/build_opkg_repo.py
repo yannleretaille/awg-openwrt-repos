@@ -73,6 +73,25 @@ def load_release_manifests(manifest_root: Path) -> List[Dict[str, Any]]:
     return manifests
 
 
+def load_coverage_policy(cfg: Dict[str, Any]) -> Tuple[bool, set[str], set[str]]:
+    policy = cfg.get("coverage_policy", {})
+    if not isinstance(policy, dict):
+        return True, set(), set()
+
+    strict = bool(policy.get("strict", True))
+    required = {
+        str(x).strip()
+        for x in policy.get("required_package_names", [])
+        if isinstance(x, str) and x.strip()
+    }
+    optional = {
+        str(x).strip()
+        for x in policy.get("optional_package_names", [])
+        if isinstance(x, str) and x.strip()
+    }
+    return strict, required, optional
+
+
 def normalize_release_key(release_id: int, release_tag: str) -> str:
     tag = (release_tag or "").strip()
     safe = "".join(ch if ch.isalnum() or ch in (".", "-", "_") else "_" for ch in tag)
@@ -214,17 +233,20 @@ def collect_ipk_artifacts(manifests: List[Dict[str, Any]], download_root: Path) 
             except Exception as exc:
                 errors.append(f"release {release_id} asset {file_name}: {exc}")
 
-    known_pairs: set[Tuple[str, str]] = set()
+    known_pairs_by_release: Dict[int, set[Tuple[str, str]]] = {}
     for cand in candidates:
         pkg_name = cand.fields.get("Package", "")
         if pkg_name.startswith("kmod-") and cand.target and cand.subtarget:
-            known_pairs.add((cand.target, cand.subtarget))
-
-    known_targets = {target for target, _ in known_pairs}
+            known_pairs_by_release.setdefault(cand.release_id, set()).add((cand.target, cand.subtarget))
 
     for cand in candidates:
+        known_pairs = known_pairs_by_release.get(cand.release_id, set())
         target, subtarget = cand.target, cand.subtarget
-        if not target or not subtarget or (known_targets and target not in known_targets):
+        if (
+            not target
+            or not subtarget
+            or (known_pairs and (target, subtarget) not in known_pairs)
+        ):
             t2, s2 = infer_target_subtarget_from_pairs(cand.suffix_after_version, known_pairs)
             if t2 and s2:
                 target, subtarget = t2, s2
@@ -367,11 +389,16 @@ def materialize_variant(
     usign_bin: str,
     sign_key: Optional[Path],
     include_release_key: bool,
-) -> Tuple[List[str], int]:
+    strict_coverage: bool,
+    required_packages: set[str],
+    optional_packages: set[str],
+) -> Tuple[List[str], int, List[Dict[str, Any]]]:
     errors: List[str] = []
+    coverage_rows: List[Dict[str, Any]] = []
 
     aggregate: Dict[Path, List[IndexedPackage]] = {}
     split_indexes: Dict[Path, List[IndexedPackage]] = {}
+    packages_by_target: Dict[Path, set[str]] = {}
 
     for item in artifacts:
         if include_release_key:
@@ -402,6 +429,9 @@ def materialize_variant(
             sha256=item.sha256 or sync.sha256_file(dst),
         )
         aggregate.setdefault(target_root, []).append(idx)
+        pkg_name = item.fields.get("Package", "").strip()
+        if pkg_name:
+            packages_by_target.setdefault(target_root, set()).add(pkg_name)
 
         split_idx = IndexedPackage(
             fields=item.fields,
@@ -428,7 +458,23 @@ def materialize_variant(
             errors.append(sig_err)
         indexed_dirs += 1
 
-    return errors, indexed_dirs
+    for target_root, present in sorted(packages_by_target.items(), key=lambda x: str(x[0])):
+        missing_required = sorted(required_packages - present)
+        present_optional = sorted(optional_packages & present)
+        coverage_rows.append(
+            {
+                "target_root": str(target_root),
+                "present_count": len(present),
+                "missing_required": missing_required,
+                "present_optional": present_optional,
+            }
+        )
+        if strict_coverage and missing_required:
+            errors.append(
+                f"coverage check failed at {target_root}: missing required packages {missing_required}"
+            )
+
+    return errors, indexed_dirs, coverage_rows
 
 
 def parse_args(argv: List[str]) -> argparse.Namespace:
@@ -456,6 +502,7 @@ def main(argv: List[str]) -> int:
     download_root = Path(args.download_root or cfg.get("download_root", output_root / "downloads"))
     repo_root = Path(args.repo_root or (output_root / "repos"))
     sign_key = Path(args.sign_key) if args.sign_key else None
+    strict_coverage, required_packages, optional_packages = load_coverage_policy(cfg)
 
     manifests = load_release_manifests(manifest_root)
     artifacts, errors = collect_ipk_artifacts(manifests, download_root)
@@ -475,24 +522,40 @@ def main(argv: List[str]) -> int:
 
     rolling_latest = select_latest_release_per_version(artifacts)
 
-    release_errors, release_indexed_dirs = materialize_variant(
+    release_errors, release_indexed_dirs, release_coverage = materialize_variant(
         artifacts,
         repo_root / "opkg" / "releases",
         usign_bin=args.usign_bin,
         sign_key=sign_key,
         include_release_key=True,
+        strict_coverage=strict_coverage,
+        required_packages=required_packages,
+        optional_packages=optional_packages,
     )
     errors.extend(release_errors)
 
     rolling_artifacts = [a for a in artifacts if rolling_latest.get(a.openwrt_version) == a.release_id]
-    rolling_errors, rolling_indexed_dirs = materialize_variant(
+    rolling_errors, rolling_indexed_dirs, rolling_coverage = materialize_variant(
         rolling_artifacts,
         repo_root / "opkg" / "openwrt",
         usign_bin=args.usign_bin,
         sign_key=sign_key,
         include_release_key=False,
+        strict_coverage=strict_coverage,
+        required_packages=required_packages,
+        optional_packages=optional_packages,
     )
     errors.extend(rolling_errors)
+
+    coverage = {
+        "strict": strict_coverage,
+        "required_package_names": sorted(required_packages),
+        "optional_package_names": sorted(optional_packages),
+        "release_targets_checked": len(release_coverage),
+        "rolling_targets_checked": len(rolling_coverage),
+        "release_missing_required_count": sum(1 for row in release_coverage if row["missing_required"]),
+        "rolling_missing_required_count": sum(1 for row in rolling_coverage if row["missing_required"]),
+    }
 
     report = {
         "generated_at": sync.now_iso(),
@@ -500,11 +563,21 @@ def main(argv: List[str]) -> int:
         "ipk_entries": len(artifacts),
         "indexed_dirs": release_indexed_dirs + rolling_indexed_dirs,
         "rolling_latest_release_by_openwrt": rolling_latest,
+        "coverage": coverage,
         "errors": errors,
     }
 
     report_path = manifest_root / "index" / "opkg_repo_report.json"
     sync.write_json(report_path, report)
+    sync.write_json(
+        manifest_root / "index" / "opkg_coverage_report.json",
+        {
+            "generated_at": sync.now_iso(),
+            "policy": coverage,
+            "rolling_targets": rolling_coverage,
+            "release_targets": release_coverage,
+        },
+    )
 
     print(json.dumps({"status": "ok", **report}, indent=2))
     return 2 if errors and args.strict else 0

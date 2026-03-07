@@ -24,21 +24,24 @@
 - [x] Restructure OPKG output to target-first layout (`targets/<target>/<subtarget>/...`) aligned with OpenWrt conventions.
 - [x] Keep payloads split as `packages/` and `kmods/<kernel-release-hash>/` directories.
 - [x] Generate aggregate top-level `Packages(.gz)` per target/subtarget with nested `Filename` references to split payload paths.
+- [x] Harden target/subtarget inference to use release-local kmod anchors, preventing cross-release metadata poisoning.
 
 ## Phase 4: APK Feed Generation
 - [x] Materialize `.apk` assets into deterministic feed directories.
 - [x] Generate single-feed aggregate `packages.adb` per target/subtarget with split payload storage (`packages/` + `kmods/<kernel-hash>/`).
 - [x] Add optional split compatibility indexes (`packages/packages.adb`, `kmods/<kernel-hash>/packages.adb`) where needed.
 - [x] Generate `packages.adb` index with proper signing.
+- [x] Validate unsigned APK index readability/installability on latest upstream release (`apk adbdump` + `apk fetch`).
+- [x] Harden target/subtarget inference to use release-local kmod anchors, preventing cross-release metadata poisoning.
 - [ ] Publish/distribute public key material required by clients.
-- [ ] Validate APK index readability and signature correctness.
+- [ ] Add automated signed APK validation in CI (`apk verify`/`apk fetch` with keys).
 
 ## Phase 5: Coverage and Quality Gates
-- [ ] Add architecture/version coverage report per release.
-- [ ] Fail pipeline when expected assets are missing or malformed.
+- [x] Add machine-readable coverage report by release/version/target/subtarget and package set.
+- [x] Define required package-set policy via config (`coverage_policy`) and fail on missing mandatory package names.
 - [ ] Detect package collisions `(name, arch, version)` and compare checksums.
 - [ ] On checksum mismatch for same package identity, block rolling-feed promotion and emit conflict report.
-- [ ] Add checksum verification for downloaded assets.
+- [ ] Add upstream checksum verification when available; otherwise enforce strict internal consistency checks.
 - [ ] Add retry logic and partial-failure handling for network/API issues.
 
 ## Phase 6: CI/CD Automation
@@ -46,8 +49,8 @@
 - [x] Add manual workflow dispatch for full backfill/rebuild.
 - [x] Generate immutable release-scoped feeds plus rolling aliases per OpenWrt version during repo build.
 - [ ] Add workflow caching/artifact strategy to reduce runtime.
-- [ ] Publish immutable release-scoped feeds plus rolling aliases per OpenWrt version.
-- [ ] Publish generated output to `published-repos`.
+- [ ] Add publish job to push generated trees (immutable + rolling + `REPOS.md`) to configured `publish_branch`.
+- [ ] Add protected publish flow (PR or branch protection compatible) and rollback procedure.
 
 ## Phase 7: Operations and Documentation
 - [x] Generate `output/REPOS.md` index with combined feed URLs (rolling + immutable), prefixed by config `public_base_url`.
@@ -57,7 +60,7 @@
 - [ ] Add monitoring signals (last successful sync, release lag, error count).
 
 ## Done Criteria
-- [ ] Full historical upstream releases processed successfully.
-- [ ] New upstream releases are synced automatically without manual edits.
+- [x] Full historical eligible upstream releases processed successfully (snapshot skipped by policy).
+- [x] New upstream releases are synced automatically without manual edits.
 - [ ] `opkg` and `apk` clients can install packages from published feeds.
 - [ ] Feed outputs are reproducible and hosting-provider agnostic.

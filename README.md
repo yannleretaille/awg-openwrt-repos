@@ -33,6 +33,11 @@ Default config is [`config/settings.json`](config/settings.json).
 `public_base_url` controls URL prefixing in generated `output/REPOS.md`.
 Example: `https://<user>.github.io/<repo>`
 
+`coverage_policy` controls strict per-target package presence checks during repo generation:
+- `strict` (default `true`): fail build if any required package is missing for a target/subtarget
+- `required_package_names`: package names expected for every target/subtarget
+- `optional_package_names`: tracked in coverage reports but not required
+
 ## Usage
 Run incremental sync:
 

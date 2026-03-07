@@ -7,6 +7,17 @@
   "download_root": "output/downloads",
   "manifest_root": "output/manifests",
   "state_file": "state/processed_release_ids.json",
+  "coverage_policy": {
+    "strict": true,
+    "required_package_names": [
+      "kmod-amneziawg",
+      "amneziawg-tools"
+    ],
+    "optional_package_names": [
+      "luci-proto-amneziawg",
+      "luci-i18n-amneziawg-ru"
+    ]
+  },
   "release_detection": {
     "ignore_snapshot": true,
     "openwrt_version_patterns": [
