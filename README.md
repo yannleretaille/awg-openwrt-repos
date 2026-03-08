@@ -86,7 +86,7 @@ Build `opkg` repositories from synced manifests/assets:
 ./scripts/build_opkg_repo.py --clean
 ```
 
-By default, repo builders fail on checksum collisions for the same `(name, arch, version)`.
+By default, repo builders fail on checksum collisions targeting the same destination path.
 Use override only for explicit emergency bypass:
 
 ```bash

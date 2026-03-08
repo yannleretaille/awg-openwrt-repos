@@ -363,12 +363,15 @@ def collect_apk_artifacts(
     return artifacts, errors
 
 
-def copy_unique(src: Path, dst: Path, expected_sha256: str) -> Optional[str]:
+def copy_unique(src: Path, dst: Path, expected_sha256: str, force_overwrite: bool = False) -> Optional[str]:
     dst.parent.mkdir(parents=True, exist_ok=True)
     if dst.exists():
         old = sync.sha256_file(dst)
         new = expected_sha256 or sync.sha256_file(src)
         if old != new:
+            if force_overwrite:
+                shutil.copy2(src, dst)
+                return None
             return f"collision: {dst} has sha256={old} but source has sha256={new}"
         return None
     shutil.copy2(src, dst)
@@ -385,50 +388,59 @@ def select_latest_release_per_version(artifacts: List[ApkArtifact]) -> Dict[str,
     return {k: v[1] for k, v in winner.items()}
 
 
-def build_collision_report(artifacts: List[ApkArtifact]) -> Dict[str, Any]:
-    by_identity: Dict[Tuple[str, str, str], List[Dict[str, Any]]] = {}
+def destination_root_for(item: ApkArtifact, variant_root: Path, include_release_key: bool) -> Path:
+    if include_release_key:
+        release_key = normalize_release_key(item.release_id, item.release_tag)
+        return variant_root / release_key / item.openwrt_version / "targets" / item.target / item.subtarget
+    return variant_root / item.openwrt_version / "targets" / item.target / item.subtarget
 
+
+def destination_paths_for(item: ApkArtifact, target_root: Path) -> List[Path]:
+    cfile = canonical_name(item.pkg_name, item.pkg_ver)
+    return [
+        target_root / item.payload_dir_rel / cfile,
+        target_root / cfile,
+        target_root / item.payload_dir_rel / item.source_path.name,
+    ]
+
+
+def build_path_collision_report(
+    artifacts: Iterable[ApkArtifact],
+    variant_root: Path,
+    include_release_key: bool,
+) -> Dict[str, Any]:
+    by_path: Dict[str, List[Dict[str, Any]]] = {}
     for item in artifacts:
-        pkg = item.pkg_name.strip()
-        ver = item.pkg_ver.strip()
-        arch = item.pkg_arch.strip()
-        if not pkg or not ver or not arch:
-            continue
-        key = (pkg, arch, ver)
-        by_identity.setdefault(key, []).append(
-            {
-                "sha256": item.source_sha256,
-                "release_id": item.release_id,
-                "release_tag": item.release_tag,
-                "openwrt_version": item.openwrt_version,
-                "target": item.target,
-                "subtarget": item.subtarget,
-                "file_name": item.source_path.name,
-            }
-        )
+        target_root = destination_root_for(item, variant_root, include_release_key)
+        for dst in destination_paths_for(item, target_root):
+            by_path.setdefault(str(dst), []).append(
+                {
+                    "sha256": item.source_sha256,
+                    "release_id": item.release_id,
+                    "release_tag": item.release_tag,
+                    "openwrt_version": item.openwrt_version,
+                    "target": item.target,
+                    "subtarget": item.subtarget,
+                    "file_name": item.source_path.name,
+                }
+            )
 
     duplicates: List[Dict[str, Any]] = []
     collisions: List[Dict[str, Any]] = []
-    for (pkg, arch, ver), entries in sorted(by_identity.items()):
-        if len(entries) <= 1:
+    for path, rows in sorted(by_path.items()):
+        if len(rows) <= 1:
             continue
-        sha_set = sorted({e["sha256"] for e in entries if e.get("sha256")})
-        row = {
-            "name": pkg,
-            "arch": arch,
-            "version": ver,
-            "sha256_values": sha_set,
-            "instances": entries,
-        }
+        sha_set = sorted({r["sha256"] for r in rows if r.get("sha256")})
+        entry = {"destination_path": path, "sha256_values": sha_set, "instances": rows}
         if len(sha_set) <= 1:
-            duplicates.append(row)
+            duplicates.append(entry)
         else:
-            collisions.append(row)
+            collisions.append(entry)
 
     return {
-        "identities_seen": len(by_identity),
-        "duplicate_identities": len(duplicates),
-        "collision_identities": len(collisions),
+        "paths_seen": len(by_path),
+        "duplicate_paths": len(duplicates),
+        "collision_paths": len(collisions),
         "duplicates": duplicates,
         "collisions": collisions,
     }
@@ -468,6 +480,7 @@ def materialize_variant(
     sign_key: Optional[Path],
     keys_dir: Optional[Path],
     include_release_key: bool,
+    force_collision_override: bool,
     split_indexes: bool,
     strict_coverage: bool,
     required_packages: set[str],
@@ -481,48 +494,51 @@ def materialize_variant(
     packages_by_target: Dict[Path, set[str]] = {}
 
     for item in artifacts:
-        if include_release_key:
-            release_key = normalize_release_key(item.release_id, item.release_tag)
-            target_root = variant_root / release_key / item.openwrt_version / "targets" / item.target / item.subtarget
-        else:
-            target_root = variant_root / item.openwrt_version / "targets" / item.target / item.subtarget
+        target_root = destination_root_for(item, variant_root, include_release_key)
 
         cfile = canonical_name(item.pkg_name, item.pkg_ver)
 
         payload_canonical = target_root / item.payload_dir_rel / cfile
-        err = copy_unique(item.source_path, payload_canonical, item.source_sha256)
+        err = copy_unique(
+            item.source_path,
+            payload_canonical,
+            item.source_sha256,
+            force_overwrite=force_collision_override,
+        )
         if err:
             errors.append(err)
             continue
 
         root_canonical = target_root / cfile
-        err = copy_unique(item.source_path, root_canonical, item.source_sha256)
+        err = copy_unique(
+            item.source_path,
+            root_canonical,
+            item.source_sha256,
+            force_overwrite=force_collision_override,
+        )
         if err:
             errors.append(err)
             continue
 
         payload_original = target_root / item.payload_dir_rel / item.source_path.name
-        err = copy_unique(item.source_path, payload_original, item.source_sha256)
+        err = copy_unique(
+            item.source_path,
+            payload_original,
+            item.source_sha256,
+            force_overwrite=force_collision_override,
+        )
         if err:
             errors.append(err)
             continue
 
         agg_map = aggregate_index_inputs.setdefault(target_root, {})
-        prev_agg_sha = agg_map.get(cfile)
-        if prev_agg_sha and prev_agg_sha != item.source_sha256:
-            errors.append(f"canonical apk collision in {target_root}: {cfile}")
-        else:
-            agg_map[cfile] = item.source_sha256
+        agg_map[cfile] = item.source_sha256
         packages_by_target.setdefault(target_root, set()).add(item.pkg_name)
 
         if split_indexes:
             split_dir = target_root / item.payload_dir_rel
             split_map = split_index_inputs.setdefault(split_dir, {})
-            prev_split_sha = split_map.get(cfile)
-            if prev_split_sha and prev_split_sha != item.source_sha256:
-                errors.append(f"canonical apk collision in {split_dir}: {cfile}")
-            else:
-                split_map[cfile] = item.source_sha256
+            split_map[cfile] = item.source_sha256
 
     indexed_dirs = 0
 
@@ -586,7 +602,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument(
         "--force-collision-override",
         action="store_true",
-        help="continue build even when checksum collisions are detected for same (name,arch,version)",
+        help="continue build and overwrite when checksum collisions are detected on destination paths",
     )
     parser.add_argument("--sign-key", default=None, help="optional apk private key path")
     parser.add_argument("--keys-dir", default=None, help="optional apk keys directory")
@@ -621,11 +637,24 @@ def main(argv: List[str]) -> int:
 
     manifests = load_release_manifests(manifest_root)
     artifacts, errors = collect_apk_artifacts(manifests, download_root, apk_bin=args.apk_bin)
-    collision_report = build_collision_report(artifacts)
-    collision_count = int(collision_report.get("collision_identities", 0))
+    rolling_latest = select_latest_release_per_version(artifacts)
+    rolling_artifacts = [a for a in artifacts if rolling_latest.get(a.openwrt_version) == a.release_id]
+    release_collision_report = build_path_collision_report(
+        artifacts,
+        repo_root / "apk" / "releases",
+        include_release_key=True,
+    )
+    rolling_collision_report = build_path_collision_report(
+        rolling_artifacts,
+        repo_root / "apk" / "openwrt",
+        include_release_key=False,
+    )
+    collision_count = int(release_collision_report.get("collision_paths", 0)) + int(
+        rolling_collision_report.get("collision_paths", 0)
+    )
     if collision_count > 0 and not args.force_collision_override:
         errors.append(
-            f"collision gate: detected {collision_count} checksum collision(s) for same (name,arch,version); "
+            f"collision gate: detected {collision_count} checksum collision(s) on destination paths; "
             "use --force-collision-override to bypass"
         )
     if args.dry_run:
@@ -652,11 +681,15 @@ def main(argv: List[str]) -> int:
         {
             "generated_at": sync.now_iso(),
             "force_override": bool(args.force_collision_override),
-            **collision_report,
+            "summary": {
+                "collision_paths": collision_count,
+                "duplicate_paths": int(release_collision_report.get("duplicate_paths", 0))
+                + int(rolling_collision_report.get("duplicate_paths", 0)),
+            },
+            "release_scope": release_collision_report,
+            "rolling_scope": rolling_collision_report,
         },
     )
-
-    rolling_latest = select_latest_release_per_version(artifacts)
 
     release_errors, release_indexed_dirs, release_coverage = materialize_variant(
         artifacts=artifacts,
@@ -665,6 +698,7 @@ def main(argv: List[str]) -> int:
         sign_key=sign_key,
         keys_dir=keys_dir,
         include_release_key=True,
+        force_collision_override=args.force_collision_override,
         split_indexes=args.split_indexes,
         strict_coverage=strict_coverage,
         required_packages=required_packages,
@@ -672,7 +706,6 @@ def main(argv: List[str]) -> int:
     )
     errors.extend(release_errors)
 
-    rolling_artifacts = [a for a in artifacts if rolling_latest.get(a.openwrt_version) == a.release_id]
     rolling_errors, rolling_indexed_dirs, rolling_coverage = materialize_variant(
         artifacts=rolling_artifacts,
         variant_root=repo_root / "apk" / "openwrt",
@@ -680,6 +713,7 @@ def main(argv: List[str]) -> int:
         sign_key=sign_key,
         keys_dir=keys_dir,
         include_release_key=False,
+        force_collision_override=args.force_collision_override,
         split_indexes=args.split_indexes,
         strict_coverage=strict_coverage,
         required_packages=required_packages,
@@ -706,8 +740,9 @@ def main(argv: List[str]) -> int:
         "rolling_latest_release_by_openwrt": rolling_latest,
         "coverage": coverage,
         "collision_summary": {
-            "collision_identities": collision_count,
-            "duplicate_identities": int(collision_report.get("duplicate_identities", 0)),
+            "collision_paths": collision_count,
+            "duplicate_paths": int(release_collision_report.get("duplicate_paths", 0))
+            + int(rolling_collision_report.get("duplicate_paths", 0)),
             "force_override": bool(args.force_collision_override),
         },
         "errors": errors,

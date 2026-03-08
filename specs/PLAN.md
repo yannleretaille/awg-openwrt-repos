@@ -39,8 +39,8 @@
 ## Phase 5: Coverage and Quality Gates
 - [x] Add machine-readable coverage report by release/version/target/subtarget and package set.
 - [x] Define required package-set policy via config (`coverage_policy`) and fail on missing mandatory package names.
-- [x] Detect package collisions `(name, arch, version)` and compare checksums.
-- [x] On checksum mismatch for same package identity, block rolling-feed promotion and emit conflict report.
+- [x] Detect destination-path collisions and compare checksums.
+- [x] On checksum mismatch for same destination path, block build/publish by default and emit conflict report.
 - [ ] Add upstream checksum verification when available; otherwise enforce strict internal consistency checks.
 - [x] Add retry logic and partial-failure handling for network/API issues.
 

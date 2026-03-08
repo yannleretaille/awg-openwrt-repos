@@ -282,12 +282,15 @@ def collect_ipk_artifacts(manifests: List[Dict[str, Any]], download_root: Path) 
     return artifacts, errors
 
 
-def copy_unique(src: Path, dst: Path, expected_sha256: str) -> Optional[str]:
+def copy_unique(src: Path, dst: Path, expected_sha256: str, force_overwrite: bool = False) -> Optional[str]:
     dst.parent.mkdir(parents=True, exist_ok=True)
     if dst.exists():
         existing_sha = sync.sha256_file(dst)
         src_sha = expected_sha256 or sync.sha256_file(src)
         if existing_sha != src_sha:
+            if force_overwrite:
+                shutil.copy2(src, dst)
+                return None
             return f"collision: {dst} has sha256={existing_sha} but source has sha256={src_sha}"
         return None
     shutil.copy2(src, dst)
@@ -304,53 +307,47 @@ def select_latest_release_per_version(artifacts: List[PackageArtifact]) -> Dict[
     return {k: v[1] for k, v in winner.items()}
 
 
-def build_collision_report(artifacts: List[PackageArtifact]) -> Dict[str, Any]:
-    by_identity: Dict[Tuple[str, str, str, str], List[Dict[str, Any]]] = {}
+def destination_root_for(item: PackageArtifact, variant_root: Path, include_release_key: bool) -> Path:
+    if include_release_key:
+        release_key = normalize_release_key(item.release_id, item.release_tag)
+        return variant_root / release_key / item.openwrt_version / "targets" / item.target / item.subtarget
+    return variant_root / item.openwrt_version / "targets" / item.target / item.subtarget
 
+
+def build_path_collision_report(
+    artifacts: Iterable[PackageArtifact],
+    variant_root: Path,
+    include_release_key: bool,
+) -> Dict[str, Any]:
+    by_path: Dict[str, List[Dict[str, Any]]] = {}
     for item in artifacts:
-        pkg = item.fields.get("Package", "").strip()
-        ver = item.fields.get("Version", "").strip()
-        arch = item.fields.get("Architecture", "").strip() or item.arch
-        if not pkg or not ver or not arch:
-            continue
-        kernel_hash = extract_kernel_hash(item.fields) if pkg.startswith("kmod-") else ""
-        key = (pkg, arch, ver, kernel_hash)
-        by_identity.setdefault(key, []).append(
-            {
-                "sha256": item.sha256,
-                "release_id": item.release_id,
-                "release_tag": item.release_tag,
-                "openwrt_version": item.openwrt_version,
-                "target": item.target,
-                "subtarget": item.subtarget,
-                "file_name": item.file_name,
-            }
-        )
+        dst = destination_root_for(item, variant_root, include_release_key) / item.payload_rel
+        row = {
+            "sha256": item.sha256,
+            "release_id": item.release_id,
+            "release_tag": item.release_tag,
+            "openwrt_version": item.openwrt_version,
+            "target": item.target,
+            "subtarget": item.subtarget,
+            "file_name": item.file_name,
+        }
+        by_path.setdefault(str(dst), []).append(row)
 
     duplicates: List[Dict[str, Any]] = []
     collisions: List[Dict[str, Any]] = []
-
-    for (pkg, arch, ver, kernel_hash), entries in sorted(by_identity.items()):
-        if len(entries) <= 1:
+    for path, rows in sorted(by_path.items()):
+        if len(rows) <= 1:
             continue
-        sha_set = sorted({e["sha256"] for e in entries if e.get("sha256")})
-        row = {
-            "name": pkg,
-            "arch": arch,
-            "version": ver,
-            "kernel_hash": kernel_hash or None,
-            "sha256_values": sha_set,
-            "instances": entries,
-        }
+        sha_set = sorted({r["sha256"] for r in rows if r.get("sha256")})
+        entry = {"destination_path": path, "sha256_values": sha_set, "instances": rows}
         if len(sha_set) <= 1:
-            duplicates.append(row)
+            duplicates.append(entry)
         else:
-            collisions.append(row)
-
+            collisions.append(entry)
     return {
-        "identities_seen": len(by_identity),
-        "duplicate_identities": len(duplicates),
-        "collision_identities": len(collisions),
+        "paths_seen": len(by_path),
+        "duplicate_paths": len(duplicates),
+        "collision_paths": len(collisions),
         "duplicates": duplicates,
         "collisions": collisions,
     }
@@ -441,6 +438,7 @@ def materialize_variant(
     usign_bin: str,
     sign_key: Optional[Path],
     include_release_key: bool,
+    force_collision_override: bool,
     strict_coverage: bool,
     required_packages: set[str],
     optional_packages: set[str],
@@ -453,22 +451,9 @@ def materialize_variant(
     packages_by_target: Dict[Path, set[str]] = {}
 
     for item in artifacts:
-        if include_release_key:
-            release_key = normalize_release_key(item.release_id, item.release_tag)
-            target_root = (
-                variant_root
-                / release_key
-                / item.openwrt_version
-                / "targets"
-                / item.target
-                / item.subtarget
-            )
-        else:
-            target_root = (
-                variant_root / item.openwrt_version / "targets" / item.target / item.subtarget
-            )
+        target_root = destination_root_for(item, variant_root, include_release_key)
         dst = target_root / item.payload_rel
-        err = copy_unique(item.source_path, dst, item.sha256)
+        err = copy_unique(item.source_path, dst, item.sha256, force_overwrite=force_collision_override)
         if err:
             errors.append(err)
             continue
@@ -543,7 +528,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument(
         "--force-collision-override",
         action="store_true",
-        help="continue build even when checksum collisions are detected for same (name,arch,version)",
+        help="continue build and overwrite when checksum collisions are detected on destination paths",
     )
     parser.add_argument("--sign-key", default=None, help="optional usign private key path")
     parser.add_argument("--usign-bin", default="usign", help="usign binary path")
@@ -563,11 +548,24 @@ def main(argv: List[str]) -> int:
 
     manifests = load_release_manifests(manifest_root)
     artifacts, errors = collect_ipk_artifacts(manifests, download_root)
-    collision_report = build_collision_report(artifacts)
-    collision_count = int(collision_report.get("collision_identities", 0))
+    rolling_latest = select_latest_release_per_version(artifacts)
+    rolling_artifacts = [a for a in artifacts if rolling_latest.get(a.openwrt_version) == a.release_id]
+    release_collision_report = build_path_collision_report(
+        artifacts,
+        repo_root / "opkg" / "releases",
+        include_release_key=True,
+    )
+    rolling_collision_report = build_path_collision_report(
+        rolling_artifacts,
+        repo_root / "opkg" / "openwrt",
+        include_release_key=False,
+    )
+    collision_count = int(release_collision_report.get("collision_paths", 0)) + int(
+        rolling_collision_report.get("collision_paths", 0)
+    )
     if collision_count > 0 and not args.force_collision_override:
         errors.append(
-            f"collision gate: detected {collision_count} checksum collision(s) for same (name,arch,version); "
+            f"collision gate: detected {collision_count} checksum collision(s) on destination paths; "
             "use --force-collision-override to bypass"
         )
     if args.dry_run:
@@ -588,11 +586,15 @@ def main(argv: List[str]) -> int:
         {
             "generated_at": sync.now_iso(),
             "force_override": bool(args.force_collision_override),
-            **collision_report,
+            "summary": {
+                "collision_paths": collision_count,
+                "duplicate_paths": int(release_collision_report.get("duplicate_paths", 0))
+                + int(rolling_collision_report.get("duplicate_paths", 0)),
+            },
+            "release_scope": release_collision_report,
+            "rolling_scope": rolling_collision_report,
         },
     )
-
-    rolling_latest = select_latest_release_per_version(artifacts)
 
     release_errors, release_indexed_dirs, release_coverage = materialize_variant(
         artifacts,
@@ -600,19 +602,20 @@ def main(argv: List[str]) -> int:
         usign_bin=args.usign_bin,
         sign_key=sign_key,
         include_release_key=True,
+        force_collision_override=args.force_collision_override,
         strict_coverage=strict_coverage,
         required_packages=required_packages,
         optional_packages=optional_packages,
     )
     errors.extend(release_errors)
 
-    rolling_artifacts = [a for a in artifacts if rolling_latest.get(a.openwrt_version) == a.release_id]
     rolling_errors, rolling_indexed_dirs, rolling_coverage = materialize_variant(
         rolling_artifacts,
         repo_root / "opkg" / "openwrt",
         usign_bin=args.usign_bin,
         sign_key=sign_key,
         include_release_key=False,
+        force_collision_override=args.force_collision_override,
         strict_coverage=strict_coverage,
         required_packages=required_packages,
         optional_packages=optional_packages,
@@ -637,8 +640,9 @@ def main(argv: List[str]) -> int:
         "rolling_latest_release_by_openwrt": rolling_latest,
         "coverage": coverage,
         "collision_summary": {
-            "collision_identities": collision_count,
-            "duplicate_identities": int(collision_report.get("duplicate_identities", 0)),
+            "collision_paths": collision_count,
+            "duplicate_paths": int(release_collision_report.get("duplicate_paths", 0))
+            + int(rolling_collision_report.get("duplicate_paths", 0)),
             "force_override": bool(args.force_collision_override),
         },
         "errors": errors,
