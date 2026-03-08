@@ -43,6 +43,31 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install apk-tools-static
+        run: |
+          set -euo pipefail
+          BASE_URL="https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64"
+          APK_FILE="$(
+            curl -fsSL "${BASE_URL}/" \
+              | grep -oE 'apk-tools-static-3[^"]+\.apk' \
+              | sort -V \
+              | tail -n1
+          )"
+          if [[ -z "${APK_FILE}" ]]; then
+            echo "Failed to resolve apk-tools-static package from ${BASE_URL}" >&2
+            exit 1
+          fi
+
+          WORK_DIR="$(mktemp -d)"
+          trap 'rm -rf "${WORK_DIR}"' EXIT
+          curl -fsSL "${BASE_URL}/${APK_FILE}" -o "${WORK_DIR}/${APK_FILE}"
+          tar -xzf "${WORK_DIR}/${APK_FILE}" -C "${WORK_DIR}"
+
+          mkdir -p "${RUNNER_TEMP}/bin"
+          cp "${WORK_DIR}/sbin/apk.static" "${RUNNER_TEMP}/bin/apk"
+          chmod +x "${RUNNER_TEMP}/bin/apk"
+          echo "${RUNNER_TEMP}/bin" >> "${GITHUB_PATH}"
+
       - name: Run sync
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
