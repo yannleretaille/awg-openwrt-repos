@@ -1,6 +1,6 @@
 # Repository URLs
 
-Generated at: `2026-03-08T03:28:47+00:00`
+Generated at: `2026-03-08T03:42:18+00:00`
 Base URL: `https://yannleretaille.github.io/awg-openwrt-repos`
 
 ### OpenWrt 25.12.0
