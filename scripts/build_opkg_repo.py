@@ -304,6 +304,58 @@ def select_latest_release_per_version(artifacts: List[PackageArtifact]) -> Dict[
     return {k: v[1] for k, v in winner.items()}
 
 
+def build_collision_report(artifacts: List[PackageArtifact]) -> Dict[str, Any]:
+    by_identity: Dict[Tuple[str, str, str, str], List[Dict[str, Any]]] = {}
+
+    for item in artifacts:
+        pkg = item.fields.get("Package", "").strip()
+        ver = item.fields.get("Version", "").strip()
+        arch = item.fields.get("Architecture", "").strip() or item.arch
+        if not pkg or not ver or not arch:
+            continue
+        kernel_hash = extract_kernel_hash(item.fields) if pkg.startswith("kmod-") else ""
+        key = (pkg, arch, ver, kernel_hash)
+        by_identity.setdefault(key, []).append(
+            {
+                "sha256": item.sha256,
+                "release_id": item.release_id,
+                "release_tag": item.release_tag,
+                "openwrt_version": item.openwrt_version,
+                "target": item.target,
+                "subtarget": item.subtarget,
+                "file_name": item.file_name,
+            }
+        )
+
+    duplicates: List[Dict[str, Any]] = []
+    collisions: List[Dict[str, Any]] = []
+
+    for (pkg, arch, ver, kernel_hash), entries in sorted(by_identity.items()):
+        if len(entries) <= 1:
+            continue
+        sha_set = sorted({e["sha256"] for e in entries if e.get("sha256")})
+        row = {
+            "name": pkg,
+            "arch": arch,
+            "version": ver,
+            "kernel_hash": kernel_hash or None,
+            "sha256_values": sha_set,
+            "instances": entries,
+        }
+        if len(sha_set) <= 1:
+            duplicates.append(row)
+        else:
+            collisions.append(row)
+
+    return {
+        "identities_seen": len(by_identity),
+        "duplicate_identities": len(duplicates),
+        "collision_identities": len(collisions),
+        "duplicates": duplicates,
+        "collisions": collisions,
+    }
+
+
 def control_fields_to_stanza(fields: Dict[str, str], filename: str, size: int, sha256: str) -> str:
     priority = [
         "Package",
@@ -488,6 +540,11 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument("--dry-run", action="store_true", help="plan only; do not write files")
     parser.add_argument("--strict", action="store_true", default=True, help="exit non-zero on errors")
     parser.add_argument("--no-strict", action="store_false", dest="strict", help="allow errors")
+    parser.add_argument(
+        "--force-collision-override",
+        action="store_true",
+        help="continue build even when checksum collisions are detected for same (name,arch,version)",
+    )
     parser.add_argument("--sign-key", default=None, help="optional usign private key path")
     parser.add_argument("--usign-bin", default="usign", help="usign binary path")
     return parser.parse_args(argv)
@@ -506,7 +563,13 @@ def main(argv: List[str]) -> int:
 
     manifests = load_release_manifests(manifest_root)
     artifacts, errors = collect_ipk_artifacts(manifests, download_root)
-
+    collision_report = build_collision_report(artifacts)
+    collision_count = int(collision_report.get("collision_identities", 0))
+    if collision_count > 0 and not args.force_collision_override:
+        errors.append(
+            f"collision gate: detected {collision_count} checksum collision(s) for same (name,arch,version); "
+            "use --force-collision-override to bypass"
+        )
     if args.dry_run:
         print(json.dumps({
             "status": "ok",
@@ -519,6 +582,15 @@ def main(argv: List[str]) -> int:
 
     if args.clean and (repo_root / "opkg").exists():
         shutil.rmtree(repo_root / "opkg")
+
+    sync.write_json(
+        manifest_root / "index" / "opkg_collision_report.json",
+        {
+            "generated_at": sync.now_iso(),
+            "force_override": bool(args.force_collision_override),
+            **collision_report,
+        },
+    )
 
     rolling_latest = select_latest_release_per_version(artifacts)
 
@@ -564,6 +636,11 @@ def main(argv: List[str]) -> int:
         "indexed_dirs": release_indexed_dirs + rolling_indexed_dirs,
         "rolling_latest_release_by_openwrt": rolling_latest,
         "coverage": coverage,
+        "collision_summary": {
+            "collision_identities": collision_count,
+            "duplicate_identities": int(collision_report.get("duplicate_identities", 0)),
+            "force_override": bool(args.force_collision_override),
+        },
         "errors": errors,
     }
 

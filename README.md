@@ -86,10 +86,21 @@ Build `opkg` repositories from synced manifests/assets:
 ./scripts/build_opkg_repo.py --clean
 ```
 
+By default, repo builders fail on checksum collisions for the same `(name, arch, version)`.
+Use override only for explicit emergency bypass:
+
+```bash
+./scripts/build_opkg_repo.py --clean --force-collision-override
+```
+
 Build `apk` repositories from synced manifests/assets:
 
 ```bash
 ./scripts/build_apk_repo.py --clean
+```
+
+```bash
+./scripts/build_apk_repo.py --clean --force-collision-override
 ```
 
 Generate feed URL index markdown:
@@ -129,7 +140,8 @@ act workflow_dispatch -W .github/workflows/sync-releases.yml \
   "inputs": {
     "mode": "incremental",
     "publish_branch": "published-repos",
-    "dry_run": "true"
+    "dry_run": "true",
+    "force_collision_override": "false"
   }
 }
 JSON

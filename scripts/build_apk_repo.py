@@ -28,6 +28,7 @@ class ApkArtifact:
     pkg_name: str
     pkg_ver: str
     pkg_arch: str
+    kernel_hash: Optional[str]
     target: str
     subtarget: str
     source_path: Path
@@ -44,6 +45,7 @@ class CandidateArtifact:
     pkg_name: str
     pkg_ver: str
     pkg_arch: str
+    kernel_hash: Optional[str]
     source_path: Path
     source_sha256: str
     suffix_after_version: str
@@ -252,7 +254,14 @@ def collect_apk_artifacts(
             pkg_arch = asset.get("arch")
 
             apk_info: Dict[str, List[str]] = {}
-            needs_pkginfo = not (isinstance(pkg_name, str) and pkg_name and isinstance(pkg_ver, str) and pkg_ver and isinstance(pkg_arch, str) and pkg_arch)
+            needs_pkginfo = not (
+                isinstance(pkg_name, str)
+                and pkg_name
+                and isinstance(pkg_ver, str)
+                and pkg_ver
+                and isinstance(pkg_arch, str)
+                and pkg_arch
+            )
             if not needs_pkginfo and isinstance(pkg_name, str) and pkg_name.startswith("kmod-"):
                 needs_pkginfo = True
 
@@ -281,6 +290,8 @@ def collect_apk_artifacts(
                     errors.append(f"release {release_id} asset {file_name}: {exc}")
                     continue
 
+            kernel_hash = kernel_hash_from_depends(apk_info.get("depends", [])) if pkg_name.startswith("kmod-") else None
+
             payload_dir_rel, perr = payload_dir_rel_path(pkg_name, apk_info)
             if perr:
                 errors.append(f"release {release_id} asset {file_name}: {perr}")
@@ -301,6 +312,7 @@ def collect_apk_artifacts(
                     pkg_name=pkg_name,
                     pkg_ver=pkg_ver,
                     pkg_arch=pkg_arch,
+                    kernel_hash=kernel_hash,
                     source_path=source_path,
                     source_sha256=str(asset.get("sha256") or sync.sha256_file(source_path)),
                     suffix_after_version=full_suffix,
@@ -339,6 +351,7 @@ def collect_apk_artifacts(
                 pkg_name=cand.pkg_name,
                 pkg_ver=cand.pkg_ver,
                 pkg_arch=cand.pkg_arch,
+                kernel_hash=cand.kernel_hash,
                 target=target,
                 subtarget=subtarget,
                 source_path=cand.source_path,
@@ -370,6 +383,55 @@ def select_latest_release_per_version(artifacts: List[ApkArtifact]) -> Dict[str,
         if cur is None or score > cur:
             winner[item.openwrt_version] = score
     return {k: v[1] for k, v in winner.items()}
+
+
+def build_collision_report(artifacts: List[ApkArtifact]) -> Dict[str, Any]:
+    by_identity: Dict[Tuple[str, str, str], List[Dict[str, Any]]] = {}
+
+    for item in artifacts:
+        pkg = item.pkg_name.strip()
+        ver = item.pkg_ver.strip()
+        arch = item.pkg_arch.strip()
+        if not pkg or not ver or not arch:
+            continue
+        key = (pkg, arch, ver)
+        by_identity.setdefault(key, []).append(
+            {
+                "sha256": item.source_sha256,
+                "release_id": item.release_id,
+                "release_tag": item.release_tag,
+                "openwrt_version": item.openwrt_version,
+                "target": item.target,
+                "subtarget": item.subtarget,
+                "file_name": item.source_path.name,
+            }
+        )
+
+    duplicates: List[Dict[str, Any]] = []
+    collisions: List[Dict[str, Any]] = []
+    for (pkg, arch, ver), entries in sorted(by_identity.items()):
+        if len(entries) <= 1:
+            continue
+        sha_set = sorted({e["sha256"] for e in entries if e.get("sha256")})
+        row = {
+            "name": pkg,
+            "arch": arch,
+            "version": ver,
+            "sha256_values": sha_set,
+            "instances": entries,
+        }
+        if len(sha_set) <= 1:
+            duplicates.append(row)
+        else:
+            collisions.append(row)
+
+    return {
+        "identities_seen": len(by_identity),
+        "duplicate_identities": len(duplicates),
+        "collision_identities": len(collisions),
+        "duplicates": duplicates,
+        "collisions": collisions,
+    }
 
 
 def run_mkndx(
@@ -521,6 +583,11 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument("--dry-run", action="store_true", help="plan only; do not write files")
     parser.add_argument("--strict", action="store_true", default=True, help="exit non-zero on errors")
     parser.add_argument("--no-strict", action="store_false", dest="strict", help="allow errors")
+    parser.add_argument(
+        "--force-collision-override",
+        action="store_true",
+        help="continue build even when checksum collisions are detected for same (name,arch,version)",
+    )
     parser.add_argument("--sign-key", default=None, help="optional apk private key path")
     parser.add_argument("--keys-dir", default=None, help="optional apk keys directory")
     parser.add_argument("--apk-bin", default="apk", help="apk binary path")
@@ -554,7 +621,13 @@ def main(argv: List[str]) -> int:
 
     manifests = load_release_manifests(manifest_root)
     artifacts, errors = collect_apk_artifacts(manifests, download_root, apk_bin=args.apk_bin)
-
+    collision_report = build_collision_report(artifacts)
+    collision_count = int(collision_report.get("collision_identities", 0))
+    if collision_count > 0 and not args.force_collision_override:
+        errors.append(
+            f"collision gate: detected {collision_count} checksum collision(s) for same (name,arch,version); "
+            "use --force-collision-override to bypass"
+        )
     if args.dry_run:
         print(
             json.dumps(
@@ -573,6 +646,15 @@ def main(argv: List[str]) -> int:
 
     if args.clean and (repo_root / "apk").exists():
         shutil.rmtree(repo_root / "apk")
+
+    sync.write_json(
+        manifest_root / "index" / "apk_collision_report.json",
+        {
+            "generated_at": sync.now_iso(),
+            "force_override": bool(args.force_collision_override),
+            **collision_report,
+        },
+    )
 
     rolling_latest = select_latest_release_per_version(artifacts)
 
@@ -623,6 +705,11 @@ def main(argv: List[str]) -> int:
         "split_indexes": args.split_indexes,
         "rolling_latest_release_by_openwrt": rolling_latest,
         "coverage": coverage,
+        "collision_summary": {
+            "collision_identities": collision_count,
+            "duplicate_identities": int(collision_report.get("duplicate_identities", 0)),
+            "force_override": bool(args.force_collision_override),
+        },
         "errors": errors,
     }
 

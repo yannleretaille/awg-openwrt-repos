@@ -21,6 +21,11 @@ on:
         type: boolean
         required: true
         default: false
+      force_collision_override:
+        description: "Bypass checksum collision gate in repo builders"
+        type: boolean
+        required: true
+        default: false
   schedule:
     - cron: "19 * * * *"
 
@@ -54,21 +59,34 @@ jobs:
 
       - name: Build OPKG repos
         if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
+        env:
+          FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
         run: |
           set -euo pipefail
-          ./scripts/build_opkg_repo.py --clean
+          ARGS=(--clean)
+          if [[ "$FORCE_COLLISION_OVERRIDE" == "true" ]]; then
+            ARGS+=(--force-collision-override)
+          fi
+          ./scripts/build_opkg_repo.py "${ARGS[@]}"
 
       - name: Build APK repos
         if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
+        env:
+          FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
         run: |
           set -euo pipefail
           docker run --rm \
             -v "$PWD:/work" \
             -w /work \
+            -e FORCE_COLLISION_OVERRIDE="$FORCE_COLLISION_OVERRIDE" \
             alpine:3.22 \
             sh -euxc '
               apk add --no-cache python3 apk-tools
-              ./scripts/build_apk_repo.py --clean
+              ARGS=(--clean)
+              if [ "${FORCE_COLLISION_OVERRIDE}" = "true" ]; then
+                ARGS+=(--force-collision-override)
+              fi
+              ./scripts/build_apk_repo.py "${ARGS[@]}"
             '
 
       - name: Generate REPOS.md
@@ -152,7 +170,9 @@ jobs:
             opkg_repo_report.json \
             apk_repo_report.json \
             opkg_coverage_report.json \
-            apk_coverage_report.json
+            apk_coverage_report.json \
+            opkg_collision_report.json \
+            apk_collision_report.json
           do
             src="${GITHUB_WORKSPACE}/output/manifests/index/${f}"
             if [[ -f "${src}" ]]; then
