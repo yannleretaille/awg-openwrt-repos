@@ -1,0 +1,51 @@
+Package: amneziawg-tools
+Version: 1.0.20250903-1
+Depends: libc
+Source: feeds/base/amneziawg-tools
+Section: opt
+Maintainer: Amnezia Admin <admin@amnezia.org>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: arm_cortex-a15_neon-vfpv4
+Installed-Size: 32480
+Description: Amnezia VPN — simple and free app to run a self-hosted VPN with
+high privacy requirements.
+
+This package provides the userspace control program for AmneziaWG,
+`awg`, a netifd protocol helper, and a re-resolve watchdog script.
+SourceDateEpoch: 1755196060
+SourceName: amneziawg-tools
+Filename: amneziawg-tools_v23.05.6_arm_cortex-a15_neon-vfpv4_ipq806x_chromium.ipk
+Size: 33338
+SHA256sum: 2cc351dbbc82b664770028c1153bebcbee182509791409d2b9094e3a6c27ef18
+
+Package: luci-i18n-amneziawg-ru
+Version: unknown
+Depends: libc, luci-proto-amneziawg
+Source: feeds/base/luci-proto-amneziawg
+Section: luci
+License: Apache-2.0
+Architecture: all
+Installed-Size: 2264
+Description: Translation for luci-proto-amneziawg - Русский (Russian)
+SourceDateEpoch: 1755196060
+SourceName: luci-i18n-amneziawg-ru
+Filename: luci-i18n-amneziawg-ru_v23.05.6_arm_cortex-a15_neon-vfpv4_ipq806x_chromium.ipk
+Size: 3002
+SHA256sum: 850993fa908297ef32f770e36828c558ed4aab69086b549231c0a6a881ea904d
+
+Package: luci-proto-amneziawg
+Version: 2.0.4
+Depends: libc, amneziawg-tools, ucode, luci-lib-uqr, resolveip
+Source: feeds/base/luci-proto-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+License: Apache-2.0
+Architecture: all
+Installed-Size: 27070
+Description: Provides support and Web UI for AmneziaWG VPN
+SourceDateEpoch: 1755196060
+SourceName: luci-proto-amneziawg
+Filename: luci-proto-amneziawg_v23.05.6_arm_cortex-a15_neon-vfpv4_ipq806x_chromium.ipk
+Size: 27940
+SHA256sum: fd319b79229f2c5be3c0b49bcb2207ae02af989ea37723b97804986328c0c900

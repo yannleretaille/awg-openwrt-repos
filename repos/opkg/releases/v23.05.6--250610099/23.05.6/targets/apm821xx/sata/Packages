@@ -1,0 +1,65 @@
+Package: amneziawg-tools
+Version: 1.0.20250903-1
+Depends: libc
+Source: feeds/base/amneziawg-tools
+Section: opt
+Maintainer: Amnezia Admin <admin@amnezia.org>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: powerpc_464fp
+Installed-Size: 37602
+Description: Amnezia VPN — simple and free app to run a self-hosted VPN with
+high privacy requirements.
+
+This package provides the userspace control program for AmneziaWG,
+`awg`, a netifd protocol helper, and a re-resolve watchdog script.
+SourceDateEpoch: 1755196060
+SourceName: amneziawg-tools
+Filename: packages/amneziawg-tools_v23.05.6_powerpc_464fp_apm821xx_sata.ipk
+Size: 38362
+SHA256sum: 5f223e20f753d9af5931efdf9aec7d15135aacb1cc334f801fdfcf7e96eb35a9
+
+Package: kmod-amneziawg
+Version: 5.15.189+1.0.20250924-1
+Depends: kernel (=5.15.189-1-082a90b3be56f6f0af6855e7b25dbcee), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/base/kmod-amneziawg
+Section: kernel
+Architecture: powerpc_464fp
+Installed-Size: 40951
+Description: AmneziaWG VPN Kernel Module
+SourceDateEpoch: 1755196060
+SourceName: kmod-amneziawg
+Filename: kmods/5.15.189-1-082a90b3be56f6f0af6855e7b25dbcee/kmod-amneziawg_v23.05.6_powerpc_464fp_apm821xx_sata.ipk
+Size: 41706
+SHA256sum: c1434174b1677ba04bee0fbedf9d2d8ae31ef9a081abd1bdd35c52a93355f2f8
+
+Package: luci-i18n-amneziawg-ru
+Version: unknown
+Depends: libc, luci-proto-amneziawg
+Source: feeds/base/luci-proto-amneziawg
+Section: luci
+License: Apache-2.0
+Architecture: all
+Installed-Size: 2264
+Description: Translation for luci-proto-amneziawg - Русский (Russian)
+SourceDateEpoch: 1755196060
+SourceName: luci-i18n-amneziawg-ru
+Filename: packages/luci-i18n-amneziawg-ru_v23.05.6_powerpc_464fp_apm821xx_sata.ipk
+Size: 3002
+SHA256sum: 850993fa908297ef32f770e36828c558ed4aab69086b549231c0a6a881ea904d
+
+Package: luci-proto-amneziawg
+Version: 2.0.4
+Depends: libc, amneziawg-tools, ucode, luci-lib-uqr, resolveip
+Source: feeds/base/luci-proto-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+License: Apache-2.0
+Architecture: all
+Installed-Size: 27070
+Description: Provides support and Web UI for AmneziaWG VPN
+SourceDateEpoch: 1755196060
+SourceName: luci-proto-amneziawg
+Filename: packages/luci-proto-amneziawg_v23.05.6_powerpc_464fp_apm821xx_sata.ipk
+Size: 27940
+SHA256sum: fd319b79229f2c5be3c0b49bcb2207ae02af989ea37723b97804986328c0c900

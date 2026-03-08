@@ -1,0 +1,53 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: mips_4kec
+Installed-Size: 28921
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+more useful than IPSec, while avoiding the massive headache. It intends to
+be considerably more performant than OpenVPN.  WireGuard is designed as a
+general purpose VPN for running on embedded interfaces and super computers
+alike, fit for many different circumstances. It uses UDP.
+
+This package provides the userspace control program for WireGuard,
+`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+SourceDateEpoch: 1728299772
+SourceName: amneziawg-tools
+Filename: packages/amneziawg-tools_v23.05.5_mips_4kec_realtek_rtl838x.ipk
+Size: 29809
+SHA256sum: e1f284473954a989e041e0d505caeb423ea75054e763a66b9d4fa1b55faa3f20
+
+Package: kmod-amneziawg
+Version: 5.15.167-1
+Depends: kernel (=5.15.167-1-040d391394b36f9ba6b7b1889d15738a), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: mips_4kec
+Installed-Size: 38256
+Description: AmneziaWG VPN Kernel Module
+SourceDateEpoch: 1728299772
+SourceName: kmod-amneziawg
+Filename: kmods/5.15.167-1-040d391394b36f9ba6b7b1889d15738a/kmod-amneziawg_v23.05.5_mips_4kec_realtek_rtl838x.ipk
+Size: 38983
+SHA256sum: 0bde7f8d5e7614bd042429d6113af4dbb1ad1391108bef3ecfff9230804876a7
+
+Package: luci-app-amneziawg
+Version: git-24.281.40572-2de5a74
+Depends: libc, amneziawg-tools, ucode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 10769
+Description: Support for AmneziaWG VPN
+SourceDateEpoch: 1728299772
+SourceName: luci-app-amneziawg
+Filename: packages/luci-app-amneziawg_v23.05.5_mips_4kec_realtek_rtl838x.ipk
+Size: 11636
+SHA256sum: ea75b83abb19e501ba7e1437fd52a481edaa20b207c8bc2b326c3acddbf4e97c

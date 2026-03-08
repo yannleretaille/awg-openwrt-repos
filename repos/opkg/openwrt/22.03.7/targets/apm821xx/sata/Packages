@@ -1,0 +1,53 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: powerpc_464fp
+Installed-Size: 34918
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+more useful than IPSec, while avoiding the massive headache. It intends to
+be considerably more performant than OpenVPN.  WireGuard is designed as a
+general purpose VPN for running on embedded interfaces and super computers
+alike, fit for many different circumstances. It uses UDP.
+
+This package provides the userspace control program for WireGuard,
+`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+SourceDateEpoch: 1722691334
+SourceName: amneziawg-tools
+Filename: packages/amneziawg-tools_v22.03.7_powerpc_464fp_apm821xx_sata.ipk
+Size: 35846
+SHA256sum: 216e2cca4d11ce5d54762c63938db6af23da668d5cb916ed99e83b2382d0e320
+
+Package: kmod-amneziawg
+Version: 5.10.221-1
+Depends: kernel (=5.10.221-1-f535f9a665e1c3894e6629837470ccaf), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: powerpc_464fp
+Installed-Size: 37162
+Description: AmneziaWG VPN Kernel Module
+SourceDateEpoch: 1722691334
+SourceName: kmod-amneziawg
+Filename: kmods/5.10.221-1-f535f9a665e1c3894e6629837470ccaf/kmod-amneziawg_v22.03.7_powerpc_464fp_apm821xx_sata.ipk
+Size: 37989
+SHA256sum: 9e39d38b7509b0d63393cfbb7a4f34ea23088b2b25bb5503e26ea8e4569c2234
+
+Package: luci-app-amneziawg
+Version: git-24.216.48134-1c17d9b
+Depends: libc, amneziawg-tools, ucode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 10778
+Description: Support for AmneziaWG VPN
+SourceDateEpoch: 1722691334
+SourceName: luci-app-amneziawg
+Filename: packages/luci-app-amneziawg_v22.03.7_powerpc_464fp_apm821xx_sata.ipk
+Size: 11658
+SHA256sum: 746827c0c243b32a7d80f94a90248bbff2a48f9b907fc347a7884576dc7dbbeb

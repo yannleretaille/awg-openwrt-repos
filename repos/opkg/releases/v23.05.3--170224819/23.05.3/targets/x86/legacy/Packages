@@ -1,0 +1,53 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: i386_pentium-mmx
+Installed-Size: 29239
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+more useful than IPSec, while avoiding the massive headache. It intends to
+be considerably more performant than OpenVPN.  WireGuard is designed as a
+general purpose VPN for running on embedded interfaces and super computers
+alike, fit for many different circumstances. It uses UDP.
+
+This package provides the userspace control program for WireGuard,
+`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+SourceDateEpoch: 1722691334
+SourceName: amneziawg-tools
+Filename: packages/amneziawg-tools_v23.05.3_i386_pentium-mmx_x86_legacy.ipk
+Size: 30343
+SHA256sum: 158a4d7da50577d80ec3ac55f4c9227423d8c0fba0394fa686047d42d6765512
+
+Package: kmod-amneziawg
+Version: 5.15.150-1
+Depends: kernel (=5.15.150-1-613b4b5f24e36f670ca5b9e3382c3498), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: i386_pentium-mmx
+Installed-Size: 33981
+Description: AmneziaWG VPN Kernel Module
+SourceDateEpoch: 1722691334
+SourceName: kmod-amneziawg
+Filename: kmods/5.15.150-1-613b4b5f24e36f670ca5b9e3382c3498/kmod-amneziawg_v23.05.3_i386_pentium-mmx_x86_legacy.ipk
+Size: 34792
+SHA256sum: 8a3c766bf8a6b86612e7aefd505a56a82495718b6be9ab0c5bab41898036e6ad
+
+Package: luci-app-amneziawg
+Version: git-24.216.48134-1c17d9b
+Depends: libc, amneziawg-tools, ucode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 10771
+Description: Support for AmneziaWG VPN
+SourceDateEpoch: 1722691334
+SourceName: luci-app-amneziawg
+Filename: packages/luci-app-amneziawg_v23.05.3_i386_pentium-mmx_x86_legacy.ipk
+Size: 11632
+SHA256sum: 1b2bcf342e181536ab42be754d717a144c4b253a6b4da1880845cc0af1a12032

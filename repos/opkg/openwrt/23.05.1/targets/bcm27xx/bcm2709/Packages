@@ -1,0 +1,53 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: arm_cortex-a7_neon-vfpv4
+Installed-Size: 29802
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+more useful than IPSec, while avoiding the massive headache. It intends to
+be considerably more performant than OpenVPN.  WireGuard is designed as a
+general purpose VPN for running on embedded interfaces and super computers
+alike, fit for many different circumstances. It uses UDP.
+
+This package provides the userspace control program for WireGuard,
+`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+SourceDateEpoch: 1722691334
+SourceName: amneziawg-tools
+Filename: packages/amneziawg-tools_v23.05.1_arm_cortex-a7_neon-vfpv4_bcm27xx_bcm2709.ipk
+Size: 30892
+SHA256sum: af67336e7f058c204c2d005f63e913107850089f98d15766b434fadaed078dc1
+
+Package: kmod-amneziawg
+Version: 5.15.137-1
+Depends: kernel (=5.15.137-1-1dbe52dff9810fd81f7121a921ec53a4), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: arm_cortex-a7_neon-vfpv4
+Installed-Size: 36971
+Description: AmneziaWG VPN Kernel Module
+SourceDateEpoch: 1722691334
+SourceName: kmod-amneziawg
+Filename: kmods/5.15.137-1-1dbe52dff9810fd81f7121a921ec53a4/kmod-amneziawg_v23.05.1_arm_cortex-a7_neon-vfpv4_bcm27xx_bcm2709.ipk
+Size: 37663
+SHA256sum: d6e8c988b42e56d701a76b6a6eefec9d0f11979d35b4b36e66ee69b568a022e0
+
+Package: luci-app-amneziawg
+Version: git-24.216.48134-1c17d9b
+Depends: libc, amneziawg-tools, ucode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 10771
+Description: Support for AmneziaWG VPN
+SourceDateEpoch: 1722691334
+SourceName: luci-app-amneziawg
+Filename: packages/luci-app-amneziawg_v23.05.1_arm_cortex-a7_neon-vfpv4_bcm27xx_bcm2709.ipk
+Size: 11632
+SHA256sum: 1b2bcf342e181536ab42be754d717a144c4b253a6b4da1880845cc0af1a12032

@@ -1,0 +1,39 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: mips_mips32
+Installed-Size: 31416
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+more useful than IPSec, while avoiding the massive headache. It intends to
+be considerably more performant than OpenVPN.  WireGuard is designed as a
+general purpose VPN for running on embedded interfaces and super computers
+alike, fit for many different circumstances. It uses UDP.
+
+This package provides the userspace control program for WireGuard,
+`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+SourceDateEpoch: 1722691334
+SourceName: amneziawg-tools
+Filename: amneziawg-tools_v23.05.2_mips_mips32_bmips_bcm6318.ipk
+Size: 32277
+SHA256sum: 965a3e8672f14d089ae3f93d14c6d053c6db11b93f033aaa840d5f5b67e4a352
+
+Package: luci-app-amneziawg
+Version: git-24.216.48134-1c17d9b
+Depends: libc, amneziawg-tools, ucode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 10771
+Description: Support for AmneziaWG VPN
+SourceDateEpoch: 1722691334
+SourceName: luci-app-amneziawg
+Filename: luci-app-amneziawg_v23.05.2_mips_mips32_bmips_bcm6318.ipk
+Size: 11632
+SHA256sum: 1b2bcf342e181536ab42be754d717a144c4b253a6b4da1880845cc0af1a12032

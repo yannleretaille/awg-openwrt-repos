@@ -1,0 +1,22 @@
+{
+  "force_override": false,
+  "generated_at": "2026-03-08T03:28:39+00:00",
+  "release_scope": {
+    "collision_paths": 0,
+    "collisions": [],
+    "duplicate_paths": 0,
+    "duplicates": [],
+    "paths_seen": 3879
+  },
+  "rolling_scope": {
+    "collision_paths": 0,
+    "collisions": [],
+    "duplicate_paths": 0,
+    "duplicates": [],
+    "paths_seen": 3879
+  },
+  "summary": {
+    "collision_paths": 0,
+    "duplicate_paths": 0
+  }
+}

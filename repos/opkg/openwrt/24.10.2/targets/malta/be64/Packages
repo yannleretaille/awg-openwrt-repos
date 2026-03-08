@@ -1,0 +1,55 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-r1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: mips64_mips64r2
+Installed-Size: 92160
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+more useful than IPSec, while avoiding the massive headache. It intends to
+be considerably more performant than OpenVPN.  WireGuard is designed as a
+general purpose VPN for running on embedded interfaces and super computers
+alike, fit for many different circumstances. It uses UDP.
+
+This package provides the userspace control program for WireGuard,
+`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+SourceDateEpoch: 1750876460
+SourceName: amneziawg-tools
+URL: https://www.wireguard.com
+Filename: packages/amneziawg-tools_v24.10.2_mips64_mips64r2_malta_be64.ipk
+Size: 30826
+SHA256sum: 7020ab180b60e997763a98e0a5940de3eb96ed943881e4194110993ec6b76224
+
+Package: kmod-amneziawg
+Version: 6.6.93-r1
+Depends: kernel (=6.6.93~19e37a7b9ed32aa9d2dc112cd63c3463-r1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: mips64_mips64r2
+Installed-Size: 143360
+Description: AmneziaWG VPN Kernel Module
+SourceDateEpoch: 1750876460
+SourceName: kmod-amneziawg
+Filename: kmods/6.6.93~19e37a7b9ed32aa9d2dc112cd63c3463-r1/kmod-amneziawg_v24.10.2_mips64_mips64r2_malta_be64.ipk
+Size: 45981
+SHA256sum: 523a9c94d4b66f803e19009777777df343c6497ae4c38986689db9af8644c899
+
+Package: luci-app-amneziawg
+Version: 25.176.66860~0c726ca
+Depends: libc, amneziawg-tools, ucode, qrencode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 51200
+Description: Support for AmneziaWG VPN
+SourceDateEpoch: 1750876460
+SourceName: luci-app-amneziawg
+URL: https://github.com/openwrt/luci
+Filename: packages/luci-app-amneziawg_v24.10.2_mips64_mips64r2_malta_be64.ipk
+Size: 12208
+SHA256sum: 9d2c28b178a3225fe84094e3a1ad1b09bac4c0f3741174b6d8061c2d1d33aff2

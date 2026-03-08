@@ -1,0 +1,43 @@
+{
+  "collision_summary": {
+    "collision_paths": 0,
+    "duplicate_paths": 0,
+    "force_override": false
+  },
+  "coverage": {
+    "optional_package_names": [
+      "luci-i18n-amneziawg-ru",
+      "luci-proto-amneziawg"
+    ],
+    "release_missing_required_count": 0,
+    "release_targets_checked": 1176,
+    "required_package_names": [
+      "amneziawg-tools",
+      "kmod-amneziawg"
+    ],
+    "rolling_missing_required_count": 0,
+    "rolling_targets_checked": 1176,
+    "strict": true
+  },
+  "errors": [],
+  "generated_at": "2026-03-08T03:28:43+00:00",
+  "indexed_dirs": 7056,
+  "ipk_entries": 3879,
+  "release_manifests": 15,
+  "rolling_latest_release_by_openwrt": {
+    "22.03.7": 170554387,
+    "23.05.0": 170477487,
+    "23.05.1": 170336315,
+    "23.05.2": 170225473,
+    "23.05.3": 170224819,
+    "23.05.4": 170097744,
+    "23.05.5": 178660602,
+    "23.05.6": 250610099,
+    "24.10.0": 198509887,
+    "24.10.1": 212658981,
+    "24.10.2": 227795179,
+    "24.10.3": 250610930,
+    "24.10.4": 256308275,
+    "24.10.5": 272097237
+  }
+}

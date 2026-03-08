@@ -1,0 +1,13 @@
+Package: kmod-amneziawg
+Version: 5.10.221-1
+Depends: kernel (=5.10.221-1-b044ac59baaec2a34ab53b296511c532), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: arm_cortex-a7_neon-vfpv4
+Installed-Size: 36076
+Description: AmneziaWG VPN Kernel Module
+SourceDateEpoch: 1722691334
+SourceName: kmod-amneziawg
+Filename: kmod-amneziawg_v22.03.7_arm_cortex-a7_neon-vfpv4_mediatek_mt7623.ipk
+Size: 36779
+SHA256sum: 184aa681197eb7c12f686e05637366d211ca88e73fbce87bf0aa251862110906

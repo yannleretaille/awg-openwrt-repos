@@ -1,0 +1,13 @@
+Package: kmod-amneziawg
+Version: 5.15.189+1.0.20250924-1
+Depends: kernel (=5.15.189-1-5cf3a56ef2e5a918b3aeec2d949be222), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/base/kmod-amneziawg
+Section: kernel
+Architecture: arm_cortex-a5_vfpv4
+Installed-Size: 38985
+Description: AmneziaWG VPN Kernel Module
+SourceDateEpoch: 1755196060
+SourceName: kmod-amneziawg
+Filename: kmod-amneziawg_v23.05.6_arm_cortex-a5_vfpv4_at91_sama5.ipk
+Size: 39706
+SHA256sum: 3a3cf19ea4dbb94def16746484547794adcab746b4a8e03afb70d2fc8263c6a9

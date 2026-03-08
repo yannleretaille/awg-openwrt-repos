@@ -1,0 +1,55 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-r1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: mips_24kc
+Installed-Size: 92160
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+more useful than IPSec, while avoiding the massive headache. It intends to
+be considerably more performant than OpenVPN.  WireGuard is designed as a
+general purpose VPN for running on embedded interfaces and super computers
+alike, fit for many different circumstances. It uses UDP.
+
+This package provides the userspace control program for WireGuard,
+`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+SourceDateEpoch: 1743085274
+SourceName: amneziawg-tools
+URL: https://www.wireguard.com
+Filename: packages/amneziawg-tools_v24.10.1_mips_24kc_lantiq_xway_legacy.ipk
+Size: 29429
+SHA256sum: 58f91ce59d1880552f031bd879172e136e913e08aeb49267cb9e09b8d95064e2
+
+Package: kmod-amneziawg
+Version: 6.6.86-r1
+Depends: kernel (=6.6.86~d489f7ad91801191dd13f67a2d362119-r1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: mips_24kc
+Installed-Size: 81920
+Description: AmneziaWG VPN Kernel Module
+SourceDateEpoch: 1743085274
+SourceName: kmod-amneziawg
+Filename: kmods/6.6.86~d489f7ad91801191dd13f67a2d362119-r1/kmod-amneziawg_v24.10.1_mips_24kc_lantiq_xway_legacy.ipk
+Size: 33543
+SHA256sum: 849ff798fffcf0c46db428496324eeada25702550ea888b756dc33b7eb528be8
+
+Package: luci-app-amneziawg
+Version: 25.086.51674~d91b892
+Depends: libc, amneziawg-tools, ucode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 51200
+Description: Support for AmneziaWG VPN
+SourceDateEpoch: 1743085274
+SourceName: luci-app-amneziawg
+URL: https://github.com/openwrt/luci
+Filename: packages/luci-app-amneziawg_v24.10.1_mips_24kc_lantiq_xway_legacy.ipk
+Size: 11658
+SHA256sum: 6f8472e1dc9c5801026f66fce819133c8f29afe5946b55d17bc13e5454a68bb9
