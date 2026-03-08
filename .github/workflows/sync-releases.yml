@@ -211,7 +211,11 @@ jobs:
           fi
 
           git commit --quiet -m "chore(publish): update generated repos"
-          git push --force-with-lease origin "${HEAD_BRANCH}"
+          # Bot-only staging branch: use --force for deterministic updates from ephemeral CI clones.
+          # If humans ever push to staging, switch to:
+          #   git fetch --depth=1 origin "${HEAD_BRANCH}:${HEAD_BRANCH}" || true
+          #   git push --force-with-lease origin "${HEAD_BRANCH}"
+          git push --force origin "${HEAD_BRANCH}"
 
           if [[ "${BASE_EXISTS}" != "true" ]]; then
             echo "Base branch ${PUBLISH_BRANCH} does not exist yet; initializing from ${HEAD_BRANCH}"
