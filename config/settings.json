@@ -21,10 +21,10 @@
     "strict": true,
     "required_package_names": [
       "kmod-amneziawg",
-      "amneziawg-tools",
-      "luci-proto-amneziawg"
+      "amneziawg-tools"
     ],
     "optional_package_names": [
+      "luci-proto-amneziawg",
       "luci-i18n-amneziawg-ru"
     ]
   },
