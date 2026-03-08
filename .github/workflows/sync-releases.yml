@@ -13,16 +13,16 @@ on:
           - backfill
           - clean-rebuild
       publish_branch:
-        description: "Destination branch name used by sync state/output conventions"
+        description: "Destination Branch"
         required: true
         default: published-repos
       dry_run:
-        description: "Skip downloads and manifest writes"
+        description: "Dry run"
         type: boolean
         required: true
         default: false
       force_collision_override:
-        description: "Bypass checksum collision gate in repo builders"
+        description: "Override collision checks"
         type: boolean
         required: true
         default: false
