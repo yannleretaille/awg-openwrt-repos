@@ -2,7 +2,7 @@
   "upstream_repo": "Slava-Shchipunov/awg-openwrt",
   "api_base": "https://api.github.com",
   "publish_branch": "published-repos",
-  "public_base_url": "",
+  "public_base_url": "https://yannleretaille.github.io/awg-openwrt-repos",
   "output_root": "output",
   "download_root": "output/downloads",
   "manifest_root": "output/manifests",
@@ -21,10 +21,10 @@
     "strict": true,
     "required_package_names": [
       "kmod-amneziawg",
-      "amneziawg-tools"
+      "amneziawg-tools",
+      "luci-proto-amneziawg"
     ],
     "optional_package_names": [
-      "luci-proto-amneziawg",
       "luci-i18n-amneziawg-ru"
     ]
   },
