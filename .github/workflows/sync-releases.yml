@@ -29,6 +29,10 @@ on:
   schedule:
     - cron: "19 * * * *"
 
+concurrency:
+  group: sync-releases-${{ github.event_name == 'schedule' && 'published-repos' || inputs.publish_branch }}
+  cancel-in-progress: false
+
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -159,6 +163,7 @@ jobs:
           fi
 
           safe_publish_branch="$(echo "${PUBLISH_BRANCH}" | tr '/ ' '--')"
+          # Keep head branch stable so each run updates the same PR.
           HEAD_BRANCH="publish-staging-${safe_publish_branch}"
 
           publish_dir="$(mktemp -d)"
@@ -203,7 +208,7 @@ jobs:
             exit 0
           fi
 
-          git commit -m "chore(publish): update generated repos"
+          git commit --quiet -m "chore(publish): update generated repos"
           git push --force-with-lease origin "${HEAD_BRANCH}"
 
           existing_pr="$(gh pr list \
