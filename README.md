@@ -1,149 +1,17 @@
-# awg-openwrt-reops
+# AmneziaWG OpenWrt Repositories
 
-Automation for ingesting upstream `Slava-Shchipunov/awg-openwrt` releases and producing normalized metadata/state for repository publishing.
+Mirrors releases from [Slava-Shchipunov/awg-openwrt](https://github.com/Slava-Shchipunov/awg-openwrt) into generated OpenWrt OPKG/APK repositories.
 
-Implemented scope currently covers Phase 1 + Phase 2:
-- release discovery from GitHub API
-- snapshot exclusion
-- OpenWrt version detection from release metadata
-- `.ipk` / `.apk` asset classification
-- package metadata extraction from package internals
-- sync modes: `incremental`, `backfill`, `clean-rebuild`
-- resumable state and release manifests
+### OPKG URL format:
 
-Implemented scope now also includes core Phase 3:
-- materialize `opkg` feed trees (immutable release-scoped and rolling OpenWrt-version scoped)
-- generate `Packages` and `Packages.gz` indexes per architecture
-- optional `Packages` signing support via `usign`
-- consistency checks for arch/metadata/index generation
-
-Implemented scope now also includes core Phase 4:
-- materialize `apk` feed trees (immutable release-scoped and rolling OpenWrt-version scoped)
-- generate top-level aggregate `packages.adb` per target/subtarget for single-URL client setup
-- preserve split payload trees (`packages/` and `kmods/<kernel-hash>/`) with optional split compatibility indexes
-- optional `packages.adb` signing support via `apk mkndx --sign`
-
-## Configuration
-Default config is [`config/settings.json`](config/settings.json).
-
-`publish_branch` is configurable in two ways:
-- config value: `publish_branch`
-- CLI override: `--publish-branch <branch>`
-
-`public_base_url` controls URL prefixing in generated `output/REPOS.md`.
-Example: `https://<user>.github.io/<repo>`
-
-`coverage_policy` controls strict per-target package presence checks during repo generation:
-- `strict` (default `true`): fail build if any required package is missing for a target/subtarget
-- `required_package_names`: package names expected for every target/subtarget
-- `optional_package_names`: tracked in coverage reports but not required
-
-`sync.network` controls API/download resilience:
-- `max_retries`: retry count for retryable network/API errors
-- `backoff_initial_seconds` / `backoff_max_seconds`: exponential backoff window
-- `timeout_api_seconds` / `timeout_asset_seconds`: request timeouts
-
-## Usage
-Run incremental sync:
-
-```bash
-./scripts/sync_releases.py --mode incremental
+```
+https://yannleretaille.github.io/awg-openwrt-repos/opkg/openwrt/<openwrt-version>/targets/<target>/<subtarget>/<pkgarch>/
 ```
 
-Run full backfill:
+### APK URL format (25.12.0+):
 
-```bash
-./scripts/sync_releases.py --mode backfill
+```
+https://yannleretaille.github.io/awg-openwrt-repos/apk/openwrt/<openwrt-version>/targets/<target>/<subtarget>/packages.adb
 ```
 
-Clear state/output and rebuild from scratch:
-
-```bash
-./scripts/sync_releases.py --mode clean-rebuild
-```
-
-Dry-run discovery only (no downloads/writes):
-
-```bash
-./scripts/sync_releases.py --mode incremental --dry-run
-```
-
-Optional token (recommended for API limits):
-
-```bash
-GITHUB_TOKEN=... ./scripts/sync_releases.py --mode incremental
-```
-
-Target a specific release id (useful for testing):
-
-```bash
-./scripts/sync_releases.py --mode incremental --release-id 170097744
-```
-
-Build `opkg` repositories from synced manifests/assets:
-
-```bash
-./scripts/build_opkg_repo.py --clean
-```
-
-By default, repo builders fail on checksum collisions targeting the same destination path.
-Use override only for explicit emergency bypass:
-
-```bash
-./scripts/build_opkg_repo.py --clean --force-collision-override
-```
-
-Build `apk` repositories from synced manifests/assets:
-
-```bash
-./scripts/build_apk_repo.py --clean
-```
-
-```bash
-./scripts/build_apk_repo.py --clean --force-collision-override
-```
-
-Generate feed URL index markdown:
-
-```bash
-./scripts/generate_repos_md.py
-```
-
-## CI Publishing
-The GitHub workflow now has a `publish` job that prepares a staging branch and opens/updates a PR into the configured destination branch:
-- published content:
-  - `repos/`
-  - `REPOS.md`
-  - curated `meta/` reports from `output/manifests/index/`:
-    - `openwrt_versions.json`
-    - `opkg_repo_report.json`
-    - `apk_repo_report.json`
-    - `opkg_coverage_report.json`
-    - `apk_coverage_report.json`
-- PR base branch: `publish_branch` workflow input (or `published-repos` on schedule)
-- PR head branch: `publish-staging-<publish_branch>`
-- publish is skipped when `dry_run=true`
-
-## Local workflow testing with act
-List jobs:
-
-```bash
-act -l
-```
-
-Run workflow dispatch locally:
-
-```bash
-act workflow_dispatch -W .github/workflows/sync-releases.yml \
-  -e <(cat <<'JSON'
-{
-  "inputs": {
-    "mode": "incremental",
-    "publish_branch": "published-repos",
-    "dry_run": "true",
-    "force_collision_override": "false"
-  }
-}
-JSON
-)
-```
+### Full release/target/subtarget overview: [REPOS.md](https://github.com/yannleretaille/awg-openwrt-repos/blob/published-repos/REPOS.md)
