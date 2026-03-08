@@ -100,19 +100,11 @@ jobs:
           FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
         run: |
           set -euo pipefail
-          docker run --rm \
-            -v "$PWD:/work" \
-            -w /work \
-            -e FORCE_COLLISION_OVERRIDE="$FORCE_COLLISION_OVERRIDE" \
-            alpine:3.22 \
-            sh -euxc '
-              apk add --no-cache python3 apk-tools
-              EXTRA=""
-              if [ "${FORCE_COLLISION_OVERRIDE}" = "true" ]; then
-                EXTRA="--force-collision-override"
-              fi
-              ./scripts/build_apk_repo.py --clean ${EXTRA}
-            '
+          ARGS=(--clean)
+          if [[ "$FORCE_COLLISION_OVERRIDE" == "true" ]]; then
+            ARGS+=(--force-collision-override)
+          fi
+          ./scripts/build_apk_repo.py "${ARGS[@]}"
 
       - name: Generate REPOS.md
         if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
