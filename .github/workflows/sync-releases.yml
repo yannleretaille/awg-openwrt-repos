@@ -107,11 +107,11 @@ jobs:
             alpine:3.22 \
             sh -euxc '
               apk add --no-cache python3 apk-tools
-              ARGS=(--clean)
+              EXTRA=""
               if [ "${FORCE_COLLISION_OVERRIDE}" = "true" ]; then
-                ARGS+=(--force-collision-override)
+                EXTRA="--force-collision-override"
               fi
-              ./scripts/build_apk_repo.py "${ARGS[@]}"
+              ./scripts/build_apk_repo.py --clean ${EXTRA}
             '
 
       - name: Generate REPOS.md
