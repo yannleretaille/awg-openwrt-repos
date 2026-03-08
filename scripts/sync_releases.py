@@ -78,6 +78,10 @@ def now_iso() -> str:
     return dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()
 
 
+def log_progress(message: str) -> None:
+    print(f"[sync] {now_iso()} {message}", file=sys.stderr, flush=True)
+
+
 def load_config(path: Path) -> Dict[str, Any]:
     cfg = read_json(path, fallback=None)
     if not isinstance(cfg, dict):
@@ -683,6 +687,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
 def main(argv: List[str]) -> int:
     args = parse_args(argv)
     cfg_path = Path(args.config)
+    started_at = time.monotonic()
 
     try:
         cfg = load_config(cfg_path)
@@ -712,6 +717,9 @@ def main(argv: List[str]) -> int:
             token=args.github_token,
             retry_cfg=retry_cfg,
         )
+        log_progress(
+            f"fetched {len(releases)} releases from {repo}; mode={args.mode}; dry_run={args.dry_run}; jobs={jobs}"
+        )
         release_filter = set(args.release_id or [])
         processed_ids = {int(rid) for rid in state.get("processed_release_ids", [])}
 
@@ -730,8 +738,15 @@ def main(argv: List[str]) -> int:
                 continue
             run_stats["seen_releases"] += 1
             if not should_process_release(args.mode, rel_id, processed_ids):
+                run_stats["skipped"] += 1
+                log_progress(
+                    f"release_id={rel_id} tag={rel.get('tag_name') or ''}: skipped (already processed in incremental mode)"
+                )
                 continue
 
+            log_progress(
+                f"release_id={rel_id} tag={rel.get('tag_name') or ''}: processing start"
+            )
             try:
                 status, record = process_release(
                     rel=rel,
@@ -755,6 +770,16 @@ def main(argv: List[str]) -> int:
                 }
 
             state["release_results"][str(rel_id)] = record
+            log_progress(
+                "release_id={rid} tag={tag}: status={status} openwrt={ow} assets={assets} errors={errs}".format(
+                    rid=rel_id,
+                    tag=record.get("tag_name") or "",
+                    status=status,
+                    ow=record.get("openwrt_version") or "-",
+                    assets=record.get("asset_count") or 0,
+                    errs=len(record.get("errors") or []) + (1 if record.get("error") else 0),
+                )
+            )
             if status == "processed":
                 run_stats["processed"] += 1
                 if rel_id not in processed_ids:
@@ -777,6 +802,10 @@ def main(argv: List[str]) -> int:
             write_json(state_path, state)
             build_release_summary(state, manifest_root, dry_run=False)
 
+        elapsed = time.monotonic() - started_at
+        log_progress(
+            f"completed run in {elapsed:.1f}s: seen={run_stats['seen_releases']} processed={run_stats['processed']} skipped={run_stats['skipped']} errors={run_stats['errors']}"
+        )
         print(json.dumps({"status": "ok", "summary": run_stats, "mode": args.mode}, indent=2))
         if run_stats["errors"] > 0:
             return 2
