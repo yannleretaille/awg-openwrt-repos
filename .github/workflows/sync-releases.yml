@@ -124,13 +124,15 @@ jobs:
             KEYS_DIR="${SIGN_DIR}/keys"
             mkdir -p "${KEYS_DIR}"
             umask 077
-            printf '%s\n' "${PRIV_OPKG_SIGNING_KEY}" > "${SIGN_DIR}/PRIVATE_opkg-usign.key"
+            # signify-openbsd requires keyname.sec + keyname.pub naming.
+            printf '%s\n' "${PRIV_OPKG_SIGNING_KEY}" > "${SIGN_DIR}/opkg-signing.sec"
             printf '%s\n' "${PRIV_APK_SIGNING_KEY}" > "${SIGN_DIR}/PRIVATE_apk-signing.rsa"
+            cp "keys/opkg-usign.pub" "${SIGN_DIR}/opkg-signing.pub"
             cp "keys/opkg-usign.pub" "${KEYS_DIR}/opkg-usign.pub"
             cp "keys/apk-signing.rsa.pub" "${KEYS_DIR}/apk-signing.rsa.pub"
-            chmod 600 "${SIGN_DIR}/PRIVATE_opkg-usign.key" "${SIGN_DIR}/PRIVATE_apk-signing.rsa"
+            chmod 600 "${SIGN_DIR}/opkg-signing.sec" "${SIGN_DIR}/PRIVATE_apk-signing.rsa"
 
-            ARGS+=(--sign-key "${SIGN_DIR}/PRIVATE_opkg-usign.key")
+            ARGS+=(--sign-key "${SIGN_DIR}/opkg-signing.sec")
           fi
           ./scripts/build_opkg_repo.py "${ARGS[@]}"
 
@@ -161,11 +163,13 @@ jobs:
             KEYS_DIR="${SIGN_DIR}/keys"
             mkdir -p "${KEYS_DIR}"
             umask 077
-            printf '%s\n' "${PRIV_OPKG_SIGNING_KEY}" > "${SIGN_DIR}/PRIVATE_opkg-usign.key"
+            # Keep OPKG key material shape consistent across steps.
+            printf '%s\n' "${PRIV_OPKG_SIGNING_KEY}" > "${SIGN_DIR}/opkg-signing.sec"
             printf '%s\n' "${PRIV_APK_SIGNING_KEY}" > "${SIGN_DIR}/PRIVATE_apk-signing.rsa"
+            cp "keys/opkg-usign.pub" "${SIGN_DIR}/opkg-signing.pub"
             cp "keys/opkg-usign.pub" "${KEYS_DIR}/opkg-usign.pub"
             cp "keys/apk-signing.rsa.pub" "${KEYS_DIR}/apk-signing.rsa.pub"
-            chmod 600 "${SIGN_DIR}/PRIVATE_opkg-usign.key" "${SIGN_DIR}/PRIVATE_apk-signing.rsa"
+            chmod 600 "${SIGN_DIR}/opkg-signing.sec" "${SIGN_DIR}/PRIVATE_apk-signing.rsa"
 
             ARGS+=(--sign-key "${SIGN_DIR}/PRIVATE_apk-signing.rsa" --keys-dir "${KEYS_DIR}")
           fi

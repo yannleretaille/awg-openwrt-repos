@@ -11,6 +11,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
@@ -432,11 +433,33 @@ def sign_packages_if_requested(index_dir: Path, usign_bin: str, sign_key: Option
         return f"sign key not found: {sign_key}"
     if signer_mode == "usign":
         cmd = [signer_bin, "-S", "-m", str(index_dir / "Packages"), "-s", str(sign_key), "-x", str(index_dir / "Packages.sig")]
-    else:
-        cmd = [signer_bin, "-S", "-s", str(sign_key), "-m", str(index_dir / "Packages"), "-x", str(index_dir / "Packages.sig")]
+        try:
+            subprocess.run(cmd, check=True, capture_output=True, text=True)
+            return None
+        except FileNotFoundError:
+            return f"signer binary not found: {signer_bin}"
+        except subprocess.CalledProcessError as exc:
+            detail = exc.stderr.strip() or exc.stdout.strip()
+            return f"{signer_mode} signing failed for {index_dir / 'Packages'}: {detail}"
+
+    # signify requires keyname.sec with matching keyname.pub naming.
     try:
-        subprocess.run(cmd, check=True, capture_output=True, text=True)
-        return None
+        with tempfile.TemporaryDirectory(prefix="opkg-signify-") as tdir:
+            tmp_base = Path(tdir) / "opkg-signing"
+            tmp_sec = tmp_base.with_suffix(".sec")
+            tmp_pub = tmp_base.with_suffix(".pub")
+            shutil.copyfile(sign_key, tmp_sec)
+
+            candidate_pub = sign_key.with_suffix(".pub")
+            if candidate_pub.exists():
+                shutil.copyfile(candidate_pub, tmp_pub)
+            else:
+                # Minimal placeholder to satisfy signify naming scheme checks.
+                tmp_pub.write_text("untrusted comment: placeholder\n", encoding="utf-8")
+
+            cmd = [signer_bin, "-S", "-s", str(tmp_sec), "-m", str(index_dir / "Packages"), "-x", str(index_dir / "Packages.sig")]
+            subprocess.run(cmd, check=True, capture_output=True, text=True)
+            return None
     except FileNotFoundError:
         return f"signer binary not found: {signer_bin}"
     except subprocess.CalledProcessError as exc:
