@@ -474,6 +474,15 @@ def run_mkndx(
         return f"apk mkndx failed in {target_root}: {detail}"
 
 
+def resolve_tool(tool: str) -> Optional[str]:
+    if "/" in tool:
+        p = Path(tool).expanduser()
+        if p.exists() and os.access(str(p), os.X_OK):
+            return str(p.resolve())
+        return None
+    return shutil.which(tool)
+
+
 def materialize_variant(
     artifacts: Iterable[ApkArtifact],
     variant_root: Path,
@@ -639,7 +648,20 @@ def main(argv: List[str]) -> int:
     keys_dir = Path(keys_dir_value).expanduser().resolve() if keys_dir_value else None
 
     manifests = load_release_manifests(manifest_root)
-    artifacts, errors = collect_apk_artifacts(manifests, download_root, apk_bin=args.apk_bin)
+    errors: List[str] = []
+
+    resolved_apk_bin = resolve_tool(args.apk_bin)
+    if sign_key is not None:
+        if not resolved_apk_bin:
+            errors.append(f"signing requested but apk binary not found: {args.apk_bin}")
+        if not sign_key.exists():
+            errors.append(f"sign key not found: {sign_key}")
+        if keys_dir is not None and not keys_dir.exists():
+            errors.append(f"keys dir not found: {keys_dir}")
+    apk_bin = resolved_apk_bin or args.apk_bin
+
+    artifacts, collect_errors = collect_apk_artifacts(manifests, download_root, apk_bin=apk_bin)
+    errors.extend(collect_errors)
     rolling_latest = select_latest_release_per_version(artifacts)
     rolling_artifacts = [a for a in artifacts if rolling_latest.get(a.openwrt_version) == a.release_id]
     release_collision_report = build_path_collision_report(
@@ -697,7 +719,7 @@ def main(argv: List[str]) -> int:
     release_errors, release_indexed_dirs, release_coverage = materialize_variant(
         artifacts=artifacts,
         variant_root=repo_root / "apk" / "releases",
-        apk_bin=args.apk_bin,
+        apk_bin=apk_bin,
         sign_key=sign_key,
         keys_dir=keys_dir,
         include_release_key=True,
@@ -712,7 +734,7 @@ def main(argv: List[str]) -> int:
     rolling_errors, rolling_indexed_dirs, rolling_coverage = materialize_variant(
         artifacts=rolling_artifacts,
         variant_root=repo_root / "apk" / "openwrt",
-        apk_bin=args.apk_bin,
+        apk_bin=apk_bin,
         sign_key=sign_key,
         keys_dir=keys_dir,
         include_release_key=False,

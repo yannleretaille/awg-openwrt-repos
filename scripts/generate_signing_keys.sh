@@ -17,6 +17,19 @@ need_cmd() {
   fi
 }
 
+need_sign_tool() {
+  if command -v usign >/dev/null 2>&1; then
+    echo "usign"
+    return 0
+  fi
+  if command -v signify >/dev/null 2>&1; then
+    echo "signify"
+    return 0
+  fi
+  echo "Missing required command: usign or signify" >&2
+  exit 1
+}
+
 maybe_remove() {
   local path="$1"
   if [[ -e "${path}" ]]; then
@@ -30,7 +43,8 @@ maybe_remove() {
   fi
 }
 
-need_cmd usign
+SIGN_TOOL="$(need_sign_tool)"
+need_cmd apk
 need_cmd openssl
 
 mkdir -p "${KEYS_DIR}"
@@ -45,7 +59,11 @@ maybe_remove "${OPKG_PUB}"
 maybe_remove "${APK_PRIV}"
 maybe_remove "${APK_PUB}"
 
-usign -G -s "${OPKG_PRIV}" -p "${OPKG_PUB}" -c "awg-openwrt-repos opkg signing key"
+if [[ "${SIGN_TOOL}" == "usign" ]]; then
+  usign -G -s "${OPKG_PRIV}" -p "${OPKG_PUB}" -c "awg-openwrt-repos opkg signing key"
+else
+  signify -G -n -s "${OPKG_PRIV}" -p "${OPKG_PUB}"
+fi
 chmod 600 "${OPKG_PRIV}"
 
 openssl genrsa -out "${APK_PRIV}" 4096 >/dev/null 2>&1
@@ -53,6 +71,7 @@ openssl rsa -in "${APK_PRIV}" -pubout -out "${APK_PUB}" >/dev/null 2>&1
 chmod 600 "${APK_PRIV}"
 
 echo "Generated key pairs in: ${KEYS_DIR}"
+echo "OPKG signer tool: ${SIGN_TOOL}"
 echo "OPKG public key: ${OPKG_PUB}"
 echo "APK public key:  ${APK_PUB}"
 echo "Private keys are prefixed with PRIVATE_ and ignored by keys/.gitignore."

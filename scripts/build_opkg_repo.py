@@ -421,16 +421,57 @@ def write_packages_files(index_dir: Path, packages: List[IndexedPackage]) -> Lis
 def sign_packages_if_requested(index_dir: Path, usign_bin: str, sign_key: Optional[Path]) -> Optional[str]:
     if sign_key is None:
         return None
+    resolved = resolve_opkg_signer(usign_bin)
+    if resolved is None:
+        return (
+            "no compatible OPKG signer found; tried preferred/usign/signify-openbsd/signify. "
+            "Install usign or signify-openbsd/signify, or pass --usign-bin."
+        )
+    signer_bin, signer_mode = resolved
     if not sign_key.exists():
         return f"sign key not found: {sign_key}"
-    cmd = [usign_bin, "-S", "-m", str(index_dir / "Packages"), "-s", str(sign_key), "-x", str(index_dir / "Packages.sig")]
+    if signer_mode == "usign":
+        cmd = [signer_bin, "-S", "-m", str(index_dir / "Packages"), "-s", str(sign_key), "-x", str(index_dir / "Packages.sig")]
+    else:
+        cmd = [signer_bin, "-S", "-s", str(sign_key), "-m", str(index_dir / "Packages"), "-x", str(index_dir / "Packages.sig")]
     try:
         subprocess.run(cmd, check=True, capture_output=True, text=True)
         return None
     except FileNotFoundError:
-        return f"usign binary not found: {usign_bin}"
+        return f"signer binary not found: {signer_bin}"
     except subprocess.CalledProcessError as exc:
-        return f"usign failed for {index_dir / 'Packages'}: {exc.stderr.strip() or exc.stdout.strip()}"
+        detail = exc.stderr.strip() or exc.stdout.strip()
+        return f"{signer_mode} signing failed for {index_dir / 'Packages'}: {detail}"
+
+
+def resolve_opkg_signer(preferred_bin: str) -> Optional[Tuple[str, str]]:
+    candidates: List[str] = []
+    if preferred_bin:
+        candidates.append(preferred_bin)
+    for c in ("usign", "signify-openbsd", "signify"):
+        if c not in candidates:
+            candidates.append(c)
+
+    for cand in candidates:
+        resolved: Optional[str] = None
+        if "/" in cand:
+            p = Path(cand).expanduser()
+            if p.exists() and os.access(str(p), os.X_OK):
+                resolved = str(p.resolve())
+        else:
+            which = shutil.which(cand)
+            if which:
+                resolved = which
+        if not resolved:
+            continue
+
+        base = Path(resolved).name
+        mode = "usign"
+        if base in ("signify", "signify-openbsd"):
+            mode = "signify"
+        return (resolved, mode)
+
+    return None
 
 
 def materialize_variant(
@@ -532,7 +573,11 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         help="continue build and overwrite when checksum collisions are detected on destination paths",
     )
     parser.add_argument("--sign-key", default=None, help="optional usign private key path")
-    parser.add_argument("--usign-bin", default="usign", help="usign binary path")
+    parser.add_argument(
+        "--usign-bin",
+        default="usign",
+        help="preferred signer binary for OPKG signatures (fallback: usign -> signify-openbsd -> signify)",
+    )
     return parser.parse_args(argv)
 
 
@@ -550,6 +595,14 @@ def main(argv: List[str]) -> int:
 
     manifests = load_release_manifests(manifest_root)
     artifacts, errors = collect_ipk_artifacts(manifests, download_root)
+    if sign_key is not None:
+        if not sign_key.exists():
+            errors.append(f"sign key not found: {sign_key}")
+        if resolve_opkg_signer(args.usign_bin) is None:
+            errors.append(
+                "signing requested but no compatible OPKG signer found "
+                "(tried preferred/usign/signify-openbsd/signify)"
+            )
     rolling_latest = select_latest_release_per_version(artifacts)
     rolling_artifacts = [a for a in artifacts if rolling_latest.get(a.openwrt_version) == a.release_id]
     release_collision_report = build_path_collision_report(
