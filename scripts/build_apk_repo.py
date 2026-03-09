@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -632,8 +633,10 @@ def main(argv: List[str]) -> int:
     repo_root = Path(args.repo_root or (output_root / "repos"))
     strict_coverage, required_packages, optional_packages = load_coverage_policy(cfg)
 
-    sign_key = Path(args.sign_key) if args.sign_key else None
-    keys_dir = Path(args.keys_dir) if args.keys_dir else None
+    sign_key_value = args.sign_key or os.getenv("APK_SIGN_KEY_PATH")
+    keys_dir_value = args.keys_dir or os.getenv("APK_KEYS_DIR")
+    sign_key = Path(sign_key_value).expanduser().resolve() if sign_key_value else None
+    keys_dir = Path(keys_dir_value).expanduser().resolve() if keys_dir_value else None
 
     manifests = load_release_manifests(manifest_root)
     artifacts, errors = collect_apk_artifacts(manifests, download_root, apk_bin=args.apk_bin)

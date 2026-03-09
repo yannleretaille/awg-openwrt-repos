@@ -1,0 +1,3 @@
+PRIVATE_*
+!*.pub
+!.gitignore

@@ -26,6 +26,11 @@ on:
         type: boolean
         required: true
         default: false
+      sign_repos:
+        description: "Sign repositories"
+        type: boolean
+        required: true
+        default: true
   schedule:
     - cron: "19 * * * *"
 
@@ -90,11 +95,36 @@ jobs:
         if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
         env:
           FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
+          SIGN_REPOS: ${{ github.event_name == 'schedule' && 'true' || inputs.sign_repos }}
+          PRIV_OPKG_SIGNING_KEY: ${{ secrets.PRIV_OPKG_SIGNING_KEY }}
+          PRIV_APK_SIGNING_KEY: ${{ secrets.PRIV_APK_SIGNING_KEY }}
         run: |
           set -euo pipefail
           ARGS=(--clean)
           if [[ "$FORCE_COLLISION_OVERRIDE" == "true" ]]; then
             ARGS+=(--force-collision-override)
+          fi
+          if [[ "$SIGN_REPOS" == "true" ]]; then
+            if [[ -z "${PRIV_OPKG_SIGNING_KEY:-}" || -z "${PRIV_APK_SIGNING_KEY:-}" ]]; then
+              echo "Signing enabled but required secrets are missing (PRIV_OPKG_SIGNING_KEY / PRIV_APK_SIGNING_KEY)." >&2
+              exit 1
+            fi
+            if [[ ! -f keys/opkg-usign.pub || ! -f keys/apk-signing.rsa.pub ]]; then
+              echo "Signing enabled but public keys are missing in repo keys/ directory." >&2
+              exit 1
+            fi
+
+            SIGN_DIR="${RUNNER_TEMP}/signing"
+            KEYS_DIR="${SIGN_DIR}/keys"
+            mkdir -p "${KEYS_DIR}"
+            umask 077
+            printf '%s\n' "${PRIV_OPKG_SIGNING_KEY}" > "${SIGN_DIR}/PRIVATE_opkg-usign.key"
+            printf '%s\n' "${PRIV_APK_SIGNING_KEY}" > "${SIGN_DIR}/PRIVATE_apk-signing.rsa"
+            cp "keys/opkg-usign.pub" "${KEYS_DIR}/opkg-usign.pub"
+            cp "keys/apk-signing.rsa.pub" "${KEYS_DIR}/apk-signing.rsa.pub"
+            chmod 600 "${SIGN_DIR}/PRIVATE_opkg-usign.key" "${SIGN_DIR}/PRIVATE_apk-signing.rsa"
+
+            ARGS+=(--sign-key "${SIGN_DIR}/PRIVATE_opkg-usign.key")
           fi
           ./scripts/build_opkg_repo.py "${ARGS[@]}"
 
@@ -102,13 +132,46 @@ jobs:
         if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
         env:
           FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
+          SIGN_REPOS: ${{ github.event_name == 'schedule' && 'true' || inputs.sign_repos }}
+          PRIV_OPKG_SIGNING_KEY: ${{ secrets.PRIV_OPKG_SIGNING_KEY }}
+          PRIV_APK_SIGNING_KEY: ${{ secrets.PRIV_APK_SIGNING_KEY }}
         run: |
           set -euo pipefail
           ARGS=(--clean)
           if [[ "$FORCE_COLLISION_OVERRIDE" == "true" ]]; then
             ARGS+=(--force-collision-override)
           fi
+          if [[ "$SIGN_REPOS" == "true" ]]; then
+            if [[ -z "${PRIV_OPKG_SIGNING_KEY:-}" || -z "${PRIV_APK_SIGNING_KEY:-}" ]]; then
+              echo "Signing enabled but required secrets are missing (PRIV_OPKG_SIGNING_KEY / PRIV_APK_SIGNING_KEY)." >&2
+              exit 1
+            fi
+            if [[ ! -f keys/opkg-usign.pub || ! -f keys/apk-signing.rsa.pub ]]; then
+              echo "Signing enabled but public keys are missing in repo keys/ directory." >&2
+              exit 1
+            fi
+
+            SIGN_DIR="${RUNNER_TEMP}/signing"
+            KEYS_DIR="${SIGN_DIR}/keys"
+            mkdir -p "${KEYS_DIR}"
+            umask 077
+            printf '%s\n' "${PRIV_OPKG_SIGNING_KEY}" > "${SIGN_DIR}/PRIVATE_opkg-usign.key"
+            printf '%s\n' "${PRIV_APK_SIGNING_KEY}" > "${SIGN_DIR}/PRIVATE_apk-signing.rsa"
+            cp "keys/opkg-usign.pub" "${KEYS_DIR}/opkg-usign.pub"
+            cp "keys/apk-signing.rsa.pub" "${KEYS_DIR}/apk-signing.rsa.pub"
+            chmod 600 "${SIGN_DIR}/PRIVATE_opkg-usign.key" "${SIGN_DIR}/PRIVATE_apk-signing.rsa"
+
+            ARGS+=(--sign-key "${SIGN_DIR}/PRIVATE_apk-signing.rsa" --keys-dir "${KEYS_DIR}")
+          fi
           ./scripts/build_apk_repo.py "${ARGS[@]}"
+
+      - name: Copy public signing keys to output
+        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && (github.event_name == 'schedule' || inputs.sign_repos == true) }}
+        run: |
+          set -euo pipefail
+          mkdir -p output/keys
+          cp keys/opkg-usign.pub output/keys/opkg-usign.pub
+          cp keys/apk-signing.rsa.pub output/keys/apk-signing.rsa.pub
 
       - name: Generate REPOS.md
         if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
@@ -186,8 +249,12 @@ jobs:
           find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
           mkdir -p repos
           mkdir -p meta
+          mkdir -p keys
           cp -a "${GITHUB_WORKSPACE}/output/repos/." repos/
           cp "${GITHUB_WORKSPACE}/output/REPOS.md" REPOS.md
+          if [[ -d "${GITHUB_WORKSPACE}/output/keys" ]]; then
+            cp -a "${GITHUB_WORKSPACE}/output/keys/." keys/
+          fi
 
           for f in \
             openwrt_versions.json \

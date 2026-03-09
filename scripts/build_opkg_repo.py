@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import gzip
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -543,7 +544,8 @@ def main(argv: List[str]) -> int:
     manifest_root = Path(args.manifest_root or cfg.get("manifest_root", output_root / "manifests"))
     download_root = Path(args.download_root or cfg.get("download_root", output_root / "downloads"))
     repo_root = Path(args.repo_root or (output_root / "repos"))
-    sign_key = Path(args.sign_key) if args.sign_key else None
+    sign_key_value = args.sign_key or os.getenv("OPKG_SIGN_KEY_PATH")
+    sign_key = Path(sign_key_value).expanduser().resolve() if sign_key_value else None
     strict_coverage, required_packages, optional_packages = load_coverage_policy(cfg)
 
     manifests = load_release_manifests(manifest_root)
