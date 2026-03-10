@@ -8,21 +8,21 @@ License: GPL-2.0
 LicenseFiles: COPYING
 Architecture: mipsel_24kc
 Installed-Size: 92160
-Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
-state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
-more useful than IPSec, while avoiding the massive headache. It intends to
-be considerably more performant than OpenVPN.  WireGuard is designed as a
-general purpose VPN for running on embedded interfaces and super computers
-alike, fit for many different circumstances. It uses UDP.
-
-This package provides the userspace control program for WireGuard,
-`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
 SourceDateEpoch: 1730035800
 SourceName: amneziawg-tools
 URL: https://www.wireguard.com
 Filename: amneziawg-tools_v24.10.0_mipsel_24kc_ramips_mt7621.ipk
 Size: 28953
 SHA256sum: d4ee0af1559216d7621f84f178a8510d3a373478ea3c2c4a1648f50b658c2494
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+ state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+ more useful than IPSec, while avoiding the massive headache. It intends to
+ be considerably more performant than OpenVPN.  WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and super computers
+ alike, fit for many different circumstances. It uses UDP.
+ .
+ This package provides the userspace control program for WireGuard,
+ `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
 
 Package: luci-app-amneziawg
 Version: 24.301.48600~e285146
@@ -32,10 +32,10 @@ Section: luci
 Maintainer: OpenWrt LuCI community
 Architecture: all
 Installed-Size: 51200
-Description: Support for AmneziaWG VPN
 SourceDateEpoch: 1730035800
 SourceName: luci-app-amneziawg
 URL: https://github.com/openwrt/luci
 Filename: luci-app-amneziawg_v24.10.0_mipsel_24kc_ramips_mt7621.ipk
 Size: 11650
 SHA256sum: e12ea31275bc750bc6daeb00538998b741818595bc2a6274f4ff69f70582bf12
+Description: Support for AmneziaWG VPN

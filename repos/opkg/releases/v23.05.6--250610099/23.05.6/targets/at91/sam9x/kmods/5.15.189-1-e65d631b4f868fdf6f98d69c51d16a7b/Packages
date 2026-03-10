@@ -5,9 +5,9 @@ Source: feeds/base/kmod-amneziawg
 Section: kernel
 Architecture: arm_arm926ej-s
 Installed-Size: 39174
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1755196060
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v23.05.6_arm_arm926ej-s_at91_sam9x.ipk
 Size: 39954
 SHA256sum: 83006a5ad19823eee6c1401431266a0c70f1cea387174d7bae48acf60f25aeec
+Description: AmneziaWG VPN Kernel Module

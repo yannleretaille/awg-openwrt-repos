@@ -8,21 +8,21 @@ License: GPL-2.0
 LicenseFiles: COPYING
 Architecture: aarch64_cortex-a53
 Installed-Size: 92160
-Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
-state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
-more useful than IPSec, while avoiding the massive headache. It intends to
-be considerably more performant than OpenVPN.  WireGuard is designed as a
-general purpose VPN for running on embedded interfaces and super computers
-alike, fit for many different circumstances. It uses UDP.
-
-This package provides the userspace control program for WireGuard,
-`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
 SourceDateEpoch: 1743085274
 SourceName: amneziawg-tools
 URL: https://www.wireguard.com
 Filename: amneziawg-tools_v24.10.1_aarch64_cortex-a53_mvebu_cortexa53.ipk
 Size: 30887
 SHA256sum: 59c278c2e474f162ffd57892dcc89f6431cdef1ebb908171e21efe041fa868c0
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+ state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+ more useful than IPSec, while avoiding the massive headache. It intends to
+ be considerably more performant than OpenVPN.  WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and super computers
+ alike, fit for many different circumstances. It uses UDP.
+ .
+ This package provides the userspace control program for WireGuard,
+ `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
 
 Package: luci-app-amneziawg
 Version: 25.086.51674~d91b892
@@ -32,10 +32,10 @@ Section: luci
 Maintainer: OpenWrt LuCI community
 Architecture: all
 Installed-Size: 51200
-Description: Support for AmneziaWG VPN
 SourceDateEpoch: 1743085274
 SourceName: luci-app-amneziawg
 URL: https://github.com/openwrt/luci
 Filename: luci-app-amneziawg_v24.10.1_aarch64_cortex-a53_mvebu_cortexa53.ipk
 Size: 11658
 SHA256sum: 6f8472e1dc9c5801026f66fce819133c8f29afe5946b55d17bc13e5454a68bb9
+Description: Support for AmneziaWG VPN

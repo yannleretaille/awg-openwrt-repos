@@ -5,9 +5,9 @@ Source: feeds/awgopenwrt/kmod-amneziawg
 Section: kernel
 Architecture: x86_64
 Installed-Size: 153600
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1730035800
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v24.10.0_x86_64_x86_64.ipk
 Size: 43359
 SHA256sum: 087e1ba524b74e01bbaf2611e8307d4d0f87a6014f191dbf7dc10c1f22fa2492
+Description: AmneziaWG VPN Kernel Module

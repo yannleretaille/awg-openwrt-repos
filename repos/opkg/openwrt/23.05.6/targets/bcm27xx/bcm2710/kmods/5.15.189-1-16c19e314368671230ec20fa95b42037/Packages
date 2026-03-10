@@ -5,9 +5,9 @@ Source: feeds/base/kmod-amneziawg
 Section: kernel
 Architecture: aarch64_cortex-a53
 Installed-Size: 40200
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1755196060
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v23.05.6_aarch64_cortex-a53_bcm27xx_bcm2710.ipk
 Size: 40867
 SHA256sum: 18a3026647d462936cc8d5a96d0c37d3cde9e4f275aa330f0d4459c32997c379
+Description: AmneziaWG VPN Kernel Module

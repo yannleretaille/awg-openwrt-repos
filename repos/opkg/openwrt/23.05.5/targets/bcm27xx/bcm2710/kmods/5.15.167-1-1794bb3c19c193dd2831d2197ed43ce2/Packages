@@ -5,9 +5,9 @@ Source: feeds/awgopenwrt/kmod-amneziawg
 Section: kernel
 Architecture: aarch64_cortex-a53
 Installed-Size: 36582
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1728299772
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v23.05.5_aarch64_cortex-a53_bcm27xx_bcm2710.ipk
 Size: 37331
 SHA256sum: e56c734a753fdccc25eeab578310b63b5765df21ddd60dcb5a8c558b61d857b3
+Description: AmneziaWG VPN Kernel Module

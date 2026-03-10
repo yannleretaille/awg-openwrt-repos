@@ -5,9 +5,9 @@ Source: feeds/base/kmod-amneziawg
 Section: kernel
 Architecture: arm_xscale
 Installed-Size: 92160
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1760891865
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v24.10.4_arm_xscale_kirkwood_generic.ipk
 Size: 40173
 SHA256sum: 96060f785afdfc3f089d6c184fdd1c9de292aff0363ef03943852265f750098e
+Description: AmneziaWG VPN Kernel Module

@@ -5,9 +5,9 @@ Source: feeds/base/kmod-amneziawg
 Section: kernel
 Architecture: mips_mips32
 Installed-Size: 81920
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1760891865
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v24.10.4_mips_mips32_lantiq_ase.ipk
 Size: 37112
 SHA256sum: 0129ecbae8eb77ded757af0adcb2950e61838da850227d6c3b63c93a7288fce3
+Description: AmneziaWG VPN Kernel Module

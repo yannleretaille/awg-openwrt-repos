@@ -5,9 +5,9 @@ Source: feeds/awgopenwrt/kmod-amneziawg
 Section: kernel
 Architecture: arm_cortex-a8_vfpv3
 Installed-Size: 37189
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1722691334
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v23.05.3_arm_cortex-a8_vfpv3_sunxi_cortexa8.ipk
 Size: 37840
 SHA256sum: c03b2167d10b7b21a0a1375bfbe5dccc73b693a6940e8399cb5fdf87046e1350
+Description: AmneziaWG VPN Kernel Module

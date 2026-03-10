@@ -8,21 +8,21 @@ License: GPL-2.0
 LicenseFiles: COPYING
 Architecture: arm_cortex-a15_neon-vfpv4
 Installed-Size: 71680
-Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
-state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
-more useful than IPSec, while avoiding the massive headache. It intends to
-be considerably more performant than OpenVPN.  WireGuard is designed as a
-general purpose VPN for running on embedded interfaces and super computers
-alike, fit for many different circumstances. It uses UDP.
-
-This package provides the userspace control program for WireGuard,
-`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
 SourceDateEpoch: 1743085274
 SourceName: amneziawg-tools
 URL: https://www.wireguard.com
 Filename: packages/amneziawg-tools_v24.10.1_arm_cortex-a15_neon-vfpv4_ipq806x_chromium.ipk
 Size: 30595
 SHA256sum: af421f4b36212c4e7b20a6d7f66e15cc9f23d6f0ced26ad6dd3b14c75e6cf77b
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+ state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+ more useful than IPSec, while avoiding the massive headache. It intends to
+ be considerably more performant than OpenVPN.  WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and super computers
+ alike, fit for many different circumstances. It uses UDP.
+ .
+ This package provides the userspace control program for WireGuard,
+ `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
 
 Package: kmod-amneziawg
 Version: 6.6.86-r1
@@ -31,12 +31,12 @@ Source: feeds/awgopenwrt/kmod-amneziawg
 Section: kernel
 Architecture: arm_cortex-a15_neon-vfpv4
 Installed-Size: 92160
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1743085274
 SourceName: kmod-amneziawg
 Filename: kmods/6.6.86~77e232d95b33f8db851f612ab7d07b8f-r1/kmod-amneziawg_v24.10.1_arm_cortex-a15_neon-vfpv4_ipq806x_chromium.ipk
 Size: 37991
 SHA256sum: b1d71ef4c644f46bcd657ba28790d066f2fa1f91eec1e4e4cdc1e2a0eb2a576c
+Description: AmneziaWG VPN Kernel Module
 
 Package: luci-app-amneziawg
 Version: 25.086.51674~d91b892
@@ -46,10 +46,10 @@ Section: luci
 Maintainer: OpenWrt LuCI community
 Architecture: all
 Installed-Size: 51200
-Description: Support for AmneziaWG VPN
 SourceDateEpoch: 1743085274
 SourceName: luci-app-amneziawg
 URL: https://github.com/openwrt/luci
 Filename: packages/luci-app-amneziawg_v24.10.1_arm_cortex-a15_neon-vfpv4_ipq806x_chromium.ipk
 Size: 11658
 SHA256sum: 6f8472e1dc9c5801026f66fce819133c8f29afe5946b55d17bc13e5454a68bb9
+Description: Support for AmneziaWG VPN

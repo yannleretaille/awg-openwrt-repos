@@ -5,9 +5,9 @@ Source: feeds/awgopenwrt/kmod-amneziawg
 Section: kernel
 Architecture: mipsel_24kc
 Installed-Size: 92160
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1743085274
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v24.10.1_mipsel_24kc_ramips_mt7620.ipk
 Size: 38851
 SHA256sum: 6ab011dbd85885fd7d26c6aeb99b8389f00e80a092fa6f262cbfaef17a44983e
+Description: AmneziaWG VPN Kernel Module

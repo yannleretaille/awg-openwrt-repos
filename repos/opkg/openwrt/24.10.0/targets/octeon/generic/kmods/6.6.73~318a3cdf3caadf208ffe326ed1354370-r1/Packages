@@ -5,9 +5,9 @@ Source: feeds/awgopenwrt/kmod-amneziawg
 Section: kernel
 Architecture: mips64_octeonplus
 Installed-Size: 143360
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1730035800
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v24.10.0_mips64_octeonplus_octeon_generic.ipk
 Size: 46095
 SHA256sum: 3eb6dd2828049f2189a15bfe3e0d4906bc162cde4ed14198925a37903b152d13
+Description: AmneziaWG VPN Kernel Module

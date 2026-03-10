@@ -5,9 +5,9 @@ Source: feeds/awgopenwrt/kmod-amneziawg
 Section: kernel
 Architecture: powerpc64_e5500
 Installed-Size: 133120
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1730035800
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v24.10.0_powerpc64_e5500_qoriq_generic.ipk
 Size: 42390
 SHA256sum: c08a8dad9639484aa6550dba660923a0d64e297ca1fdb40bc671f0cd635014f1
+Description: AmneziaWG VPN Kernel Module

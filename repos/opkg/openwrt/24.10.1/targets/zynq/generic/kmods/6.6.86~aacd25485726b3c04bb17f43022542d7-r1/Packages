@@ -5,9 +5,9 @@ Source: feeds/awgopenwrt/kmod-amneziawg
 Section: kernel
 Architecture: arm_cortex-a9_neon
 Installed-Size: 92160
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1743085274
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v24.10.1_arm_cortex-a9_neon_zynq_generic.ipk
 Size: 38136
 SHA256sum: 1f9988eda8e3b4e1a793e95604dbd5663d7f7aa9f77d45de82f7d799bc9c24a2
+Description: AmneziaWG VPN Kernel Module

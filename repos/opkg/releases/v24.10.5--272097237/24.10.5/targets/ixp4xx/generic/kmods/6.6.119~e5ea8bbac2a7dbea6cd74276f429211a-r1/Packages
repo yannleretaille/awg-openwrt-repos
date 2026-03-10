@@ -5,9 +5,9 @@ Source: feeds/base/kmod-amneziawg
 Section: kernel
 Architecture: armeb_xscale
 Installed-Size: 92160
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1766005702
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v24.10.5_armeb_xscale_ixp4xx_generic.ipk
 Size: 40481
 SHA256sum: 0b39e5748d6f634d5ab5cab21c2a48d5be392a552d1a81ebb48608f5ce377204
+Description: AmneziaWG VPN Kernel Module
