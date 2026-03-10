@@ -8,20 +8,20 @@ License: GPL-2.0
 LicenseFiles: COPYING
 Architecture: arm_cortex-a9_neon
 Installed-Size: 29736
-Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
-state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
-more useful than IPSec, while avoiding the massive headache. It intends to
-be considerably more performant than OpenVPN.  WireGuard is designed as a
-general purpose VPN for running on embedded interfaces and super computers
-alike, fit for many different circumstances. It uses UDP.
-
-This package provides the userspace control program for WireGuard,
-`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
 SourceDateEpoch: 1728299772
 SourceName: amneziawg-tools
 Filename: packages/amneziawg-tools_v23.05.5_arm_cortex-a9_neon_imx_cortexa9.ipk
 Size: 30820
 SHA256sum: 37878cb5d68228b2776c0354399a688c65335b19840e275cca984394fce7931b
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+ state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+ more useful than IPSec, while avoiding the massive headache. It intends to
+ be considerably more performant than OpenVPN.  WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and super computers
+ alike, fit for many different circumstances. It uses UDP.
+ .
+ This package provides the userspace control program for WireGuard,
+ `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
 
 Package: kmod-amneziawg
 Version: 5.15.167-1
@@ -30,12 +30,12 @@ Source: feeds/awgopenwrt/kmod-amneziawg
 Section: kernel
 Architecture: arm_cortex-a9_neon
 Installed-Size: 36920
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1728299772
 SourceName: kmod-amneziawg
 Filename: kmods/5.15.167-1-2157324c2f58dd1596e62610feb3a51e/kmod-amneziawg_v23.05.5_arm_cortex-a9_neon_imx_cortexa9.ipk
 Size: 37521
 SHA256sum: d1a7299e1aeff5470a4f558a50421166688223ff8b1b04fbb5353ffcead1fb53
+Description: AmneziaWG VPN Kernel Module
 
 Package: luci-app-amneziawg
 Version: git-24.281.40572-2de5a74
@@ -45,9 +45,9 @@ Section: luci
 Maintainer: OpenWrt LuCI community
 Architecture: all
 Installed-Size: 10769
-Description: Support for AmneziaWG VPN
 SourceDateEpoch: 1728299772
 SourceName: luci-app-amneziawg
 Filename: packages/luci-app-amneziawg_v23.05.5_arm_cortex-a9_neon_imx_cortexa9.ipk
 Size: 11636
 SHA256sum: ea75b83abb19e501ba7e1437fd52a481edaa20b207c8bc2b326c3acddbf4e97c
+Description: Support for AmneziaWG VPN

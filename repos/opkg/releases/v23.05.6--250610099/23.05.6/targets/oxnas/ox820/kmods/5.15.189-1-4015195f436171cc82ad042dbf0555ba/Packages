@@ -5,9 +5,9 @@ Source: feeds/base/kmod-amneziawg
 Section: kernel
 Architecture: arm_mpcore
 Installed-Size: 39299
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1755196060
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v23.05.6_arm_mpcore_oxnas_ox820.ipk
 Size: 40034
 SHA256sum: 51d1fb0493e74c8266baee678926a484b70ec8d23a75e679b8f78c674a7c2ce0
+Description: AmneziaWG VPN Kernel Module

@@ -5,9 +5,9 @@ Source: feeds/base/kmod-amneziawg
 Section: kernel
 Architecture: mips_24kc
 Installed-Size: 41932
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1755196060
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v23.05.6_mips_24kc_realtek_rtl930x.ipk
 Size: 42661
 SHA256sum: ba6a9ea653b3039b14bee892a3baca8fc3b0d66e5c20c420374130160035a2e2
+Description: AmneziaWG VPN Kernel Module

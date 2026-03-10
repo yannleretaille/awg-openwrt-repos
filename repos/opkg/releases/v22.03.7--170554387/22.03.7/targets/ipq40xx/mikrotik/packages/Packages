@@ -8,20 +8,20 @@ License: GPL-2.0
 LicenseFiles: COPYING
 Architecture: arm_cortex-a7_neon-vfpv4
 Installed-Size: 29538
-Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
-state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
-more useful than IPSec, while avoiding the massive headache. It intends to
-be considerably more performant than OpenVPN.  WireGuard is designed as a
-general purpose VPN for running on embedded interfaces and super computers
-alike, fit for many different circumstances. It uses UDP.
-
-This package provides the userspace control program for WireGuard,
-`wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
 SourceDateEpoch: 1722691334
 SourceName: amneziawg-tools
 Filename: amneziawg-tools_v22.03.7_arm_cortex-a7_neon-vfpv4_ipq40xx_mikrotik.ipk
 Size: 30660
 SHA256sum: bcaddcb3fab37e0fb17a6126823d245afe0ff224b0dbe4d8426451615771c7ce
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+ state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+ more useful than IPSec, while avoiding the massive headache. It intends to
+ be considerably more performant than OpenVPN.  WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and super computers
+ alike, fit for many different circumstances. It uses UDP.
+ .
+ This package provides the userspace control program for WireGuard,
+ `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
 
 Package: luci-app-amneziawg
 Version: git-24.216.48134-1c17d9b
@@ -31,9 +31,9 @@ Section: luci
 Maintainer: OpenWrt LuCI community
 Architecture: all
 Installed-Size: 10778
-Description: Support for AmneziaWG VPN
 SourceDateEpoch: 1722691334
 SourceName: luci-app-amneziawg
 Filename: luci-app-amneziawg_v22.03.7_arm_cortex-a7_neon-vfpv4_ipq40xx_mikrotik.ipk
 Size: 11658
 SHA256sum: 746827c0c243b32a7d80f94a90248bbff2a48f9b907fc347a7884576dc7dbbeb
+Description: Support for AmneziaWG VPN

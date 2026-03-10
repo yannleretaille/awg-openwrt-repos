@@ -8,17 +8,17 @@ License: GPL-2.0
 LicenseFiles: COPYING
 Architecture: riscv64_riscv64
 Installed-Size: 81920
-Description: Amnezia VPN — simple and free app to run a self-hosted VPN with
-high privacy requirements.
-
-This package provides the userspace control program for AmneziaWG,
-`awg`, a netifd protocol helper, and a re-resolve watchdog script.
 SourceDateEpoch: 1766005702
 SourceName: amneziawg-tools
 URL: https://amnezia.org/
 Filename: amneziawg-tools_v24.10.5_riscv64_riscv64_sifiveu_generic.ipk
 Size: 34504
 SHA256sum: 53e38104c29888d6283ab18badb7f663d5ed8649876723e88dde7fa59562fb19
+Description: Amnezia VPN — simple and free app to run a self-hosted VPN with
+ high privacy requirements.
+ .
+ This package provides the userspace control program for AmneziaWG,
+ `awg`, a netifd protocol helper, and a re-resolve watchdog script.
 
 Package: luci-i18n-amneziawg-ru
 Version: 0
@@ -28,12 +28,12 @@ Section: luci
 License: Apache-2.0
 Architecture: all
 Installed-Size: 20480
-Description: Translation for luci-proto-amneziawg - Русский (Russian)
 SourceDateEpoch: 1766005702
 SourceName: luci-proto-amneziawg
 Filename: luci-i18n-amneziawg-ru_v24.10.5_riscv64_riscv64_sifiveu_generic.ipk
 Size: 2991
 SHA256sum: a03f3aa3cc66214c7c37e63531d49bfc1f52d8b42de1bf2dfc8b05f9944ac535
+Description: Translation for luci-proto-amneziawg - Русский (Russian)
 
 Package: luci-proto-amneziawg
 Version: 2.0.4-r1
@@ -44,10 +44,10 @@ Maintainer: OpenWrt LuCI community
 License: Apache-2.0
 Architecture: all
 Installed-Size: 102400
-Description: Provides support and Web UI for AmneziaWG VPN
 SourceDateEpoch: 1766005702
 SourceName: luci-proto-amneziawg
 URL: https://github.com/openwrt/luci
 Filename: luci-proto-amneziawg_v24.10.5_riscv64_riscv64_sifiveu_generic.ipk
 Size: 27961
 SHA256sum: 0c843597b97cea5e7ec96b1af3559e6fe6a51552600c7c05b0e473113e92bc94
+Description: Provides support and Web UI for AmneziaWG VPN

@@ -5,9 +5,9 @@ Source: feeds/awgopenwrt/kmod-amneziawg
 Section: kernel
 Architecture: i386_pentium-mmx
 Installed-Size: 33981
-Description: AmneziaWG VPN Kernel Module
 SourceDateEpoch: 1722691334
 SourceName: kmod-amneziawg
 Filename: kmod-amneziawg_v23.05.3_i386_pentium-mmx_x86_geode.ipk
 Size: 34793
 SHA256sum: ea26f5529430a53fe8a1e48e07e27ad1a26c30a07d15031658df8b58467e5ed7
+Description: AmneziaWG VPN Kernel Module
