@@ -422,7 +422,10 @@ def write_packages_files(index_dir: Path, packages: List[IndexedPackage]) -> Lis
     if len(non_all_arches) > 1:
         errors.append(f"mixed package architectures in index dir {index_dir}: {sorted(seen_arch)}")
 
-    payload = ("\n\n".join(stanzas) + "\n") if stanzas else ""
+    # Keep a trailing blank stanza separator to satisfy LuCI package-manager parser
+    # (`/usr/libexec/package-manager-call list-available` -> parseList), which
+    # may drop the last package entry without an explicit terminator.
+    payload = ("\n\n".join(stanzas) + "\n\n") if stanzas else ""
     index_dir.mkdir(parents=True, exist_ok=True)
     (index_dir / "Packages").write_text(payload, encoding="utf-8")
     with (index_dir / "Packages.gz").open("wb") as out:

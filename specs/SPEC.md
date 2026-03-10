@@ -63,6 +63,7 @@ The system must:
 - OPKG `Packages` stanzas must remain parser-safe for multiline metadata:
 - emit `Filename`, `Size`, and `SHA256sum` before multiline `Description`;
 - encode continuation lines with a leading space and encode blank description paragraph lines as ` .`.
+- OPKG `Packages` files must end with an explicit trailing blank stanza separator (`\n\n`) so LuCI package manager parsing (`cgi-exec` -> `/usr/libexec/package-manager-call list-available`) does not drop the last package entry.
 
 ## Rebuild and Recovery Modes
 - Incremental mode: process only unseen/changed upstream releases.

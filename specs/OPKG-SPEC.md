@@ -77,6 +77,7 @@ Control-stanza serialization requirements for parser compatibility:
 - continuation lines prefixed with one leading space
 - blank paragraph lines encoded as ` .` (space + dot)
 - For this project's generated OPKG indexes, emit `Filename`, `Size`, and `SHA256sum` before `Description` to avoid parser breakage from malformed multiline blocks.
+- Ensure generated `Packages` ends with a trailing blank stanza separator (`\n\n`). This avoids last-entry loss in LuCI package-manager parsing path (`/cgi-bin/cgi-exec` -> `/usr/libexec/package-manager-call list-available` -> `parseList()` in `luci-app-package-manager`).
 
 OpenWrt additionally creates:
 - `Packages.manifest`
