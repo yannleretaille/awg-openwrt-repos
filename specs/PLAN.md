@@ -25,6 +25,7 @@
 - [x] Keep payloads split as `packages/` and `kmods/<kernel-release-hash>/` directories.
 - [x] Generate aggregate top-level `Packages(.gz)` per target/subtarget with nested `Filename` references to split payload paths.
 - [x] Harden target/subtarget inference to use release-local kmod anchors, preventing cross-release metadata poisoning.
+- [x] Serialize OPKG control stanzas with RFC822-style continuation folding and emit `Filename/Size/SHA256sum` before multiline `Description`.
 
 ## Phase 4: APK Feed Generation
 - [x] Materialize `.apk` assets into deterministic feed directories.
@@ -33,7 +34,7 @@
 - [x] Generate `packages.adb` index with proper signing.
 - [x] Validate unsigned APK index readability/installability on latest upstream release (`apk adbdump` + `apk fetch`).
 - [x] Harden target/subtarget inference to use release-local kmod anchors, preventing cross-release metadata poisoning.
-- [ ] Publish/distribute public key material required by clients.
+- [x] Publish/distribute public key material required by clients.
 - [ ] Add automated signed APK validation in CI (`apk verify`/`apk fetch` with keys).
 
 ## Phase 5: Coverage and Quality Gates
@@ -55,7 +56,7 @@
 
 ## Phase 7: Operations and Documentation
 - [x] Generate `output/REPOS.md` index with combined feed URLs (rolling + immutable), prefixed by config `public_base_url`.
-- [ ] Document client feed setup examples for `opkg` and `apk`.
+- [x] Document client feed setup examples for `opkg` and `apk`.
 - [ ] Document key rotation/signing key management process.
 - [ ] Add runbooks for recovery (failed run, bad release, rollback).
 - [ ] Add monitoring signals (last successful sync, release lag, error count).

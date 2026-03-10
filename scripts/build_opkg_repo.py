@@ -371,19 +371,32 @@ def control_fields_to_stanza(fields: Dict[str, str], filename: str, size: int, s
         "LicenseFiles",
         "Architecture",
         "Installed-Size",
-        "Description",
     ]
     lines: List[str] = []
+    priority_set = set(priority)
+
+    def append_field(key: str, value: str) -> None:
+        parts = str(value).split("\n")
+        if not parts:
+            lines.append(f"{key}:")
+            return
+        first = parts[0]
+        lines.append(f"{key}: {first}" if first else f"{key}:")
+        for cont in parts[1:]:
+            # Control stanza continuation line; represent blank paragraph lines as " .".
+            lines.append(" ." if cont == "" else f" {cont}")
 
     for key in priority:
         if key in fields:
-            lines.append(f"{key}: {fields[key]}")
-    for key in sorted(k for k in fields if k not in set(priority)):
-        lines.append(f"{key}: {fields[key]}")
+            append_field(key, fields[key])
+    for key in sorted(k for k in fields if k not in priority_set and k != "Description"):
+        append_field(key, fields[key])
 
     lines.append(f"Filename: {filename}")
     lines.append(f"Size: {size}")
     lines.append(f"SHA256sum: {sha256}")
+    if "Description" in fields:
+        append_field("Description", fields["Description"])
     return "\n".join(lines)
 
 

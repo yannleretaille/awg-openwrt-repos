@@ -4,6 +4,8 @@ Mirrors releases from [Slava-Shchipunov/awg-openwrt](https://github.com/Slava-Sh
 
 ### OPKG feed format:
 
+Add to `/etc/opkg/customfeeds.conf`:
+
 ```bash
 src/gz awg https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/<openwrt-version>/targets/<target>/<subtarget>/
 ```
@@ -17,9 +19,7 @@ src https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/<openwr
 ### Install OPKG trust key:
 
 ```bash
-wget -O /tmp/opkg-usign.pub https://yannleretaille.github.io/awg-openwrt-repos/keys/opkg-usign.pub
-key_id="$(usign -F -p /tmp/opkg-usign.pub)"
-cp /tmp/opkg-usign.pub "/etc/opkg/keys/${key_id}"
+wget -qO /tmp/opkg-usign.pub https://yannleretaille.github.io/awg-openwrt-repos/keys/opkg-usign.pub && cp /tmp/opkg-usign.pub "/etc/opkg/keys/$(usign -F -p /tmp/opkg-usign.pub)"
 ```
 
 ### Install APK trust key:

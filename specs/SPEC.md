@@ -60,6 +60,9 @@ The system must:
 - `targets/<target>/<subtarget>/Packages` and `Packages.gz`
 - Aggregate index entries must use nested `Filename` paths (for example `packages/...` and `kmods/<kernel-hash>/...`).
 - Keep `kmod-*` packages isolated by kernel-hash path on disk; do not flatten kmods across hashes.
+- OPKG `Packages` stanzas must remain parser-safe for multiline metadata:
+- emit `Filename`, `Size`, and `SHA256sum` before multiline `Description`;
+- encode continuation lines with a leading space and encode blank description paragraph lines as ` .`.
 
 ## Rebuild and Recovery Modes
 - Incremental mode: process only unseen/changed upstream releases.

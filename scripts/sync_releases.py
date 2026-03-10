@@ -271,7 +271,8 @@ def parse_control_blob(raw: str) -> Dict[str, str]:
         if not line:
             continue
         if line.startswith((" ", "\t")) and current:
-            fields[current] = f"{fields[current]}\n{line.strip()}"
+            # Preserve continuation payload, removing only the folding marker.
+            fields[current] = f"{fields[current]}\n{line[1:]}"
             continue
         if ":" not in line:
             continue

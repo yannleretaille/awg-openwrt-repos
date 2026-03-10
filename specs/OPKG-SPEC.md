@@ -71,6 +71,13 @@ OpenWrt index generation for OPKG:
 5. Write `Packages`.
 6. Write `Packages.gz` via gzip.
 
+Control-stanza serialization requirements for parser compatibility:
+- Multiline field values must use RFC822-style folding:
+- first line as `Key: value`
+- continuation lines prefixed with one leading space
+- blank paragraph lines encoded as ` .` (space + dot)
+- For this project's generated OPKG indexes, emit `Filename`, `Size`, and `SHA256sum` before `Description` to avoid parser breakage from malformed multiline blocks.
+
 OpenWrt additionally creates:
 - `Packages.manifest`
 - `index.json`
