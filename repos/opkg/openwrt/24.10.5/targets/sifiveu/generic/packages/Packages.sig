@@ -1,2 +1,2 @@
 untrusted comment: verify with opkg-signing.pub
-RWRG1unEw4E6pT6NRBmwG1Qn1Wk4qYrWZj5CEMSFVix+Vz7nwkdApdkpLz30Lo68gmjU90OmL6c6jLWeU8k5mxZArdxwNOydVww=
+RWRG1unEw4E6pf3CC/1JdhK1YxvPzyxnnDH40fl64P1Upq0BbjUQKnRUQzIsugy5Giyaa1VgF3DBnty0LW5HsrjlHzRfY9XB+wM=
