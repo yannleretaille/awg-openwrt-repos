@@ -64,8 +64,11 @@ class NetworkRetryConfig:
 def read_json(path: Path, fallback: Any) -> Any:
     if not path.exists():
         return fallback
-    with path.open("r", encoding="utf-8") as fh:
-        return json.load(fh)
+    try:
+        with path.open("r", encoding="utf-8") as fh:
+            return json.load(fh)
+    except (json.JSONDecodeError, OSError):
+        return fallback
 
 
 def write_json(path: Path, payload: Any) -> None:

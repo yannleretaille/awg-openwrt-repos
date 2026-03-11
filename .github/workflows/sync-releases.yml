@@ -94,9 +94,13 @@ jobs:
           STATE_PATH="$(python3 -c 'import json, pathlib; cfg=json.loads(pathlib.Path("config/settings.json").read_text(encoding="utf-8")); print(cfg.get("state_file", "state/processed_release_ids.json"))')"
           mkdir -p "$(dirname "${STATE_PATH}")"
           if git fetch --depth=1 origin "${PUBLISH_BRANCH}" >/dev/null 2>&1; then
-            if git show "origin/${PUBLISH_BRANCH}:meta/processed_release_ids.json" > "${STATE_PATH}" 2>/dev/null; then
+            TMP_STATE="${STATE_PATH}.tmp"
+            rm -f "${TMP_STATE}"
+            if git show "origin/${PUBLISH_BRANCH}:meta/processed_release_ids.json" > "${TMP_STATE}" 2>/dev/null; then
+              mv "${TMP_STATE}" "${STATE_PATH}"
               echo "Restored sync state from origin/${PUBLISH_BRANCH}:meta/processed_release_ids.json"
             else
+              rm -f "${TMP_STATE}"
               echo "No prior sync state found in origin/${PUBLISH_BRANCH}/meta."
             fi
           else
