@@ -63,6 +63,17 @@
 - [ ] Add runbooks for recovery (failed run, bad release, rollback).
 - [ ] Add monitoring signals (last successful sync, release lag, error count).
 
+## Phase 8: Client Installer Script
+- [x] Add `installer/install.sh` as the canonical one-shot client installer entrypoint (`curl | ash` friendly).
+- [x] Detect package manager (`opkg` vs `apk`) and OpenWrt identity (`version`, `target`, `subtarget`) using native system sources (`ubus call system board`, fallback `/etc/openwrt_release`).
+- [x] Require installation of `kmod-amneziawg` and `amneziawg-tools`; install `luci-proto-amneziawg` by default, skipping only when `--skip-luci` is set or the package is unavailable.
+- [x] Re-enroll signing keys on every installer run (OPKG/APK key paths) before package manager update/install.
+- [x] Remove old `awg` feed entries before adding the new computed feed entry (upgrade-safe feed hygiene).
+- [x] Probe feed existence (`Packages.gz` or `packages.adb`) before mutating package manager config.
+- [x] Add reboot prompt (`y/n`) with non-interactive-safe defaults and automation flags.
+- [x] Publish installer to `published-repos/install.sh` from workflow.
+- [x] Extend incremental sync decision gate so installer-only changes still trigger publish update even when releases are unchanged.
+
 ## Done Criteria
 - [x] Full historical eligible upstream releases processed successfully (snapshot skipped by policy).
 - [x] New upstream releases are synced automatically without manual edits.

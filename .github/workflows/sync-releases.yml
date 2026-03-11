@@ -43,6 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       should_publish: ${{ steps.sync_decision.outputs.should_publish }}
+      should_build_repos: ${{ steps.sync_decision.outputs.should_build_repos }}
     permissions:
       contents: read
     steps:
@@ -107,20 +108,25 @@ jobs:
           set -euo pipefail
           if [[ ! -f output/sync_decision.json ]]; then
             echo "should_publish=false" >> "$GITHUB_OUTPUT"
+            echo "should_build_repos=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          should_publish="$(python3 - <<'PY'
+          read_values="$(python3 - <<'PY'
 import json
 from pathlib import Path
 payload = json.loads(Path("output/sync_decision.json").read_text(encoding="utf-8"))
 print("true" if payload.get("should_publish") else "false")
+print("true" if payload.get("should_build_repos") else "false")
 PY
 )"
+          should_publish="$(printf '%s\n' "$read_values" | sed -n '1p')"
+          should_build_repos="$(printf '%s\n' "$read_values" | sed -n '2p')"
           echo "should_publish=${should_publish}" >> "$GITHUB_OUTPUT"
-          echo "Sync decision should_publish=${should_publish}"
+          echo "should_build_repos=${should_build_repos}" >> "$GITHUB_OUTPUT"
+          echo "Sync decision should_publish=${should_publish} should_build_repos=${should_build_repos}"
 
       - name: Build OPKG repos
-        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_publish == 'true' }}
+        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_build_repos == 'true' }}
         env:
           FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
           SIGN_REPOS: ${{ github.event_name == 'schedule' && 'true' || inputs.sign_repos }}
@@ -159,7 +165,7 @@ PY
           ./scripts/build_opkg_repo.py "${ARGS[@]}"
 
       - name: Build APK repos
-        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_publish == 'true' }}
+        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_build_repos == 'true' }}
         env:
           FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
           SIGN_REPOS: ${{ github.event_name == 'schedule' && 'true' || inputs.sign_repos }}
@@ -198,7 +204,7 @@ PY
           ./scripts/build_apk_repo.py "${ARGS[@]}"
 
       - name: Copy public signing keys to output
-        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_publish == 'true' && (github.event_name == 'schedule' || inputs.sign_repos == true) }}
+        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_build_repos == 'true' && (github.event_name == 'schedule' || inputs.sign_repos == true) }}
         run: |
           set -euo pipefail
           mkdir -p output/keys
@@ -206,10 +212,17 @@ PY
           cp keys/apk-signing.rsa.pub output/keys/apk-signing.rsa.pub
 
       - name: Generate REPOS.md
-        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_publish == 'true' }}
+        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_build_repos == 'true' }}
         run: |
           set -euo pipefail
           ./scripts/generate_repos_md.py
+
+      - name: Stage installer artifact
+        if: ${{ steps.sync_decision.outputs.should_publish == 'true' }}
+        run: |
+          set -euo pipefail
+          mkdir -p output
+          cp installer/install.sh output/install.sh
 
       - name: Upload output artifact
         if: ${{ always() }}
@@ -248,15 +261,6 @@ PY
         run: |
           set -euo pipefail
 
-          if [[ ! -d output/repos ]]; then
-            echo "output/repos not found, nothing to publish"
-            exit 0
-          fi
-          if [[ ! -f output/REPOS.md ]]; then
-            echo "output/REPOS.md not found, nothing to publish"
-            exit 0
-          fi
-
           safe_publish_branch="$(echo "${PUBLISH_BRANCH}" | tr '/ ' '--')"
           # Keep head branch stable so each run updates the same PR.
           HEAD_BRANCH="publish-staging-${safe_publish_branch}"
@@ -278,30 +282,46 @@ PY
             git checkout --orphan "${HEAD_BRANCH}"
           fi
 
-          find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
-          mkdir -p repos
-          mkdir -p meta
-          mkdir -p keys
-          cp -a "${GITHUB_WORKSPACE}/output/repos/." repos/
-          cp "${GITHUB_WORKSPACE}/output/REPOS.md" REPOS.md
-          if [[ -d "${GITHUB_WORKSPACE}/output/keys" ]]; then
-            cp -a "${GITHUB_WORKSPACE}/output/keys/." keys/
+          published_any=false
+          if [[ -d "${GITHUB_WORKSPACE}/output/repos" ]]; then
+            published_any=true
+            find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+            mkdir -p repos
+            mkdir -p meta
+            mkdir -p keys
+            cp -a "${GITHUB_WORKSPACE}/output/repos/." repos/
+            if [[ -f "${GITHUB_WORKSPACE}/output/REPOS.md" ]]; then
+              cp "${GITHUB_WORKSPACE}/output/REPOS.md" REPOS.md
+            fi
+            if [[ -d "${GITHUB_WORKSPACE}/output/keys" ]]; then
+              cp -a "${GITHUB_WORKSPACE}/output/keys/." keys/
+            fi
+
+            for f in \
+              openwrt_versions.json \
+              opkg_repo_report.json \
+              apk_repo_report.json \
+              opkg_coverage_report.json \
+              apk_coverage_report.json \
+              opkg_collision_report.json \
+              apk_collision_report.json
+            do
+              src="${GITHUB_WORKSPACE}/output/manifests/index/${f}"
+              if [[ -f "${src}" ]]; then
+                cp "${src}" "meta/${f}"
+              fi
+            done
           fi
 
-          for f in \
-            openwrt_versions.json \
-            opkg_repo_report.json \
-            apk_repo_report.json \
-            opkg_coverage_report.json \
-            apk_coverage_report.json \
-            opkg_collision_report.json \
-            apk_collision_report.json
-          do
-            src="${GITHUB_WORKSPACE}/output/manifests/index/${f}"
-            if [[ -f "${src}" ]]; then
-              cp "${src}" "meta/${f}"
-            fi
-          done
+          if [[ -f "${GITHUB_WORKSPACE}/output/install.sh" ]]; then
+            published_any=true
+            cp "${GITHUB_WORKSPACE}/output/install.sh" install.sh
+          fi
+
+          if [[ "${published_any}" != "true" ]]; then
+            echo "No publishable artifacts found (repos/install.sh absent)."
+            exit 0
+          fi
 
           git add -A
           if git diff --cached --quiet; then

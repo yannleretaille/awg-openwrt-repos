@@ -77,7 +77,11 @@ Control-stanza serialization requirements for parser compatibility:
 - continuation lines prefixed with one leading space
 - blank paragraph lines encoded as ` .` (space + dot)
 - For this project's generated OPKG indexes, emit `Filename`, `Size`, and `SHA256sum` before `Description` to avoid parser breakage from malformed multiline blocks.
-- Ensure generated `Packages` ends with a trailing blank stanza separator (`\n\n`). This avoids last-entry loss in LuCI package-manager parsing path (`/cgi-bin/cgi-exec` -> `/usr/libexec/package-manager-call list-available` -> `parseList()` in `luci-app-package-manager`).
+- Ensure generated `Packages` ends with a trailing blank stanza separator (`\n\n`). This avoids last-entry loss in LuCI package-manager parsing path:
+- `/cgi-bin/cgi-exec` executes `/usr/libexec/package-manager-call list-available`
+- script location (LuCI source): `applications/luci-app-package-manager/root/usr/libexec/package-manager-call`
+- frontend parser location: `applications/luci-app-package-manager/htdocs/luci-static/resources/view/package-manager.js` (`parseList()`).
+- In current LuCI parser behavior, package objects are committed when a non-field separator line is encountered, but there is no explicit end-of-input flush for the final buffered package stanza. If the stream ends without an extra blank separator, the final package may be omitted from the "Available" tab even though it is present and installable via `opkg`.
 
 OpenWrt additionally creates:
 - `Packages.manifest`

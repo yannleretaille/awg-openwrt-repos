@@ -77,3 +77,28 @@ The system must:
 ## Hosting Target (v1)
 - GitHub Pages (publishing from `published-repos` branch) serving static feed files.
 - Directory structure designed to be reusable on S3/R2 later.
+
+## Client Installer (`install.sh`)
+- Provide a single canonical installer script at `installer/install.sh`.
+- Publish that script verbatim as `install.sh` at the root of `published-repos` (for `curl | ash` usage).
+- Installer behavior requirements:
+- Detect package manager mode (`opkg` or `apk`) from runtime environment.
+- Detect OpenWrt `version`, `target`, and `subtarget` using native runtime sources:
+- primary: `ubus call system board`;
+- fallback: `/etc/openwrt_release` (`DISTRIB_RELEASE`, `DISTRIB_TARGET`).
+- Compute feed URL from configured base URL + detected version/target/subtarget.
+- Validate feed availability before config mutation:
+- OPKG: probe `.../Packages.gz`;
+- APK: probe `.../packages.adb`.
+- Remove existing AWG feed entries first, then add the new feed entry (avoid stale feeds across upgrades).
+- Re-enroll signing keys on every run before update/install.
+- Run package index update and install package set:
+- required: `kmod-amneziawg`, `amneziawg-tools`;
+- default-install: `luci-proto-amneziawg`; skip only when explicitly disabled (`--skip-luci`) or when unavailable in the selected feed.
+- Prompt user to reboot (`y/n`) at end, with non-interactive-safe default behavior.
+
+## Incremental Publish Gate Extension
+- Incremental sync/publish gating must trigger publish when either:
+- upstream releases changed (new or changed release assets), or
+- `installer/install.sh` content changed.
+- This prevents no-op publish PRs while still propagating installer updates promptly.

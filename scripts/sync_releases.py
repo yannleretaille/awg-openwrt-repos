@@ -750,6 +750,11 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         default=None,
         help="optional path to write sync decision json for downstream workflow gating",
     )
+    parser.add_argument(
+        "--installer-script",
+        default=None,
+        help="path to installer script used for installer-change publish gating",
+    )
     return parser.parse_args(argv)
 
 
@@ -771,6 +776,9 @@ def main(argv: List[str]) -> int:
         jobs = int(cfg.get("sync", {}).get("jobs", args.jobs))
         if jobs < 1:
             raise SyncError("jobs must be >= 1")
+        installer_script = Path(args.installer_script or cfg.get("installer_script", "installer/install.sh"))
+        if not installer_script.exists():
+            raise SyncError(f"installer script not found: {installer_script}")
 
         state = load_state(state_path, repo=repo, publish_branch=publish_branch)
         if args.mode == "clean-rebuild":
@@ -796,6 +804,8 @@ def main(argv: List[str]) -> int:
             release_results = {}
             state["release_results"] = release_results
         last_successful_sync = parse_iso_datetime(state.get("last_successful_sync_at"))
+        installer_script_sha256 = sha256_file(installer_script)
+        installer_changed = installer_script_sha256 != state.get("installer_script_sha256")
 
         run_stats = {
             "seen_releases": 0,
@@ -805,6 +815,7 @@ def main(argv: List[str]) -> int:
             "new_release_ids": 0,
             "changed_release_ids": 0,
             "unchanged_release_ids": 0,
+            "installer_changed": installer_changed,
         }
 
         for rel in releases:
@@ -900,6 +911,7 @@ def main(argv: List[str]) -> int:
         state["last_run_summary"] = run_stats
         if run_stats["errors"] == 0 and not args.dry_run:
             state["last_successful_sync_at"] = state["last_run_at"]
+            state["installer_script_sha256"] = installer_script_sha256
 
         if not args.dry_run:
             write_json(state_path, state)
@@ -909,13 +921,17 @@ def main(argv: List[str]) -> int:
         log_progress(
             f"completed run in {elapsed:.1f}s: seen={run_stats['seen_releases']} processed={run_stats['processed']} skipped={run_stats['skipped']} errors={run_stats['errors']}"
         )
+        should_build_repos = bool(run_stats["processed"] > 0 and run_stats["errors"] == 0 and not args.dry_run)
+        should_publish = bool(should_build_repos or (installer_changed and run_stats["errors"] == 0 and not args.dry_run))
         decision = {
             "mode": args.mode,
             "dry_run": bool(args.dry_run),
-            "should_publish": bool(run_stats["processed"] > 0 and run_stats["errors"] == 0 and not args.dry_run),
+            "should_publish": should_publish,
+            "should_build_repos": should_build_repos,
             "processed_releases": int(run_stats["processed"]),
             "new_release_ids": int(run_stats["new_release_ids"]),
             "changed_release_ids": int(run_stats["changed_release_ids"]),
+            "installer_changed": bool(installer_changed),
             "errors": int(run_stats["errors"]),
         }
         if args.decision_file:
