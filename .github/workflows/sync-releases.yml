@@ -86,6 +86,23 @@ jobs:
           chmod +x "${RUNNER_TEMP}/bin/apk"
           echo "${RUNNER_TEMP}/bin" >> "${GITHUB_PATH}"
 
+      - name: Restore sync state from publish branch
+        env:
+          PUBLISH_BRANCH: ${{ github.event_name == 'schedule' && 'published-repos' || inputs.publish_branch }}
+        run: |
+          set -euo pipefail
+          STATE_PATH="$(python3 -c 'import json, pathlib; cfg=json.loads(pathlib.Path("config/settings.json").read_text(encoding="utf-8")); print(cfg.get("state_file", "state/processed_release_ids.json"))')"
+          mkdir -p "$(dirname "${STATE_PATH}")"
+          if git fetch --depth=1 origin "${PUBLISH_BRANCH}" >/dev/null 2>&1; then
+            if git show "origin/${PUBLISH_BRANCH}:meta/processed_release_ids.json" > "${STATE_PATH}" 2>/dev/null; then
+              echo "Restored sync state from origin/${PUBLISH_BRANCH}:meta/processed_release_ids.json"
+            else
+              echo "No prior sync state found in origin/${PUBLISH_BRANCH}/meta."
+            fi
+          else
+            echo "Publish branch ${PUBLISH_BRANCH} does not exist yet; starting with fresh state."
+          fi
+
       - name: Run sync
         id: run_sync
         env:
@@ -304,6 +321,12 @@ jobs:
                 cp "${src}" "meta/${f}"
               fi
             done
+          fi
+
+          if [[ -f "${GITHUB_WORKSPACE}/state/processed_release_ids.json" ]]; then
+            published_any=true
+            mkdir -p meta
+            cp "${GITHUB_WORKSPACE}/state/processed_release_ids.json" "meta/processed_release_ids.json"
           fi
 
           if [[ -f "${GITHUB_WORKSPACE}/output/install.sh" ]]; then

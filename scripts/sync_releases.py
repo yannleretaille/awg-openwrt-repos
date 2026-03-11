@@ -832,7 +832,6 @@ def main(argv: List[str]) -> int:
                 prev_record = release_results.get(str(rel_id))
                 if rel_id not in processed_ids:
                     process_reason = "new_release_id"
-                    run_stats["new_release_ids"] += 1
                     should_process = True
                 else:
                     api_fp = release_asset_fingerprint_from_api(rel)
@@ -841,7 +840,6 @@ def main(argv: List[str]) -> int:
                     changed_by_updated_at = release_assets_updated_since(rel, last_successful_sync)
                     if changed_by_fingerprint or changed_by_updated_at:
                         process_reason = "changed_assets"
-                        run_stats["changed_release_ids"] += 1
                         should_process = True
                         force_download = True
                     else:
@@ -894,6 +892,10 @@ def main(argv: List[str]) -> int:
             )
             if status == "processed":
                 run_stats["processed"] += 1
+                if process_reason == "new_release_id":
+                    run_stats["new_release_ids"] += 1
+                elif process_reason == "changed_assets":
+                    run_stats["changed_release_ids"] += 1
                 if rel_id not in processed_ids:
                     state["processed_release_ids"].append(rel_id)
                     processed_ids.add(rel_id)
