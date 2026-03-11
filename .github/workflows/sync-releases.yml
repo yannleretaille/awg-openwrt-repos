@@ -32,7 +32,7 @@ on:
         required: true
         default: true
   schedule:
-    - cron: "19 * * * *"
+    - cron: "0 19 * * *"
 
 concurrency:
   group: sync-releases-${{ github.event_name == 'schedule' && 'published-repos' || inputs.publish_branch }}
@@ -41,6 +41,8 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    outputs:
+      should_publish: ${{ steps.sync_decision.outputs.should_publish }}
     permissions:
       contents: read
     steps:
@@ -84,6 +86,7 @@ jobs:
           echo "${RUNNER_TEMP}/bin" >> "${GITHUB_PATH}"
 
       - name: Run sync
+        id: run_sync
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MODE: ${{ github.event_name == 'schedule' && 'incremental' || inputs.mode }}
@@ -95,10 +98,29 @@ jobs:
           if [[ "$DRY_RUN" == "true" ]]; then
             ARGS+=(--dry-run)
           fi
+          ARGS+=(--decision-file output/sync_decision.json)
           ./scripts/sync_releases.py "${ARGS[@]}"
 
+      - name: Read sync decision
+        id: sync_decision
+        run: |
+          set -euo pipefail
+          if [[ ! -f output/sync_decision.json ]]; then
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          should_publish="$(python3 - <<'PY'
+import json
+from pathlib import Path
+payload = json.loads(Path("output/sync_decision.json").read_text(encoding="utf-8"))
+print("true" if payload.get("should_publish") else "false")
+PY
+)"
+          echo "should_publish=${should_publish}" >> "$GITHUB_OUTPUT"
+          echo "Sync decision should_publish=${should_publish}"
+
       - name: Build OPKG repos
-        if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
+        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_publish == 'true' }}
         env:
           FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
           SIGN_REPOS: ${{ github.event_name == 'schedule' && 'true' || inputs.sign_repos }}
@@ -137,7 +159,7 @@ jobs:
           ./scripts/build_opkg_repo.py "${ARGS[@]}"
 
       - name: Build APK repos
-        if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
+        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_publish == 'true' }}
         env:
           FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
           SIGN_REPOS: ${{ github.event_name == 'schedule' && 'true' || inputs.sign_repos }}
@@ -176,7 +198,7 @@ jobs:
           ./scripts/build_apk_repo.py "${ARGS[@]}"
 
       - name: Copy public signing keys to output
-        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && (github.event_name == 'schedule' || inputs.sign_repos == true) }}
+        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_publish == 'true' && (github.event_name == 'schedule' || inputs.sign_repos == true) }}
         run: |
           set -euo pipefail
           mkdir -p output/keys
@@ -184,7 +206,7 @@ jobs:
           cp keys/apk-signing.rsa.pub output/keys/apk-signing.rsa.pub
 
       - name: Generate REPOS.md
-        if: ${{ github.event_name == 'schedule' || inputs.dry_run != true }}
+        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_publish == 'true' }}
         run: |
           set -euo pipefail
           ./scripts/generate_repos_md.py
@@ -201,7 +223,7 @@ jobs:
 
   publish:
     needs: sync
-    if: ${{ needs.sync.result == 'success' && (github.event_name == 'schedule' || inputs.dry_run != true) }}
+    if: ${{ needs.sync.result == 'success' && needs.sync.outputs.should_publish == 'true' && (github.event_name == 'schedule' || inputs.dry_run != true) }}
     runs-on: ubuntu-latest
     permissions:
       contents: write

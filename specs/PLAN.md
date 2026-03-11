@@ -13,7 +13,8 @@
 - [x] Fail release processing when OpenWrt version cannot be detected unambiguously.
 - [x] Detect and skip snapshot releases with explicit logging/metrics.
 - [x] Add resumable state tracking (`processed_release_ids.json` or similar).
-- [x] Support three modes: `backfill` (all eligible historical), `incremental` (new only), and `clean-rebuild` (clear+rebuild).
+- [x] Add incremental change gate: process known release IDs only when upstream asset fingerprint/`updated_at` changed since last successful sync.
+- [x] Support three modes: `backfill` (all eligible historical), `incremental` (new/changed only), and `clean-rebuild` (clear+rebuild).
 - [x] Parallelize per-release asset download/metadata extraction with configurable worker count.
 
 ## Phase 3: OPKG Feed Generation
@@ -52,6 +53,7 @@
 - [ ] Add workflow caching/artifact strategy to reduce runtime.
 - [x] Add publish job to push generated trees (immutable + rolling + `REPOS.md`) to configured `publish_branch`.
 - [x] Add basic protected publish flow (staging branch + PR into `publish_branch`).
+- [x] Gate build/publish steps on sync decision (`should_publish`) to avoid no-op PRs from timestamp-only meta changes.
 - [ ] Add rollback procedure documentation.
 
 ## Phase 7: Operations and Documentation

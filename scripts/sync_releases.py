@@ -16,6 +16,7 @@ import argparse
 import concurrent.futures
 import datetime as dt
 import io
+import hashlib
 import json
 import os
 import re
@@ -76,6 +77,15 @@ def write_json(path: Path, payload: Any) -> None:
 
 def now_iso() -> str:
     return dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()
+
+
+def parse_iso_datetime(value: Any) -> Optional[dt.datetime]:
+    if not isinstance(value, str) or not value:
+        return None
+    try:
+        return dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
 
 
 def log_progress(message: str) -> None:
@@ -447,6 +457,7 @@ def load_state(path: Path, repo: str, publish_branch: str) -> Dict[str, Any]:
     state.setdefault("publish_branch", publish_branch)
     state.setdefault("processed_release_ids", [])
     state.setdefault("release_results", {})
+    state.setdefault("last_successful_sync_at", None)
     return state
 
 
@@ -478,6 +489,55 @@ def should_process_release(mode: str, rel_id: int, processed: set[int]) -> bool:
     raise SyncError(f"unsupported mode: {mode}")
 
 
+def release_asset_fingerprint_from_api(rel: Dict[str, Any]) -> str:
+    rows: List[Tuple[str, str, int, str]] = []
+    for asset in rel.get("assets", []):
+        if not isinstance(asset, dict):
+            continue
+        name = asset.get("name")
+        url = asset.get("browser_download_url")
+        size = asset.get("size")
+        updated_at = asset.get("updated_at")
+        if not isinstance(name, str) or not isinstance(url, str):
+            continue
+        rows.append((name, url, int(size or 0), str(updated_at or "")))
+    rows.sort()
+    payload = json.dumps(rows, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def release_asset_fingerprint_from_record(record: Dict[str, Any]) -> Optional[str]:
+    assets = record.get("assets")
+    if not isinstance(assets, list):
+        return None
+    rows: List[Tuple[str, str, int, str]] = []
+    for asset in assets:
+        if not isinstance(asset, dict):
+            continue
+        name = asset.get("file_name")
+        url = asset.get("source_url")
+        size = asset.get("source_size")
+        updated_at = asset.get("source_updated_at")
+        if not isinstance(name, str) or not isinstance(url, str):
+            continue
+        rows.append((name, url, int(size or 0), str(updated_at or "")))
+    rows.sort()
+    payload = json.dumps(rows, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def release_assets_updated_since(rel: Dict[str, Any], since: Optional[dt.datetime]) -> bool:
+    if since is None:
+        return False
+    for asset in rel.get("assets", []):
+        if not isinstance(asset, dict):
+            continue
+        updated = parse_iso_datetime(asset.get("updated_at"))
+        if updated and updated > since:
+            return True
+    return False
+
+
 def process_release(
     rel: Dict[str, Any],
     cfg: Dict[str, Any],
@@ -488,6 +548,7 @@ def process_release(
     dry_run: bool,
     max_workers: int,
     retry_cfg: NetworkRetryConfig,
+    force_download: bool = False,
 ) -> Tuple[str, Dict[str, Any]]:
     rel_id = rel.get("id")
     rel_tag = rel.get("tag_name")
@@ -542,6 +603,8 @@ def process_release(
 
         try:
             if not dry_run:
+                if force_download and target_path.exists():
+                    target_path.unlink()
                 if not target_path.exists():
                     download_asset(url, target_path, token, retry_cfg)
                 sha256 = sha256_file(target_path)
@@ -682,6 +745,11 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         help="max parallel asset workers per release (default: 6)",
     )
     parser.add_argument("--dry-run", action="store_true", help="discover only, no downloads/writes")
+    parser.add_argument(
+        "--decision-file",
+        default=None,
+        help="optional path to write sync decision json for downstream workflow gating",
+    )
     return parser.parse_args(argv)
 
 
@@ -723,12 +791,20 @@ def main(argv: List[str]) -> int:
         )
         release_filter = set(args.release_id or [])
         processed_ids = {int(rid) for rid in state.get("processed_release_ids", [])}
+        release_results = state.get("release_results", {})
+        if not isinstance(release_results, dict):
+            release_results = {}
+            state["release_results"] = release_results
+        last_successful_sync = parse_iso_datetime(state.get("last_successful_sync_at"))
 
         run_stats = {
             "seen_releases": 0,
             "processed": 0,
             "skipped": 0,
             "errors": 0,
+            "new_release_ids": 0,
+            "changed_release_ids": 0,
+            "unchanged_release_ids": 0,
         }
 
         for rel in releases:
@@ -738,15 +814,38 @@ def main(argv: List[str]) -> int:
             if release_filter and rel_id not in release_filter:
                 continue
             run_stats["seen_releases"] += 1
-            if not should_process_release(args.mode, rel_id, processed_ids):
+            should_process = should_process_release(args.mode, rel_id, processed_ids)
+            process_reason = "mode_forced"
+            force_download = False
+            if args.mode == "incremental":
+                prev_record = release_results.get(str(rel_id))
+                if rel_id not in processed_ids:
+                    process_reason = "new_release_id"
+                    run_stats["new_release_ids"] += 1
+                    should_process = True
+                else:
+                    api_fp = release_asset_fingerprint_from_api(rel)
+                    prev_fp = release_asset_fingerprint_from_record(prev_record) if isinstance(prev_record, dict) else None
+                    changed_by_fingerprint = bool(prev_fp and api_fp != prev_fp)
+                    changed_by_updated_at = release_assets_updated_since(rel, last_successful_sync)
+                    if changed_by_fingerprint or changed_by_updated_at:
+                        process_reason = "changed_assets"
+                        run_stats["changed_release_ids"] += 1
+                        should_process = True
+                        force_download = True
+                    else:
+                        should_process = False
+                        run_stats["unchanged_release_ids"] += 1
+                        process_reason = "unchanged_assets"
+            if not should_process:
                 run_stats["skipped"] += 1
                 log_progress(
-                    f"release_id={rel_id} tag={rel.get('tag_name') or ''}: skipped (already processed in incremental mode)"
+                    f"release_id={rel_id} tag={rel.get('tag_name') or ''}: skipped ({process_reason})"
                 )
                 continue
 
             log_progress(
-                f"release_id={rel_id} tag={rel.get('tag_name') or ''}: processing start"
+                f"release_id={rel_id} tag={rel.get('tag_name') or ''}: processing start ({process_reason})"
             )
             try:
                 status, record = process_release(
@@ -759,6 +858,7 @@ def main(argv: List[str]) -> int:
                     dry_run=args.dry_run,
                     max_workers=jobs,
                     retry_cfg=retry_cfg,
+                    force_download=force_download,
                 )
             except Exception as exc:
                 status = "error"
@@ -798,6 +898,8 @@ def main(argv: List[str]) -> int:
         state["last_mode"] = args.mode
         state["last_run_at"] = now_iso()
         state["last_run_summary"] = run_stats
+        if run_stats["errors"] == 0 and not args.dry_run:
+            state["last_successful_sync_at"] = state["last_run_at"]
 
         if not args.dry_run:
             write_json(state_path, state)
@@ -807,7 +909,18 @@ def main(argv: List[str]) -> int:
         log_progress(
             f"completed run in {elapsed:.1f}s: seen={run_stats['seen_releases']} processed={run_stats['processed']} skipped={run_stats['skipped']} errors={run_stats['errors']}"
         )
-        print(json.dumps({"status": "ok", "summary": run_stats, "mode": args.mode}, indent=2))
+        decision = {
+            "mode": args.mode,
+            "dry_run": bool(args.dry_run),
+            "should_publish": bool(run_stats["processed"] > 0 and run_stats["errors"] == 0 and not args.dry_run),
+            "processed_releases": int(run_stats["processed"]),
+            "new_release_ids": int(run_stats["new_release_ids"]),
+            "changed_release_ids": int(run_stats["changed_release_ids"]),
+            "errors": int(run_stats["errors"]),
+        }
+        if args.decision_file:
+            write_json(Path(args.decision_file), decision)
+        print(json.dumps({"status": "ok", "summary": run_stats, "mode": args.mode, "decision": decision}, indent=2))
         if run_stats["errors"] > 0:
             return 2
         return 0

@@ -66,7 +66,11 @@ The system must:
 - OPKG `Packages` files must end with an explicit trailing blank stanza separator (`\n\n`) so LuCI package manager parsing (`cgi-exec` -> `/usr/libexec/package-manager-call list-available`) does not drop the last package entry.
 
 ## Rebuild and Recovery Modes
-- Incremental mode: process only unseen/changed upstream releases.
+- Incremental mode: process only unseen release IDs or previously seen releases whose asset set changed.
+- Incremental change detection gate uses upstream release assets (`name`, `browser_download_url`, `size`, `updated_at`) and `last_successful_sync_at`:
+- new release ID -> process;
+- known release with changed asset fingerprint or asset `updated_at` newer than last successful sync -> process;
+- otherwise skip release download/build/publish.
 - Backfill mode: process all eligible historical releases.
 - Clean rebuild mode: clear generated output and state, then rebuild from scratch deterministically.
 
