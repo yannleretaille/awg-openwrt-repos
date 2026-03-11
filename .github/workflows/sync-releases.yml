@@ -111,14 +111,7 @@ jobs:
             echo "should_build_repos=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          read_values="$(python3 - <<'PY'
-import json
-from pathlib import Path
-payload = json.loads(Path("output/sync_decision.json").read_text(encoding="utf-8"))
-print("true" if payload.get("should_publish") else "false")
-print("true" if payload.get("should_build_repos") else "false")
-PY
-)"
+          read_values="$(python3 -c 'import json, pathlib; p=json.loads(pathlib.Path("output/sync_decision.json").read_text(encoding="utf-8")); print("true" if p.get("should_publish") else "false"); print("true" if p.get("should_build_repos") else "false")')"
           should_publish="$(printf '%s\n' "$read_values" | sed -n '1p')"
           should_build_repos="$(printf '%s\n' "$read_values" | sed -n '2p')"
           echo "should_publish=${should_publish}" >> "$GITHUB_OUTPUT"
