@@ -139,16 +139,38 @@ jobs:
           echo "should_build_repos=${should_build_repos}" >> "$GITHUB_OUTPUT"
           echo "Sync decision should_publish=${should_publish} should_build_repos=${should_build_repos}"
 
+      - name: Restore published repo baseline
+        if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_build_repos == 'true' }}
+        env:
+          PUBLISH_BRANCH: ${{ github.event_name == 'schedule' && 'published-repos' || inputs.publish_branch }}
+        run: |
+          set -euo pipefail
+          if git fetch --depth=1 origin "${PUBLISH_BRANCH}" >/dev/null 2>&1 && git cat-file -e "origin/${PUBLISH_BRANCH}:repos" 2>/dev/null; then
+            TMP_DIR="$(mktemp -d)"
+            trap 'rm -rf "${TMP_DIR}"' EXIT
+            git archive --format=tar "origin/${PUBLISH_BRANCH}" repos | tar -xf - -C "${TMP_DIR}"
+            mkdir -p output
+            rm -rf output/repos
+            mv "${TMP_DIR}/repos" output/repos
+            echo "Restored output/repos baseline from origin/${PUBLISH_BRANCH}"
+          else
+            echo "No existing repos baseline found in origin/${PUBLISH_BRANCH}; proceeding without restore."
+          fi
+
       - name: Build OPKG repos
         if: ${{ (github.event_name == 'schedule' || inputs.dry_run != true) && steps.sync_decision.outputs.should_build_repos == 'true' }}
         env:
           FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
           SIGN_REPOS: ${{ github.event_name == 'schedule' && 'true' || inputs.sign_repos }}
+          SYNC_MODE: ${{ github.event_name == 'schedule' && 'incremental' || inputs.mode }}
           PRIV_OPKG_SIGNING_KEY: ${{ secrets.PRIV_OPKG_SIGNING_KEY }}
           PRIV_APK_SIGNING_KEY: ${{ secrets.PRIV_APK_SIGNING_KEY }}
         run: |
           set -euo pipefail
-          ARGS=(--clean)
+          ARGS=()
+          if [[ "${SYNC_MODE}" != "incremental" ]]; then
+            ARGS+=(--clean)
+          fi
           if [[ "$FORCE_COLLISION_OVERRIDE" == "true" ]]; then
             ARGS+=(--force-collision-override)
           fi
@@ -183,11 +205,15 @@ jobs:
         env:
           FORCE_COLLISION_OVERRIDE: ${{ github.event_name == 'schedule' && 'false' || inputs.force_collision_override }}
           SIGN_REPOS: ${{ github.event_name == 'schedule' && 'true' || inputs.sign_repos }}
+          SYNC_MODE: ${{ github.event_name == 'schedule' && 'incremental' || inputs.mode }}
           PRIV_OPKG_SIGNING_KEY: ${{ secrets.PRIV_OPKG_SIGNING_KEY }}
           PRIV_APK_SIGNING_KEY: ${{ secrets.PRIV_APK_SIGNING_KEY }}
         run: |
           set -euo pipefail
-          ARGS=(--clean)
+          ARGS=()
+          if [[ "${SYNC_MODE}" != "incremental" ]]; then
+            ARGS+=(--clean)
+          fi
           if [[ "$FORCE_COLLISION_OVERRIDE" == "true" ]]; then
             ARGS+=(--force-collision-override)
           fi
