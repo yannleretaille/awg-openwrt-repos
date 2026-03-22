@@ -409,8 +409,14 @@ def collect_apk_artifacts(
             )
 
     known_pairs_by_release: Dict[int, set[Tuple[str, str]]] = {}
+    weak_arches = {"noarch", "all", "any"}
     for cand in candidates:
-        if cand.pkg_name.startswith("kmod-") and cand.target and cand.subtarget:
+        if not cand.target or not cand.subtarget:
+            continue
+        arch_norm = (cand.pkg_arch or "").strip().lower()
+        # Anchor target pairs on architecture-specific packages first.
+        # This avoids deriving synthetic target roots from noarch/all packages.
+        if arch_norm not in weak_arches:
             known_pairs_by_release.setdefault(cand.release_id, set()).add((cand.target, cand.subtarget))
     for cand in candidates:
         known_pairs = known_pairs_by_release.get(cand.release_id, set())
