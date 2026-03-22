@@ -55,6 +55,18 @@ class CandidateArtifact:
     payload_dir_rel: str
 
 
+@dataclass
+class CoverageSkipRule:
+    rule_id: str
+    reason: str
+    openwrt_version: Optional[str]
+    release_id: Optional[int]
+    release_tag: Optional[str]
+    target: Optional[str]
+    subtarget: Optional[str]
+    required_package_names: set[str]
+
+
 def load_release_manifests(manifest_root: Path) -> List[Dict[str, Any]]:
     releases_dir = manifest_root / "releases"
     if not releases_dir.exists():
@@ -67,10 +79,10 @@ def load_release_manifests(manifest_root: Path) -> List[Dict[str, Any]]:
     return manifests
 
 
-def load_coverage_policy(cfg: Dict[str, Any]) -> Tuple[bool, set[str], set[str]]:
+def load_coverage_policy(cfg: Dict[str, Any]) -> Tuple[bool, set[str], set[str], List[CoverageSkipRule]]:
     policy = cfg.get("coverage_policy", {})
     if not isinstance(policy, dict):
-        return True, set(), set()
+        return True, set(), set(), []
 
     strict = bool(policy.get("strict", True))
     required = {
@@ -83,7 +95,80 @@ def load_coverage_policy(cfg: Dict[str, Any]) -> Tuple[bool, set[str], set[str]]
         for x in policy.get("optional_package_names", [])
         if isinstance(x, str) and x.strip()
     }
-    return strict, required, optional
+    skip_rules: List[CoverageSkipRule] = []
+    raw_rules = policy.get("skip_rules", [])
+    if isinstance(raw_rules, list):
+        for idx, raw in enumerate(raw_rules):
+            if not isinstance(raw, dict):
+                continue
+            rule_id = str(raw.get("id") or f"rule-{idx + 1}").strip() or f"rule-{idx + 1}"
+            reason = str(raw.get("reason") or "").strip()
+
+            openwrt_version = raw.get("openwrt_version")
+            if not isinstance(openwrt_version, str) or not openwrt_version.strip():
+                openwrt_version = None
+            else:
+                openwrt_version = openwrt_version.strip()
+
+            release_id = raw.get("release_id")
+            release_id_int: Optional[int] = None
+            if isinstance(release_id, int):
+                release_id_int = release_id
+            elif isinstance(release_id, str) and release_id.strip().isdigit():
+                release_id_int = int(release_id.strip())
+
+            release_tag = raw.get("release_tag")
+            if not isinstance(release_tag, str) or not release_tag.strip():
+                release_tag = None
+            else:
+                release_tag = release_tag.strip()
+
+            target = raw.get("target")
+            if not isinstance(target, str) or not target.strip():
+                target = None
+            else:
+                target = target.strip()
+
+            subtarget = raw.get("subtarget")
+            if not isinstance(subtarget, str) or not subtarget.strip():
+                subtarget = None
+            else:
+                subtarget = subtarget.strip()
+
+            rule_packages = {
+                str(x).strip()
+                for x in raw.get("required_package_names", [])
+                if isinstance(x, str) and x.strip()
+            }
+
+            skip_rules.append(
+                CoverageSkipRule(
+                    rule_id=rule_id,
+                    reason=reason,
+                    openwrt_version=openwrt_version,
+                    release_id=release_id_int,
+                    release_tag=release_tag,
+                    target=target,
+                    subtarget=subtarget,
+                    required_package_names=rule_packages,
+                )
+            )
+
+    return strict, required, optional, skip_rules
+
+
+def coverage_skip_rule_matches(rule: CoverageSkipRule, ctx: Dict[str, Any]) -> bool:
+    if rule.openwrt_version and rule.openwrt_version != ctx.get("openwrt_version"):
+        return False
+    if rule.release_id is not None and rule.release_id != ctx.get("release_id"):
+        return False
+    if rule.release_tag and rule.release_tag != ctx.get("release_tag"):
+        return False
+    if rule.target and rule.target != ctx.get("target"):
+        return False
+    if rule.subtarget and rule.subtarget != ctx.get("subtarget"):
+        return False
+    return True
 
 
 def normalize_release_key(release_id: int, release_tag: str) -> str:
@@ -495,6 +580,8 @@ def materialize_variant(
     strict_coverage: bool,
     required_packages: set[str],
     optional_packages: set[str],
+    skip_rules: List[CoverageSkipRule],
+    variant_name: str,
 ) -> Tuple[List[str], int, List[Dict[str, Any]]]:
     errors: List[str] = []
     coverage_rows: List[Dict[str, Any]] = []
@@ -502,6 +589,7 @@ def materialize_variant(
     aggregate_index_inputs: Dict[Path, Dict[str, str]] = {}
     split_index_inputs: Dict[Path, Dict[str, str]] = {}
     packages_by_target: Dict[Path, set[str]] = {}
+    target_context: Dict[Path, Dict[str, Any]] = {}
 
     for item in artifacts:
         target_root = destination_root_for(item, variant_root, include_release_key)
@@ -544,6 +632,17 @@ def materialize_variant(
         agg_map = aggregate_index_inputs.setdefault(target_root, {})
         agg_map[cfile] = item.source_sha256
         packages_by_target.setdefault(target_root, set()).add(item.pkg_name)
+        target_context.setdefault(
+            target_root,
+            {
+                "variant": variant_name,
+                "release_id": item.release_id,
+                "release_tag": item.release_tag,
+                "openwrt_version": item.openwrt_version,
+                "target": item.target,
+                "subtarget": item.subtarget,
+            },
+        )
 
         if split_indexes:
             split_dir = target_root / item.payload_dir_rel
@@ -582,17 +681,60 @@ def materialize_variant(
     for target_root, present in sorted(packages_by_target.items(), key=lambda x: str(x[0])):
         missing_required = sorted(required_packages - present)
         present_optional = sorted(optional_packages & present)
+        ctx = target_context.get(target_root, {"variant": variant_name})
+
+        matched_skip_rules = [r for r in skip_rules if coverage_skip_rule_matches(r, ctx)]
+        matched_skip_meta: List[Dict[str, Any]] = []
+        skipped_missing_required: set[str] = set()
+        for rule in matched_skip_rules:
+            applied_pkgs = (
+                set(missing_required)
+                if not rule.required_package_names
+                else set(missing_required) & rule.required_package_names
+            )
+            if not applied_pkgs:
+                continue
+            skipped_missing_required |= applied_pkgs
+            matched_skip_meta.append(
+                {
+                    "id": rule.rule_id,
+                    "reason": rule.reason,
+                    "required_package_names": sorted(rule.required_package_names),
+                    "applied_packages": sorted(applied_pkgs),
+                }
+            )
+
+        effective_missing_required = sorted(set(missing_required) - skipped_missing_required)
+        skipped_missing_required_sorted = sorted(skipped_missing_required)
+        coverage_status = "ok"
+        if effective_missing_required:
+            coverage_status = "missing_required"
+            if skipped_missing_required_sorted:
+                coverage_status = "missing_required_partial_skip"
+        elif skipped_missing_required_sorted:
+            coverage_status = "missing_required_skipped"
+
         coverage_rows.append(
             {
                 "target_root": str(target_root),
+                "variant": ctx.get("variant"),
+                "release_id": ctx.get("release_id"),
+                "release_tag": ctx.get("release_tag"),
+                "openwrt_version": ctx.get("openwrt_version"),
+                "target": ctx.get("target"),
+                "subtarget": ctx.get("subtarget"),
                 "present_count": len(present),
                 "missing_required": missing_required,
+                "skipped_missing_required": skipped_missing_required_sorted,
+                "effective_missing_required": effective_missing_required,
+                "coverage_status": coverage_status,
+                "skip_rules": matched_skip_meta,
                 "present_optional": present_optional,
             }
         )
-        if strict_coverage and missing_required:
+        if strict_coverage and effective_missing_required:
             errors.append(
-                f"coverage check failed at {target_root}: missing required packages {missing_required}"
+                f"coverage check failed at {target_root}: missing required packages {effective_missing_required}"
             )
 
     return errors, indexed_dirs, coverage_rows
@@ -640,7 +782,7 @@ def main(argv: List[str]) -> int:
     manifest_root = Path(args.manifest_root or cfg.get("manifest_root", output_root / "manifests"))
     download_root = Path(args.download_root or cfg.get("download_root", output_root / "downloads"))
     repo_root = Path(args.repo_root or (output_root / "repos"))
-    strict_coverage, required_packages, optional_packages = load_coverage_policy(cfg)
+    strict_coverage, required_packages, optional_packages, skip_rules = load_coverage_policy(cfg)
 
     sign_key_value = args.sign_key or os.getenv("APK_SIGN_KEY_PATH")
     keys_dir_value = args.keys_dir or os.getenv("APK_KEYS_DIR")
@@ -728,6 +870,8 @@ def main(argv: List[str]) -> int:
         strict_coverage=strict_coverage,
         required_packages=required_packages,
         optional_packages=optional_packages,
+        skip_rules=skip_rules,
+        variant_name="release",
     )
     errors.extend(release_errors)
 
@@ -743,6 +887,8 @@ def main(argv: List[str]) -> int:
         strict_coverage=strict_coverage,
         required_packages=required_packages,
         optional_packages=optional_packages,
+        skip_rules=skip_rules,
+        variant_name="rolling",
     )
     errors.extend(rolling_errors)
 
@@ -750,11 +896,35 @@ def main(argv: List[str]) -> int:
         "strict": strict_coverage,
         "required_package_names": sorted(required_packages),
         "optional_package_names": sorted(optional_packages),
+        "skip_rule_count": len(skip_rules),
         "release_targets_checked": len(release_coverage),
         "rolling_targets_checked": len(rolling_coverage),
-        "release_missing_required_count": sum(1 for row in release_coverage if row["missing_required"]),
-        "rolling_missing_required_count": sum(1 for row in rolling_coverage if row["missing_required"]),
+        "release_missing_required_count": sum(
+            1 for row in release_coverage if row["effective_missing_required"]
+        ),
+        "rolling_missing_required_count": sum(
+            1 for row in rolling_coverage if row["effective_missing_required"]
+        ),
+        "release_skipped_missing_required_count": sum(
+            1 for row in release_coverage if row["skipped_missing_required"]
+        ),
+        "rolling_skipped_missing_required_count": sum(
+            1 for row in rolling_coverage if row["skipped_missing_required"]
+        ),
     }
+    coverage_notices: List[str] = []
+    for row in [*release_coverage, *rolling_coverage]:
+        if not row.get("skipped_missing_required"):
+            continue
+        location = row.get("target_root")
+        skipped = row.get("skipped_missing_required")
+        remaining = row.get("effective_missing_required")
+        status = row.get("coverage_status")
+        coverage_notices.append(
+            "coverage check skipped by policy at "
+            f"{location}: missing required packages {skipped} (status={status}, "
+            f"remaining_required={remaining})"
+        )
 
     report = {
         "generated_at": sync.now_iso(),
@@ -770,6 +940,7 @@ def main(argv: List[str]) -> int:
             + int(rolling_collision_report.get("duplicate_paths", 0)),
             "force_override": bool(args.force_collision_override),
         },
+        "notices": coverage_notices,
         "errors": errors,
     }
 

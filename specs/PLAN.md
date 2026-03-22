@@ -41,6 +41,11 @@
 ## Phase 5: Coverage and Quality Gates
 - [x] Add machine-readable coverage report by release/version/target/subtarget and package set.
 - [x] Define required package-set policy via config (`coverage_policy`) and fail on missing mandatory package names.
+- [x] Add per-release/per-target skip rules in config for required-package coverage checks (temporary mitigation for upstream breakage).
+- [x] Evaluate skip rules before strict coverage failure is raised, so unaffected targets/releases continue publishing.
+- [x] Keep visibility when skipped: report missing required package(s) with explicit non-fatal `skipped-by-policy` status and reason.
+- [x] Include skip rule metadata in coverage output (release, target/subtarget, package names, reason, rule id).
+- [ ] Add guardrails for skip rules: optional expiry/review date and link/reference to upstream issue.
 - [x] Detect destination-path collisions and compare checksums.
 - [x] On checksum mismatch for same destination path, block build/publish by default and emit conflict report.
 - [ ] Add upstream checksum verification when available; otherwise enforce strict internal consistency checks.

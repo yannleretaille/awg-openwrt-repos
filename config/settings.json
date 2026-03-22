@@ -26,6 +26,18 @@
     "optional_package_names": [
       "luci-proto-amneziawg",
       "luci-i18n-amneziawg-ru"
+    ],
+    "skip_rules": [
+      {
+        "id": "owrt-xxhash-lan969x-25.12.1",
+        "openwrt_version": "25.12.1",
+        "target": "microchipsw",
+        "subtarget": "lan969x",
+        "required_package_names": [
+          "kmod-amneziawg"
+        ],
+        "reason": "Temporary mitigation for OpenWrt kmod dependency closure failure on this target (xxhash built-in vs kmod-crypto-xxhash dependency mismatch). Remove after upstream fix/backport."
+      }
     ]
   },
   "release_detection": {
