@@ -1,0 +1,14 @@
+Package: kmod-amneziawg
+Version: 5.15.137-1
+Depends: kernel (=5.15.137-1-39aa581045800d8a5283445b3086f0c1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: mipsel_74kc
+Installed-Size: 32219
+SourceDateEpoch: 1722691334
+SourceName: kmod-amneziawg
+Filename: kmod-amneziawg_v23.05.2_mipsel_74kc_ramips_rt3883.ipk
+Size: 32999
+SHA256sum: 54b49b82a0e8324efce710b4687853eed9ba359d5a8576412b8b0be87821bcba
+Description: AmneziaWG VPN Kernel Module
+

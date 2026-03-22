@@ -1,0 +1,54 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: arm_cortex-a5_vfpv4
+Installed-Size: 29810
+SourceDateEpoch: 1728299772
+SourceName: amneziawg-tools
+Filename: packages/amneziawg-tools_v23.05.5_arm_cortex-a5_vfpv4_at91_sama5.ipk
+Size: 30921
+SHA256sum: b1c61f6468c17c9abcbb44fc30676562301d9ff73b04ee93e3c883c4db127e77
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+ state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+ more useful than IPSec, while avoiding the massive headache. It intends to
+ be considerably more performant than OpenVPN.  WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and super computers
+ alike, fit for many different circumstances. It uses UDP.
+ .
+ This package provides the userspace control program for WireGuard,
+ `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+
+Package: kmod-amneziawg
+Version: 5.15.167-1
+Depends: kernel (=5.15.167-1-c0bd0e6a3a62142b196bd287375720be), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: arm_cortex-a5_vfpv4
+Installed-Size: 35539
+SourceDateEpoch: 1728299772
+SourceName: kmod-amneziawg
+Filename: kmods/5.15.167-1-c0bd0e6a3a62142b196bd287375720be/kmod-amneziawg_v23.05.5_arm_cortex-a5_vfpv4_at91_sama5.ipk
+Size: 36229
+SHA256sum: c314d282d4b340e2a0e6b58e87dcda7e732ad63e32f225c1ef4bc03cac22c693
+Description: AmneziaWG VPN Kernel Module
+
+Package: luci-app-amneziawg
+Version: git-24.281.40572-2de5a74
+Depends: libc, amneziawg-tools, ucode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 10769
+SourceDateEpoch: 1728299772
+SourceName: luci-app-amneziawg
+Filename: packages/luci-app-amneziawg_v23.05.5_arm_cortex-a5_vfpv4_at91_sama5.ipk
+Size: 11636
+SHA256sum: ea75b83abb19e501ba7e1437fd52a481edaa20b207c8bc2b326c3acddbf4e97c
+Description: Support for AmneziaWG VPN
+

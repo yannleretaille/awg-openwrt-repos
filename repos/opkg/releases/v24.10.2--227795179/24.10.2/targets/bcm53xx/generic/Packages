@@ -1,0 +1,56 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-r1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: arm_cortex-a9
+Installed-Size: 71680
+SourceDateEpoch: 1750876460
+SourceName: amneziawg-tools
+URL: https://www.wireguard.com
+Filename: packages/amneziawg-tools_v24.10.2_arm_cortex-a9_bcm53xx_generic.ipk
+Size: 30586
+SHA256sum: 72998a7e874fd53fa332c7ae266f08739318eb765a9234da6352abd9db4a9ab9
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+ state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+ more useful than IPSec, while avoiding the massive headache. It intends to
+ be considerably more performant than OpenVPN.  WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and super computers
+ alike, fit for many different circumstances. It uses UDP.
+ .
+ This package provides the userspace control program for WireGuard,
+ `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+
+Package: kmod-amneziawg
+Version: 6.6.93-r1
+Depends: kernel (=6.6.93~c1def456ca4cecb8fbffdca90c29a9de-r1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: arm_cortex-a9
+Installed-Size: 92160
+SourceDateEpoch: 1750876460
+SourceName: kmod-amneziawg
+Filename: kmods/6.6.93~c1def456ca4cecb8fbffdca90c29a9de-r1/kmod-amneziawg_v24.10.2_arm_cortex-a9_bcm53xx_generic.ipk
+Size: 37944
+SHA256sum: 59c7eaff4d2779f52c9cfd6c5f783ed59a1e97d14ed45d131f834857aac926f9
+Description: AmneziaWG VPN Kernel Module
+
+Package: luci-app-amneziawg
+Version: 25.176.66860~0c726ca
+Depends: libc, amneziawg-tools, ucode, qrencode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 51200
+SourceDateEpoch: 1750876460
+SourceName: luci-app-amneziawg
+URL: https://github.com/openwrt/luci
+Filename: packages/luci-app-amneziawg_v24.10.2_arm_cortex-a9_bcm53xx_generic.ipk
+Size: 12208
+SHA256sum: 9d2c28b178a3225fe84094e3a1ad1b09bac4c0f3741174b6d8061c2d1d33aff2
+Description: Support for AmneziaWG VPN
+
