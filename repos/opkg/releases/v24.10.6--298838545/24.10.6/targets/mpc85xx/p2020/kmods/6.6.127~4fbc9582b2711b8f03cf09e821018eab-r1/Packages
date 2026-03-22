@@ -1,0 +1,14 @@
+Package: kmod-amneziawg
+Version: 6.6.127.1.0.20260210-r1
+Depends: kernel (=6.6.127~4fbc9582b2711b8f03cf09e821018eab-r1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/base/kmod-amneziawg
+Section: kernel
+Architecture: powerpc_8548
+Installed-Size: 112640
+SourceDateEpoch: 1773709139
+SourceName: kmod-amneziawg
+Filename: kmod-amneziawg_v24.10.6_powerpc_8548_mpc85xx_p2020.ipk
+Size: 47875
+SHA256sum: 33a2b1ff129413b997fedf83061fdfb817a0b4dfabd5820297e491ba224c3f85
+Description: AmneziaWG VPN Kernel Module
+

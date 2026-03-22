@@ -1,2 +1,0 @@
-untrusted comment: verify with opkg-signing.pub
-RWRG1unEw4E6pahWxwYRJEf+Y+TGClJX3EHqvudQ9w320+WC8NH53nRUQrj/B1UIGCDF33+fSBkkqHtjOpn0RmE3wsFzrXMWBAE=

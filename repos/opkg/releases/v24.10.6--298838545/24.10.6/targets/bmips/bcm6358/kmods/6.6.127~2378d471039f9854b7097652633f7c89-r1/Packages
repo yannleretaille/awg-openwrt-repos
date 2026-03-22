@@ -1,0 +1,14 @@
+Package: kmod-amneziawg
+Version: 6.6.127.1.0.20260210-r1
+Depends: kernel (=6.6.127~2378d471039f9854b7097652633f7c89-r1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/base/kmod-amneziawg
+Section: kernel
+Architecture: mips_mips32
+Installed-Size: 102400
+SourceDateEpoch: 1773709139
+SourceName: kmod-amneziawg
+Filename: kmod-amneziawg_v24.10.6_mips_mips32_bmips_bcm6358.ipk
+Size: 44447
+SHA256sum: 267f79129a3c4f290670f69e2dbefceaa726d18d8757294a500a5d6724cbc1c7
+Description: AmneziaWG VPN Kernel Module
+
