@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-11T22:17:22+00:00",
+  "generated_at": "2026-03-22T03:08:08+00:00",
   "versions": {
     "22.03.7": {
       "openwrt_version": "22.03.7",
@@ -211,6 +211,21 @@
         }
       ]
     },
+    "24.10.6": {
+      "openwrt_version": "24.10.6",
+      "release_ids": [
+        298838545
+      ],
+      "releases": [
+        {
+          "asset_count": 360,
+          "published_at": "2026-03-19T08:47:38Z",
+          "release_id": 298838545,
+          "status": "processed",
+          "tag_name": "v24.10.6"
+        }
+      ]
+    },
     "25.12.0": {
       "openwrt_version": "25.12.0",
       "release_ids": [
@@ -223,6 +238,21 @@
           "release_id": 292884142,
           "status": "processed",
           "tag_name": "v25.12.0"
+        }
+      ]
+    },
+    "25.12.1": {
+      "openwrt_version": "25.12.1",
+      "release_ids": [
+        298836680
+      ],
+      "releases": [
+        {
+          "asset_count": 375,
+          "published_at": "2026-03-19T08:42:47Z",
+          "release_id": 298836680,
+          "status": "processed",
+          "tag_name": "v25.12.1"
         }
       ]
     }
