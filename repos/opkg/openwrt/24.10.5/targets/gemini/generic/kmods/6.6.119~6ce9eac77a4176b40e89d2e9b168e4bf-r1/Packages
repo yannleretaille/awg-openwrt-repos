@@ -1,0 +1,14 @@
+Package: kmod-amneziawg
+Version: 6.6.119.1.0.20251104-r1
+Depends: kernel (=6.6.119~6ce9eac77a4176b40e89d2e9b168e4bf-r1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/base/kmod-amneziawg
+Section: kernel
+Architecture: arm_fa526
+Installed-Size: 92160
+SourceDateEpoch: 1766005702
+SourceName: kmod-amneziawg
+Filename: kmod-amneziawg_v24.10.5_arm_fa526_gemini_generic.ipk
+Size: 41008
+SHA256sum: 897727d130d11a75aee893d8ce357c757458d15cc66367b7cb125f5944edd68a
+Description: AmneziaWG VPN Kernel Module
+

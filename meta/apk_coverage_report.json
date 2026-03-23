@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-22T03:08:19+00:00",
+  "generated_at": "2026-03-22T04:20:17+00:00",
   "policy": {
     "optional_package_names": [
       "luci-i18n-amneziawg-ru",
@@ -7,18 +7,1785 @@
     ],
     "release_missing_required_count": 0,
     "release_skipped_missing_required_count": 1,
-    "release_targets_checked": 94,
+    "release_targets_checked": 187,
     "required_package_names": [
       "amneziawg-tools",
       "kmod-amneziawg"
     ],
     "rolling_missing_required_count": 0,
     "rolling_skipped_missing_required_count": 1,
-    "rolling_targets_checked": 94,
+    "rolling_targets_checked": 187,
     "skip_rule_count": 1,
     "strict": true
   },
   "release_targets": [
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "nand",
+      "target": "apm821xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/apm821xx/nand",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "sata",
+      "target": "apm821xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/apm821xx/sata",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "armv7",
+      "target": "armsr",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/armsr/armv7",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "armv8",
+      "target": "armsr",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/armsr/armv8",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "sam9x",
+      "target": "at91",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/at91/sam9x",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "sama5",
+      "target": "at91",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/at91/sama5",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "sama7",
+      "target": "at91",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/at91/sama7",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "ath79",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ath79/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mikrotik",
+      "target": "ath79",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ath79/mikrotik",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "nand",
+      "target": "ath79",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ath79/nand",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "tiny",
+      "target": "ath79",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ath79/tiny",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm2708",
+      "target": "bcm27xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bcm27xx/bcm2708",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm2709",
+      "target": "bcm27xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bcm27xx/bcm2709",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm2710",
+      "target": "bcm27xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bcm27xx/bcm2710",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm2711",
+      "target": "bcm27xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bcm27xx/bcm2711",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm2712",
+      "target": "bcm27xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bcm27xx/bcm2712",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "bcm47xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bcm47xx/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "legacy",
+      "target": "bcm47xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bcm47xx/legacy",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mips74k",
+      "target": "bcm47xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bcm47xx/mips74k",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "bcm4908",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bcm4908/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "bcm53xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bcm53xx/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm6318",
+      "target": "bmips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bmips/bcm6318",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm63268",
+      "target": "bmips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bmips/bcm63268",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm6328",
+      "target": "bmips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bmips/bcm6328",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm6358",
+      "target": "bmips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bmips/bcm6358",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm6362",
+      "target": "bmips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bmips/bcm6362",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm6368",
+      "target": "bmips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/bmips/bcm6368",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "d1",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/d1/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "gemini",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/gemini/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa53",
+      "target": "imx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/imx/cortexa53",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa7",
+      "target": "imx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/imx/cortexa7",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa9",
+      "target": "imx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/imx/cortexa9",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "chromium",
+      "target": "ipq40xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ipq40xx/chromium",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "ipq40xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ipq40xx/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mikrotik",
+      "target": "ipq40xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ipq40xx/mikrotik",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "chromium",
+      "target": "ipq806x",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ipq806x/chromium",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "ipq806x",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ipq806x/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "ixp4xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ixp4xx/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "kirkwood",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/kirkwood/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "xrx200",
+      "target": "lantiq",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/lantiq/xrx200",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "xrx200_legacy",
+      "target": "lantiq",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/lantiq/xrx200_legacy",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "xway",
+      "target": "lantiq",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/lantiq/xway",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "armv7",
+      "target": "layerscape",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/layerscape/armv7",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "armv8_64b",
+      "target": "layerscape",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/layerscape/armv8_64b",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "loongarch64",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/loongarch64/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "be",
+      "target": "malta",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/malta/be",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "be64",
+      "target": "malta",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/malta/be64",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "le",
+      "target": "malta",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/malta/le",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "le64",
+      "target": "malta",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/malta/le64",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "filogic",
+      "target": "mediatek",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mediatek/filogic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt7622",
+      "target": "mediatek",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mediatek/mt7622",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt7623",
+      "target": "mediatek",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mediatek/mt7623",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt7629",
+      "target": "mediatek",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mediatek/mt7629",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "p1010",
+      "target": "mpc85xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mpc85xx/p1010",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "p1020",
+      "target": "mpc85xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mpc85xx/p1020",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "p2020",
+      "target": "mpc85xx",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mpc85xx/p2020",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa53",
+      "target": "mvebu",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mvebu/cortexa53",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa72",
+      "target": "mvebu",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mvebu/cortexa72",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa9",
+      "target": "mvebu",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mvebu/cortexa9",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "mxs",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/mxs/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "octeon",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/octeon/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "omap",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/omap/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "pistachio",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/pistachio/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "qoriq",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/qoriq/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "ipq50xx",
+      "target": "qualcommax",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/qualcommax/ipq50xx",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "ipq60xx",
+      "target": "qualcommax",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/qualcommax/ipq60xx",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "ipq807x",
+      "target": "qualcommax",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/qualcommax/ipq807x",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt7620",
+      "target": "ramips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ramips/mt7620",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt7621",
+      "target": "ramips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ramips/mt7621",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt76x8",
+      "target": "ramips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ramips/mt76x8",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rt305x",
+      "target": "ramips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ramips/rt305x",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rt3883",
+      "target": "ramips",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/ramips/rt3883",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl838x",
+      "target": "realtek",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/realtek/rtl838x",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl839x",
+      "target": "realtek",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/realtek/rtl839x",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl930x",
+      "target": "realtek",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/realtek/rtl930x",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl930x_nand",
+      "target": "realtek",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/realtek/rtl930x_nand",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl931x",
+      "target": "realtek",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/realtek/rtl931x",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl931x_nand",
+      "target": "realtek",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/realtek/rtl931x_nand",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "armv8",
+      "target": "rockchip",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/rockchip/armv8",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "sifiveu",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/sifiveu/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "sf21",
+      "target": "siflower",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/siflower/sf21",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "starfive",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/starfive/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "stm32mp1",
+      "target": "stm32",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/stm32/stm32mp1",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "arm926ejs",
+      "target": "sunxi",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/sunxi/arm926ejs",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa53",
+      "target": "sunxi",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/sunxi/cortexa53",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa7",
+      "target": "sunxi",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/sunxi/cortexa7",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa8",
+      "target": "sunxi",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/sunxi/cortexa8",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "tegra",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/tegra/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "64",
+      "target": "x86",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/x86/64",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "x86",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/x86/generic",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "geode",
+      "target": "x86",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/x86/geode",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "legacy",
+      "target": "x86",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/x86/legacy",
+      "variant": "release"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "zynq",
+      "target_root": "output/repos/apk/releases/v25.12.0--292884142/25.12.0/targets/zynq/generic",
+      "variant": "release"
+    },
     {
       "coverage_status": "ok",
       "effective_missing_required": [],
@@ -1822,6 +3589,1773 @@
     }
   ],
   "rolling_targets": [
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "nand",
+      "target": "apm821xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/apm821xx/nand",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "sata",
+      "target": "apm821xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/apm821xx/sata",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "armv7",
+      "target": "armsr",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/armsr/armv7",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "armv8",
+      "target": "armsr",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/armsr/armv8",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "sam9x",
+      "target": "at91",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/at91/sam9x",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "sama5",
+      "target": "at91",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/at91/sama5",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "sama7",
+      "target": "at91",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/at91/sama7",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "ath79",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ath79/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mikrotik",
+      "target": "ath79",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ath79/mikrotik",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "nand",
+      "target": "ath79",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ath79/nand",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "tiny",
+      "target": "ath79",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ath79/tiny",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm2708",
+      "target": "bcm27xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bcm27xx/bcm2708",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm2709",
+      "target": "bcm27xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bcm27xx/bcm2709",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm2710",
+      "target": "bcm27xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bcm27xx/bcm2710",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm2711",
+      "target": "bcm27xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bcm27xx/bcm2711",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm2712",
+      "target": "bcm27xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bcm27xx/bcm2712",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "bcm47xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bcm47xx/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "legacy",
+      "target": "bcm47xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bcm47xx/legacy",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mips74k",
+      "target": "bcm47xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bcm47xx/mips74k",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "bcm4908",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bcm4908/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "bcm53xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bcm53xx/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm6318",
+      "target": "bmips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bmips/bcm6318",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm63268",
+      "target": "bmips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bmips/bcm63268",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm6328",
+      "target": "bmips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bmips/bcm6328",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm6358",
+      "target": "bmips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bmips/bcm6358",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm6362",
+      "target": "bmips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bmips/bcm6362",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "bcm6368",
+      "target": "bmips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/bmips/bcm6368",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "d1",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/d1/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "gemini",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/gemini/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa53",
+      "target": "imx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/imx/cortexa53",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa7",
+      "target": "imx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/imx/cortexa7",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa9",
+      "target": "imx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/imx/cortexa9",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "chromium",
+      "target": "ipq40xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ipq40xx/chromium",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "ipq40xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ipq40xx/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mikrotik",
+      "target": "ipq40xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ipq40xx/mikrotik",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "chromium",
+      "target": "ipq806x",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ipq806x/chromium",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "ipq806x",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ipq806x/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "ixp4xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ixp4xx/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "kirkwood",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/kirkwood/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "xrx200",
+      "target": "lantiq",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/lantiq/xrx200",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "xrx200_legacy",
+      "target": "lantiq",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/lantiq/xrx200_legacy",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "xway",
+      "target": "lantiq",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/lantiq/xway",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "armv7",
+      "target": "layerscape",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/layerscape/armv7",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "armv8_64b",
+      "target": "layerscape",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/layerscape/armv8_64b",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "loongarch64",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/loongarch64/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "be",
+      "target": "malta",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/malta/be",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "be64",
+      "target": "malta",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/malta/be64",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "le",
+      "target": "malta",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/malta/le",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "le64",
+      "target": "malta",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/malta/le64",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "filogic",
+      "target": "mediatek",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mediatek/filogic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt7622",
+      "target": "mediatek",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mediatek/mt7622",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt7623",
+      "target": "mediatek",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mediatek/mt7623",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt7629",
+      "target": "mediatek",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mediatek/mt7629",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "p1010",
+      "target": "mpc85xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mpc85xx/p1010",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "p1020",
+      "target": "mpc85xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mpc85xx/p1020",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "p2020",
+      "target": "mpc85xx",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mpc85xx/p2020",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa53",
+      "target": "mvebu",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mvebu/cortexa53",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa72",
+      "target": "mvebu",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mvebu/cortexa72",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa9",
+      "target": "mvebu",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mvebu/cortexa9",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "mxs",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/mxs/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "octeon",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/octeon/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "omap",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/omap/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "pistachio",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/pistachio/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "qoriq",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/qoriq/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "ipq50xx",
+      "target": "qualcommax",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/qualcommax/ipq50xx",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "ipq60xx",
+      "target": "qualcommax",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/qualcommax/ipq60xx",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "ipq807x",
+      "target": "qualcommax",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/qualcommax/ipq807x",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt7620",
+      "target": "ramips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ramips/mt7620",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt7621",
+      "target": "ramips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ramips/mt7621",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "mt76x8",
+      "target": "ramips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ramips/mt76x8",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rt305x",
+      "target": "ramips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ramips/rt305x",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rt3883",
+      "target": "ramips",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/ramips/rt3883",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl838x",
+      "target": "realtek",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/realtek/rtl838x",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl839x",
+      "target": "realtek",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/realtek/rtl839x",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl930x",
+      "target": "realtek",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/realtek/rtl930x",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl930x_nand",
+      "target": "realtek",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/realtek/rtl930x_nand",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl931x",
+      "target": "realtek",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/realtek/rtl931x",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "rtl931x_nand",
+      "target": "realtek",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/realtek/rtl931x_nand",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "armv8",
+      "target": "rockchip",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/rockchip/armv8",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "sifiveu",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/sifiveu/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "sf21",
+      "target": "siflower",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/siflower/sf21",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "starfive",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/starfive/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "stm32mp1",
+      "target": "stm32",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/stm32/stm32mp1",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "arm926ejs",
+      "target": "sunxi",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/sunxi/arm926ejs",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa53",
+      "target": "sunxi",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/sunxi/cortexa53",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa7",
+      "target": "sunxi",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/sunxi/cortexa7",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "cortexa8",
+      "target": "sunxi",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/sunxi/cortexa8",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "tegra",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/tegra/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "64",
+      "target": "x86",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/x86/64",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "x86",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/x86/generic",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "geode",
+      "target": "x86",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/x86/geode",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "legacy",
+      "target": "x86",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/x86/legacy",
+      "variant": "rolling"
+    },
+    {
+      "coverage_status": "ok",
+      "effective_missing_required": [],
+      "missing_required": [],
+      "openwrt_version": "25.12.0",
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "release_id": 292884142,
+      "release_tag": "v25.12.0",
+      "skip_rules": [],
+      "skipped_missing_required": [],
+      "subtarget": "generic",
+      "target": "zynq",
+      "target_root": "output/repos/apk/openwrt/25.12.0/targets/zynq/generic",
+      "variant": "rolling"
+    },
     {
       "coverage_status": "ok",
       "effective_missing_required": [],

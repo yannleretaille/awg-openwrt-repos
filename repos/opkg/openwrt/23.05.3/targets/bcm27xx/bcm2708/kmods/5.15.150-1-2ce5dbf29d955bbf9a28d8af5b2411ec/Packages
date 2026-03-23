@@ -1,0 +1,14 @@
+Package: kmod-amneziawg
+Version: 5.15.150-1
+Depends: kernel (=5.15.150-1-2ce5dbf29d955bbf9a28d8af5b2411ec), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: arm_arm1176jzf-s_vfp
+Installed-Size: 35096
+SourceDateEpoch: 1722691334
+SourceName: kmod-amneziawg
+Filename: kmod-amneziawg_v23.05.3_arm_arm1176jzf-s_vfp_bcm27xx_bcm2708.ipk
+Size: 35838
+SHA256sum: d0f183faebd049d31fe82b7fcc833f9f890838d61b9ecca010b0eff512a82eb1
+Description: AmneziaWG VPN Kernel Module
+

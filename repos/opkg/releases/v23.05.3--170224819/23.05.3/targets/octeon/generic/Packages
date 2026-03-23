@@ -1,0 +1,54 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: mips64_octeonplus
+Installed-Size: 30352
+SourceDateEpoch: 1722691334
+SourceName: amneziawg-tools
+Filename: packages/amneziawg-tools_v23.05.3_mips64_octeonplus_octeon_generic.ipk
+Size: 31396
+SHA256sum: 17262cbf560decf939fff8504d43a8a93b156f7fd62d6e88a7f8132ab35eb6c5
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+ state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+ more useful than IPSec, while avoiding the massive headache. It intends to
+ be considerably more performant than OpenVPN.  WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and super computers
+ alike, fit for many different circumstances. It uses UDP.
+ .
+ This package provides the userspace control program for WireGuard,
+ `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+
+Package: kmod-amneziawg
+Version: 5.15.150-1
+Depends: kernel (=5.15.150-1-07803bb34d32784d5c4836a7525e2968), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: mips64_octeonplus
+Installed-Size: 45096
+SourceDateEpoch: 1722691334
+SourceName: kmod-amneziawg
+Filename: kmods/5.15.150-1-07803bb34d32784d5c4836a7525e2968/kmod-amneziawg_v23.05.3_mips64_octeonplus_octeon_generic.ipk
+Size: 45636
+SHA256sum: a977a16ac4abce6228805d8c6a04afe329993b8924b852ea78a478af60935edb
+Description: AmneziaWG VPN Kernel Module
+
+Package: luci-app-amneziawg
+Version: git-24.216.48134-1c17d9b
+Depends: libc, amneziawg-tools, ucode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 10771
+SourceDateEpoch: 1722691334
+SourceName: luci-app-amneziawg
+Filename: packages/luci-app-amneziawg_v23.05.3_mips64_octeonplus_octeon_generic.ipk
+Size: 11632
+SHA256sum: 1b2bcf342e181536ab42be754d717a144c4b253a6b4da1880845cc0af1a12032
+Description: Support for AmneziaWG VPN
+

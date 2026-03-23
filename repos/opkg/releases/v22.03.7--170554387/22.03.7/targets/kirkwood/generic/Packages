@@ -1,0 +1,54 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: arm_xscale
+Installed-Size: 29685
+SourceDateEpoch: 1722691334
+SourceName: amneziawg-tools
+Filename: packages/amneziawg-tools_v22.03.7_arm_xscale_kirkwood_generic.ipk
+Size: 30803
+SHA256sum: 7e2993aa820676431c1c9c934e33ce3e4aa29d92d00551c1e7bab52e5ab98a09
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+ state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+ more useful than IPSec, while avoiding the massive headache. It intends to
+ be considerably more performant than OpenVPN.  WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and super computers
+ alike, fit for many different circumstances. It uses UDP.
+ .
+ This package provides the userspace control program for WireGuard,
+ `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+
+Package: kmod-amneziawg
+Version: 5.10.221-1
+Depends: kernel (=5.10.221-1-d1ff5f75ed3a78f385a174eea63f7b8b), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: arm_xscale
+Installed-Size: 34285
+SourceDateEpoch: 1722691334
+SourceName: kmod-amneziawg
+Filename: kmods/5.10.221-1-d1ff5f75ed3a78f385a174eea63f7b8b/kmod-amneziawg_v22.03.7_arm_xscale_kirkwood_generic.ipk
+Size: 35041
+SHA256sum: f887f2d9faa0a4f03119cea992006e80bd49eef3b5ca41f55cec2e80540f28ae
+Description: AmneziaWG VPN Kernel Module
+
+Package: luci-app-amneziawg
+Version: git-24.216.48134-1c17d9b
+Depends: libc, amneziawg-tools, ucode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 10778
+SourceDateEpoch: 1722691334
+SourceName: luci-app-amneziawg
+Filename: packages/luci-app-amneziawg_v22.03.7_arm_xscale_kirkwood_generic.ipk
+Size: 11658
+SHA256sum: 746827c0c243b32a7d80f94a90248bbff2a48f9b907fc347a7884576dc7dbbeb
+Description: Support for AmneziaWG VPN
+

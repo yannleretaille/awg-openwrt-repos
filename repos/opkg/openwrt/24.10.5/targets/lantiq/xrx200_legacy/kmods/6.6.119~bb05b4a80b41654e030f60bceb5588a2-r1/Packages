@@ -1,0 +1,14 @@
+Package: kmod-amneziawg
+Version: 6.6.119.1.0.20251104-r1
+Depends: kernel (=6.6.119~bb05b4a80b41654e030f60bceb5588a2-r1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/base/kmod-amneziawg
+Section: kernel
+Architecture: mips_24kc
+Installed-Size: 92160
+SourceDateEpoch: 1766005702
+SourceName: kmod-amneziawg
+Filename: kmod-amneziawg_v24.10.5_mips_24kc_lantiq_xrx200_legacy.ipk
+Size: 38186
+SHA256sum: 95028abd13ae10b5d8997322335d189747776547fccb6cacf6062557aa0f1c65
+Description: AmneziaWG VPN Kernel Module
+

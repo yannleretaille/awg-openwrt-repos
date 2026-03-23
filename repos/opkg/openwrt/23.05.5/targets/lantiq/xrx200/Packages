@@ -1,0 +1,54 @@
+Package: amneziawg-tools
+Version: 1.0.20240213-1
+Depends: libc
+Source: feeds/awgopenwrt/amneziawg-tools
+Section: opt
+Maintainer: Jason A. Donenfeld <Jason@zx2c4.com>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: mips_24kc
+Installed-Size: 28900
+SourceDateEpoch: 1728299772
+SourceName: amneziawg-tools
+Filename: packages/amneziawg-tools_v23.05.5_mips_24kc_lantiq_xrx200.ipk
+Size: 29785
+SHA256sum: f2e76bab21425fb1f80fc66f30c438bc8975b4638907920a808cabcd5240ab77
+Description: WireGuard is a novel VPN that runs inside the Linux Kernel and utilizes
+ state-of-the-art cryptography. It aims to be faster, simpler, leaner, and
+ more useful than IPSec, while avoiding the massive headache. It intends to
+ be considerably more performant than OpenVPN.  WireGuard is designed as a
+ general purpose VPN for running on embedded interfaces and super computers
+ alike, fit for many different circumstances. It uses UDP.
+ .
+ This package provides the userspace control program for WireGuard,
+ `wg(8)`, a netifd protocol helper, and a re-resolve watchdog script.
+
+Package: kmod-amneziawg
+Version: 5.15.167-1
+Depends: kernel (=5.15.167-1-bd4dace3499bcaf87dca2e0045ad0c5a), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/awgopenwrt/kmod-amneziawg
+Section: kernel
+Architecture: mips_24kc
+Installed-Size: 38998
+SourceDateEpoch: 1728299772
+SourceName: kmod-amneziawg
+Filename: kmods/5.15.167-1-bd4dace3499bcaf87dca2e0045ad0c5a/kmod-amneziawg_v23.05.5_mips_24kc_lantiq_xrx200.ipk
+Size: 39705
+SHA256sum: b83c8907d9b9697c339aad89d3813383c61530692d4382cf48b2d0157984683f
+Description: AmneziaWG VPN Kernel Module
+
+Package: luci-app-amneziawg
+Version: git-24.281.40572-2de5a74
+Depends: libc, amneziawg-tools, ucode
+Source: feeds/awgopenwrt/luci-app-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 10769
+SourceDateEpoch: 1728299772
+SourceName: luci-app-amneziawg
+Filename: packages/luci-app-amneziawg_v23.05.5_mips_24kc_lantiq_xrx200.ipk
+Size: 11636
+SHA256sum: ea75b83abb19e501ba7e1437fd52a481edaa20b207c8bc2b326c3acddbf4e97c
+Description: Support for AmneziaWG VPN
+
