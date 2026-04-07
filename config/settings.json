@@ -37,6 +37,16 @@
           "kmod-amneziawg"
         ],
         "reason": "Temporary mitigation for OpenWrt kmod dependency closure failure on this target (xxhash built-in vs kmod-crypto-xxhash dependency mismatch). Remove after upstream fix/backport."
+      },
+      {
+        "id": "owrt-xxhash-lan969x-25.12.2",
+        "openwrt_version": "25.12.2",
+        "target": "microchipsw",
+        "subtarget": "lan969x",
+        "required_package_names": [
+          "kmod-amneziawg"
+        ],
+        "reason": "Temporary mitigation for OpenWrt kmod dependency closure failure on this target (xxhash built-in vs kmod-crypto-xxhash dependency mismatch). Remove after upstream fix/backport."
       }
     ]
   },
