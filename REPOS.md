@@ -1,7 +1,106 @@
 # Repository URLs
 
-Generated at: `2026-03-22T04:20:17+00:00`
+Generated at: `2026-04-08T19:59:36+00:00`
 Base URL: `https://yannleretaille.github.io/awg-openwrt-repos/repos`
+
+### OpenWrt 25.12.2
+
+| Target | Subtarget | OPKG | APK |
+| --- | --- | --- | --- |
+| apm821xx | nand |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/apm821xx/nand/packages.adb> |
+| apm821xx | sata |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/apm821xx/sata/packages.adb> |
+| armsr | armv7 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/armsr/armv7/packages.adb> |
+| armsr | armv8 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/armsr/armv8/packages.adb> |
+| at91 | sam9x |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/at91/sam9x/packages.adb> |
+| at91 | sama5 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/at91/sama5/packages.adb> |
+| at91 | sama7 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/at91/sama7/packages.adb> |
+| ath79 | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ath79/generic/packages.adb> |
+| ath79 | mikrotik |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ath79/mikrotik/packages.adb> |
+| ath79 | nand |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ath79/nand/packages.adb> |
+| ath79 | tiny |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ath79/tiny/packages.adb> |
+| bcm27xx | bcm2708 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bcm27xx/bcm2708/packages.adb> |
+| bcm27xx | bcm2709 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bcm27xx/bcm2709/packages.adb> |
+| bcm27xx | bcm2710 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bcm27xx/bcm2710/packages.adb> |
+| bcm27xx | bcm2711 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bcm27xx/bcm2711/packages.adb> |
+| bcm27xx | bcm2712 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bcm27xx/bcm2712/packages.adb> |
+| bcm47xx | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bcm47xx/generic/packages.adb> |
+| bcm47xx | legacy |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bcm47xx/legacy/packages.adb> |
+| bcm47xx | mips74k |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bcm47xx/mips74k/packages.adb> |
+| bcm4908 | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bcm4908/generic/packages.adb> |
+| bcm53xx | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bcm53xx/generic/packages.adb> |
+| bmips | bcm6318 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bmips/bcm6318/packages.adb> |
+| bmips | bcm63268 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bmips/bcm63268/packages.adb> |
+| bmips | bcm6328 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bmips/bcm6328/packages.adb> |
+| bmips | bcm6358 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bmips/bcm6358/packages.adb> |
+| bmips | bcm6362 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bmips/bcm6362/packages.adb> |
+| bmips | bcm6368 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/bmips/bcm6368/packages.adb> |
+| d1 | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/d1/generic/packages.adb> |
+| gemini | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/gemini/generic/packages.adb> |
+| imx | cortexa53 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/imx/cortexa53/packages.adb> |
+| imx | cortexa7 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/imx/cortexa7/packages.adb> |
+| imx | cortexa9 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/imx/cortexa9/packages.adb> |
+| ipq40xx | chromium |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ipq40xx/chromium/packages.adb> |
+| ipq40xx | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ipq40xx/generic/packages.adb> |
+| ipq40xx | mikrotik |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ipq40xx/mikrotik/packages.adb> |
+| ipq806x | chromium |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ipq806x/chromium/packages.adb> |
+| ipq806x | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ipq806x/generic/packages.adb> |
+| ixp4xx | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ixp4xx/generic/packages.adb> |
+| kirkwood | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/kirkwood/generic/packages.adb> |
+| lantiq | xrx200 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/lantiq/xrx200/packages.adb> |
+| lantiq | xrx200_legacy |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/lantiq/xrx200_legacy/packages.adb> |
+| lantiq | xway |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/lantiq/xway/packages.adb> |
+| layerscape | armv7 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/layerscape/armv7/packages.adb> |
+| layerscape | armv8_64b |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/layerscape/armv8_64b/packages.adb> |
+| loongarch64 | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/loongarch64/generic/packages.adb> |
+| malta | be |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/malta/be/packages.adb> |
+| malta | be64 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/malta/be64/packages.adb> |
+| malta | le |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/malta/le/packages.adb> |
+| malta | le64 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/malta/le64/packages.adb> |
+| mediatek | filogic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mediatek/filogic/packages.adb> |
+| mediatek | mt7622 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mediatek/mt7622/packages.adb> |
+| mediatek | mt7623 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mediatek/mt7623/packages.adb> |
+| mediatek | mt7629 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mediatek/mt7629/packages.adb> |
+| microchipsw | lan969x |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/microchipsw/lan969x/packages.adb> |
+| mpc85xx | p1010 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mpc85xx/p1010/packages.adb> |
+| mpc85xx | p1020 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mpc85xx/p1020/packages.adb> |
+| mpc85xx | p2020 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mpc85xx/p2020/packages.adb> |
+| mvebu | cortexa53 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mvebu/cortexa53/packages.adb> |
+| mvebu | cortexa72 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mvebu/cortexa72/packages.adb> |
+| mvebu | cortexa9 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mvebu/cortexa9/packages.adb> |
+| mxs | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/mxs/generic/packages.adb> |
+| octeon | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/octeon/generic/packages.adb> |
+| omap | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/omap/generic/packages.adb> |
+| pistachio | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/pistachio/generic/packages.adb> |
+| qoriq | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/qoriq/generic/packages.adb> |
+| qualcommax | ipq50xx |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/qualcommax/ipq50xx/packages.adb> |
+| qualcommax | ipq60xx |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/qualcommax/ipq60xx/packages.adb> |
+| qualcommax | ipq807x |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/qualcommax/ipq807x/packages.adb> |
+| ramips | mt7620 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ramips/mt7620/packages.adb> |
+| ramips | mt7621 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ramips/mt7621/packages.adb> |
+| ramips | mt76x8 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ramips/mt76x8/packages.adb> |
+| ramips | rt305x |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ramips/rt305x/packages.adb> |
+| ramips | rt3883 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/ramips/rt3883/packages.adb> |
+| realtek | rtl838x |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/realtek/rtl838x/packages.adb> |
+| realtek | rtl839x |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/realtek/rtl839x/packages.adb> |
+| realtek | rtl930x |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/realtek/rtl930x/packages.adb> |
+| realtek | rtl930x_nand |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/realtek/rtl930x_nand/packages.adb> |
+| realtek | rtl931x |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/realtek/rtl931x/packages.adb> |
+| realtek | rtl931x_nand |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/realtek/rtl931x_nand/packages.adb> |
+| rockchip | armv8 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/rockchip/armv8/packages.adb> |
+| sifiveu | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/sifiveu/generic/packages.adb> |
+| siflower | sf21 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/siflower/sf21/packages.adb> |
+| starfive | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/starfive/generic/packages.adb> |
+| stm32 | stm32mp1 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/stm32/stm32mp1/packages.adb> |
+| sunxi | arm926ejs |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/sunxi/arm926ejs/packages.adb> |
+| sunxi | cortexa53 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/sunxi/cortexa53/packages.adb> |
+| sunxi | cortexa7 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/sunxi/cortexa7/packages.adb> |
+| sunxi | cortexa8 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/sunxi/cortexa8/packages.adb> |
+| tegra | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/tegra/generic/packages.adb> |
+| x86 | 64 |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/x86/64/packages.adb> |
+| x86 | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/x86/generic/packages.adb> |
+| x86 | geode |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/x86/geode/packages.adb> |
+| x86 | legacy |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/x86/legacy/packages.adb> |
+| zynq | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.2/targets/zynq/generic/packages.adb> |
 
 ### OpenWrt 25.12.1
 

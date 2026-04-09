@@ -1,5 +1,5 @@
 {
-  "apk_entries": 747,
+  "apk_entries": 375,
   "collision_summary": {
     "collision_paths": 0,
     "duplicate_paths": 0,
@@ -12,28 +12,27 @@
     ],
     "release_missing_required_count": 0,
     "release_skipped_missing_required_count": 1,
-    "release_targets_checked": 187,
+    "release_targets_checked": 94,
     "required_package_names": [
       "amneziawg-tools",
       "kmod-amneziawg"
     ],
     "rolling_missing_required_count": 0,
     "rolling_skipped_missing_required_count": 1,
-    "rolling_targets_checked": 187,
-    "skip_rule_count": 1,
+    "rolling_targets_checked": 94,
+    "skip_rule_count": 2,
     "strict": true
   },
   "errors": [],
-  "generated_at": "2026-03-22T04:20:17+00:00",
-  "indexed_dirs": 1120,
+  "generated_at": "2026-04-08T19:59:35+00:00",
+  "indexed_dirs": 562,
   "notices": [
-    "coverage check skipped by policy at output/repos/apk/releases/v25.12.1--298836680/25.12.1/targets/microchipsw/lan969x: missing required packages ['kmod-amneziawg'] (status=missing_required_skipped, remaining_required=[])",
-    "coverage check skipped by policy at output/repos/apk/openwrt/25.12.1/targets/microchipsw/lan969x: missing required packages ['kmod-amneziawg'] (status=missing_required_skipped, remaining_required=[])"
+    "coverage check skipped by policy at output/repos/apk/releases/v25.12.2--302464580/25.12.2/targets/microchipsw/lan969x: missing required packages ['kmod-amneziawg'] (status=missing_required_skipped, remaining_required=[])",
+    "coverage check skipped by policy at output/repos/apk/openwrt/25.12.2/targets/microchipsw/lan969x: missing required packages ['kmod-amneziawg'] (status=missing_required_skipped, remaining_required=[])"
   ],
-  "release_manifests": 17,
+  "release_manifests": 1,
   "rolling_latest_release_by_openwrt": {
-    "25.12.0": 292884142,
-    "25.12.1": 298836680
+    "25.12.2": 302464580
   },
   "split_indexes": true
 }
