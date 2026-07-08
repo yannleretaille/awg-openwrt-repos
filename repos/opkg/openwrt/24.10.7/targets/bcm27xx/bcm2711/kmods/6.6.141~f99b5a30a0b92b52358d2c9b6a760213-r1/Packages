@@ -1,0 +1,14 @@
+Package: kmod-amneziawg
+Version: 6.6.141.1.0.20260329-r1
+Depends: kernel (=6.6.141~f99b5a30a0b92b52358d2c9b6a760213-r1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/base/kmod-amneziawg
+Section: kernel
+Architecture: aarch64_cortex-a72
+Installed-Size: 122880
+SourceDateEpoch: 1779897308
+SourceName: kmod-amneziawg
+Filename: kmod-amneziawg_v24.10.7_aarch64_cortex-a72_bcm27xx_bcm2711.ipk
+Size: 41542
+SHA256sum: da1616e2b5ddaf420110d3c782928b82f59675689c8e5172eb0571a8764a4d0c
+Description: AmneziaWG VPN Kernel Module
+
