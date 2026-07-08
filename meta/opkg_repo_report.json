@@ -10,19 +10,21 @@
       "luci-proto-amneziawg"
     ],
     "release_missing_required_count": 0,
-    "release_targets_checked": 0,
+    "release_targets_checked": 90,
     "required_package_names": [
       "amneziawg-tools",
       "kmod-amneziawg"
     ],
     "rolling_missing_required_count": 0,
-    "rolling_targets_checked": 0,
+    "rolling_targets_checked": 90,
     "strict": true
   },
   "errors": [],
-  "generated_at": "2026-04-08T19:59:26+00:00",
-  "indexed_dirs": 0,
-  "ipk_entries": 0,
-  "release_manifests": 1,
-  "rolling_latest_release_by_openwrt": {}
+  "generated_at": "2026-07-08T03:25:43+00:00",
+  "indexed_dirs": 540,
+  "ipk_entries": 360,
+  "release_manifests": 4,
+  "rolling_latest_release_by_openwrt": {
+    "24.10.7": 334159801
+  }
 }

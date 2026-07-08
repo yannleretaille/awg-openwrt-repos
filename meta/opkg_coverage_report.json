@@ -1,20 +1,1642 @@
 {
-  "generated_at": "2026-04-08T19:59:26+00:00",
+  "generated_at": "2026-07-08T03:25:43+00:00",
   "policy": {
     "optional_package_names": [
       "luci-i18n-amneziawg-ru",
       "luci-proto-amneziawg"
     ],
     "release_missing_required_count": 0,
-    "release_targets_checked": 0,
+    "release_targets_checked": 90,
     "required_package_names": [
       "amneziawg-tools",
       "kmod-amneziawg"
     ],
     "rolling_missing_required_count": 0,
-    "rolling_targets_checked": 0,
+    "rolling_targets_checked": 90,
     "strict": true
   },
-  "release_targets": [],
-  "rolling_targets": []
+  "release_targets": [
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/apm821xx/nand"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/apm821xx/sata"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/armsr/armv7"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/armsr/armv8"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/at91/sam9x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/at91/sama5"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/at91/sama7"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ath79/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ath79/mikrotik"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ath79/nand"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ath79/tiny"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bcm27xx/bcm2708"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bcm27xx/bcm2709"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bcm27xx/bcm2710"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bcm27xx/bcm2711"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bcm27xx/bcm2712"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bcm47xx/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bcm47xx/legacy"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bcm47xx/mips74k"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bcm4908/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bcm53xx/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bmips/bcm6318"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bmips/bcm63268"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bmips/bcm6328"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bmips/bcm6358"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bmips/bcm6362"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/bmips/bcm6368"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/d1/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/gemini/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/imx/cortexa53"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/imx/cortexa7"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/imx/cortexa9"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ipq40xx/chromium"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ipq40xx/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ipq40xx/mikrotik"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ipq806x/chromium"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ipq806x/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ixp4xx/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/kirkwood/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/lantiq/ase"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/lantiq/xrx200"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/lantiq/xrx200_legacy"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/lantiq/xway"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/lantiq/xway_legacy"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/layerscape/armv7"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/layerscape/armv8_64b"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/loongarch64/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/malta/be"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/malta/be64"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/malta/le"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/malta/le64"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mediatek/filogic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mediatek/mt7622"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mediatek/mt7623"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mediatek/mt7629"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mpc85xx/p1010"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mpc85xx/p1020"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mpc85xx/p2020"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mvebu/cortexa53"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mvebu/cortexa72"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mvebu/cortexa9"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/mxs/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/octeon/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/omap/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/pistachio/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/qoriq/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/qualcommax/ipq807x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ramips/mt7620"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ramips/mt7621"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ramips/mt76x8"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ramips/rt288x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ramips/rt305x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/ramips/rt3883"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/realtek/rtl838x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/realtek/rtl839x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/realtek/rtl930x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/realtek/rtl931x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/rockchip/armv8"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/sifiveu/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/starfive/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/stm32/stm32mp1"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/sunxi/cortexa53"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/sunxi/cortexa7"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/sunxi/cortexa8"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/tegra/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/x86/64"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/x86/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/x86/geode"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/x86/legacy"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/releases/v24.10.7--334159801/24.10.7/targets/zynq/generic"
+    }
+  ],
+  "rolling_targets": [
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/apm821xx/nand"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/apm821xx/sata"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/armsr/armv7"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/armsr/armv8"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/at91/sam9x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/at91/sama5"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/at91/sama7"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ath79/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ath79/mikrotik"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ath79/nand"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ath79/tiny"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bcm27xx/bcm2708"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bcm27xx/bcm2709"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bcm27xx/bcm2710"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bcm27xx/bcm2711"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bcm27xx/bcm2712"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bcm47xx/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bcm47xx/legacy"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bcm47xx/mips74k"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bcm4908/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bcm53xx/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bmips/bcm6318"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bmips/bcm63268"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bmips/bcm6328"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bmips/bcm6358"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bmips/bcm6362"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/bmips/bcm6368"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/d1/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/gemini/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/imx/cortexa53"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/imx/cortexa7"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/imx/cortexa9"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ipq40xx/chromium"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ipq40xx/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ipq40xx/mikrotik"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ipq806x/chromium"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ipq806x/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ixp4xx/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/kirkwood/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/lantiq/ase"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/lantiq/xrx200"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/lantiq/xrx200_legacy"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/lantiq/xway"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/lantiq/xway_legacy"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/layerscape/armv7"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/layerscape/armv8_64b"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/loongarch64/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/malta/be"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/malta/be64"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/malta/le"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/malta/le64"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mediatek/filogic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mediatek/mt7622"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mediatek/mt7623"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mediatek/mt7629"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mpc85xx/p1010"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mpc85xx/p1020"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mpc85xx/p2020"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mvebu/cortexa53"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mvebu/cortexa72"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mvebu/cortexa9"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/mxs/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/octeon/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/omap/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/pistachio/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/qoriq/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/qualcommax/ipq807x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ramips/mt7620"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ramips/mt7621"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ramips/mt76x8"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ramips/rt288x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ramips/rt305x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/ramips/rt3883"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/realtek/rtl838x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/realtek/rtl839x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/realtek/rtl930x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/realtek/rtl931x"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/rockchip/armv8"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/sifiveu/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/starfive/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/stm32/stm32mp1"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/sunxi/cortexa53"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/sunxi/cortexa7"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/sunxi/cortexa8"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/tegra/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/x86/64"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/x86/generic"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/x86/geode"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/x86/legacy"
+    },
+    {
+      "missing_required": [],
+      "present_count": 4,
+      "present_optional": [
+        "luci-i18n-amneziawg-ru",
+        "luci-proto-amneziawg"
+      ],
+      "target_root": "output/repos/opkg/openwrt/24.10.7/targets/zynq/generic"
+    }
+  ]
 }
