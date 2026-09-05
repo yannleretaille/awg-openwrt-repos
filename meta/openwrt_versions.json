@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T03:25:38+00:00",
+  "generated_at": "2026-09-05T20:57:09+00:00",
   "versions": {
     "22.03.7": {
       "openwrt_version": "22.03.7",
@@ -238,6 +238,21 @@
           "release_id": 334159801,
           "status": "processed",
           "tag_name": "v24.10.7"
+        }
+      ]
+    },
+    "24.10.8": {
+      "openwrt_version": "24.10.8",
+      "release_ids": [
+        360162709
+      ],
+      "releases": [
+        {
+          "asset_count": 360,
+          "published_at": "2026-07-27T01:24:27Z",
+          "release_id": 360162709,
+          "status": "processed",
+          "tag_name": "v24.10.8"
         }
       ]
     },

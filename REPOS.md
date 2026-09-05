@@ -1,6 +1,6 @@
 # Repository URLs
 
-Generated at: `2026-07-08T03:26:10+00:00`
+Generated at: `2026-09-05T20:57:15+00:00`
 Base URL: `https://yannleretaille.github.io/awg-openwrt-repos/repos`
 
 ### OpenWrt 25.12.5
@@ -594,6 +594,101 @@ Base URL: `https://yannleretaille.github.io/awg-openwrt-repos/repos`
 | x86 | geode |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.0/targets/x86/geode/packages.adb> |
 | x86 | legacy |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.0/targets/x86/legacy/packages.adb> |
 | zynq | generic |  | <https://yannleretaille.github.io/awg-openwrt-repos/repos/apk/openwrt/25.12.0/targets/zynq/generic/packages.adb> |
+
+### OpenWrt 24.10.8
+
+| Target | Subtarget | OPKG | APK |
+| --- | --- | --- | --- |
+| apm821xx | nand | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/apm821xx/nand> |  |
+| apm821xx | sata | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/apm821xx/sata> |  |
+| armsr | armv7 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/armsr/armv7> |  |
+| armsr | armv8 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/armsr/armv8> |  |
+| at91 | sam9x | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/at91/sam9x> |  |
+| at91 | sama5 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/at91/sama5> |  |
+| at91 | sama7 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/at91/sama7> |  |
+| ath79 | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ath79/generic> |  |
+| ath79 | mikrotik | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ath79/mikrotik> |  |
+| ath79 | nand | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ath79/nand> |  |
+| ath79 | tiny | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ath79/tiny> |  |
+| bcm27xx | bcm2708 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bcm27xx/bcm2708> |  |
+| bcm27xx | bcm2709 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bcm27xx/bcm2709> |  |
+| bcm27xx | bcm2710 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bcm27xx/bcm2710> |  |
+| bcm27xx | bcm2711 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bcm27xx/bcm2711> |  |
+| bcm27xx | bcm2712 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bcm27xx/bcm2712> |  |
+| bcm47xx | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bcm47xx/generic> |  |
+| bcm47xx | legacy | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bcm47xx/legacy> |  |
+| bcm47xx | mips74k | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bcm47xx/mips74k> |  |
+| bcm4908 | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bcm4908/generic> |  |
+| bcm53xx | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bcm53xx/generic> |  |
+| bmips | bcm6318 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bmips/bcm6318> |  |
+| bmips | bcm63268 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bmips/bcm63268> |  |
+| bmips | bcm6328 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bmips/bcm6328> |  |
+| bmips | bcm6358 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bmips/bcm6358> |  |
+| bmips | bcm6362 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bmips/bcm6362> |  |
+| bmips | bcm6368 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/bmips/bcm6368> |  |
+| d1 | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/d1/generic> |  |
+| gemini | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/gemini/generic> |  |
+| imx | cortexa53 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/imx/cortexa53> |  |
+| imx | cortexa7 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/imx/cortexa7> |  |
+| imx | cortexa9 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/imx/cortexa9> |  |
+| ipq40xx | chromium | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ipq40xx/chromium> |  |
+| ipq40xx | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ipq40xx/generic> |  |
+| ipq40xx | mikrotik | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ipq40xx/mikrotik> |  |
+| ipq806x | chromium | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ipq806x/chromium> |  |
+| ipq806x | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ipq806x/generic> |  |
+| ixp4xx | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ixp4xx/generic> |  |
+| kirkwood | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/kirkwood/generic> |  |
+| lantiq | ase | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/lantiq/ase> |  |
+| lantiq | xrx200 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/lantiq/xrx200> |  |
+| lantiq | xrx200_legacy | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/lantiq/xrx200_legacy> |  |
+| lantiq | xway | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/lantiq/xway> |  |
+| lantiq | xway_legacy | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/lantiq/xway_legacy> |  |
+| layerscape | armv7 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/layerscape/armv7> |  |
+| layerscape | armv8_64b | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/layerscape/armv8_64b> |  |
+| loongarch64 | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/loongarch64/generic> |  |
+| malta | be | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/malta/be> |  |
+| malta | be64 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/malta/be64> |  |
+| malta | le | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/malta/le> |  |
+| malta | le64 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/malta/le64> |  |
+| mediatek | filogic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mediatek/filogic> |  |
+| mediatek | mt7622 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mediatek/mt7622> |  |
+| mediatek | mt7623 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mediatek/mt7623> |  |
+| mediatek | mt7629 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mediatek/mt7629> |  |
+| mpc85xx | p1010 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mpc85xx/p1010> |  |
+| mpc85xx | p1020 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mpc85xx/p1020> |  |
+| mpc85xx | p2020 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mpc85xx/p2020> |  |
+| mvebu | cortexa53 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mvebu/cortexa53> |  |
+| mvebu | cortexa72 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mvebu/cortexa72> |  |
+| mvebu | cortexa9 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mvebu/cortexa9> |  |
+| mxs | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/mxs/generic> |  |
+| octeon | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/octeon/generic> |  |
+| omap | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/omap/generic> |  |
+| pistachio | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/pistachio/generic> |  |
+| qoriq | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/qoriq/generic> |  |
+| qualcommax | ipq807x | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/qualcommax/ipq807x> |  |
+| ramips | mt7620 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ramips/mt7620> |  |
+| ramips | mt7621 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ramips/mt7621> |  |
+| ramips | mt76x8 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ramips/mt76x8> |  |
+| ramips | rt288x | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ramips/rt288x> |  |
+| ramips | rt305x | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ramips/rt305x> |  |
+| ramips | rt3883 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/ramips/rt3883> |  |
+| realtek | rtl838x | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/realtek/rtl838x> |  |
+| realtek | rtl839x | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/realtek/rtl839x> |  |
+| realtek | rtl930x | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/realtek/rtl930x> |  |
+| realtek | rtl931x | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/realtek/rtl931x> |  |
+| rockchip | armv8 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/rockchip/armv8> |  |
+| sifiveu | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/sifiveu/generic> |  |
+| starfive | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/starfive/generic> |  |
+| stm32 | stm32mp1 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/stm32/stm32mp1> |  |
+| sunxi | cortexa53 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/sunxi/cortexa53> |  |
+| sunxi | cortexa7 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/sunxi/cortexa7> |  |
+| sunxi | cortexa8 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/sunxi/cortexa8> |  |
+| tegra | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/tegra/generic> |  |
+| x86 | 64 | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/x86/64> |  |
+| x86 | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/x86/generic> |  |
+| x86 | geode | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/x86/geode> |  |
+| x86 | legacy | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/x86/legacy> |  |
+| zynq | generic | <https://yannleretaille.github.io/awg-openwrt-repos/repos/opkg/openwrt/24.10.8/targets/zynq/generic> |  |
 
 ### OpenWrt 24.10.7
 

@@ -1,0 +1,14 @@
+Package: kmod-amneziawg
+Version: 6.6.144.1.0.20260611-r1
+Depends: kernel (=6.6.144~e8209682f5647f3a301dad3fb2c9b9c0-r1), kmod-udptunnel4, kmod-udptunnel6, kmod-crypto-lib-chacha20poly1305, kmod-crypto-lib-curve25519
+Source: feeds/base/kmod-amneziawg
+Section: kernel
+Architecture: powerpc64_e5500
+Installed-Size: 153600
+SourceDateEpoch: 1784877710
+SourceName: kmod-amneziawg
+Filename: kmod-amneziawg_v24.10.8_powerpc64_e5500_qoriq_generic.ipk
+Size: 46888
+SHA256sum: c15a1e910261c42088ea71e7d2415d98b37ec7a12a1af4ecda2fe07c95a7ef47
+Description: AmneziaWG VPN Kernel Module
+
