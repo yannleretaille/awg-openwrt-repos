@@ -1,0 +1,54 @@
+Package: amneziawg-tools
+Version: 1.0.20260618-r1
+Depends: libc, ip, ip, kmod-amneziawg
+Source: feeds/base/amneziawg-tools
+Section: net
+Maintainer: Amnezia Admin <admin@amnezia.org>
+License: GPL-2.0
+LicenseFiles: COPYING
+Architecture: mips_24kc
+Installed-Size: 92160
+SourceDateEpoch: 1784877710
+SourceName: amneziawg-tools
+URL: https://amnezia.org/
+Filename: amneziawg-tools_v24.10.8_mips_24kc_lantiq_xway.ipk
+Size: 30956
+SHA256sum: ff895ffc2db9c77eb78e5e29ad262a36631a14ea675657f7278cbd5a220dd42d
+Description: Amnezia VPN — simple and free app to run a self-hosted VPN with
+ high privacy requirements.
+ .
+ This package provides the userspace control program for AmneziaWG,
+ `awg`, a netifd protocol helper, and a re-resolve watchdog script.
+
+Package: luci-i18n-amneziawg-ru
+Version: 0
+Depends: libc, luci-proto-amneziawg
+Source: feeds/base/luci-proto-amneziawg
+Section: luci
+License: Apache-2.0
+Architecture: all
+Installed-Size: 20480
+SourceDateEpoch: 1784877710
+SourceName: luci-proto-amneziawg
+Filename: luci-i18n-amneziawg-ru_v24.10.8_mips_24kc_lantiq_xway.ipk
+Size: 3001
+SHA256sum: 0a25458359e8e3e2bc4a206ef829d082df41fd408d3431d1a7810a7868ad4f35
+Description: Translation for luci-proto-amneziawg - Русский (Russian)
+
+Package: luci-proto-amneziawg
+Version: 2.0.4-r1
+Depends: libc, amneziawg-tools, ucode, luci-lib-uqr, resolveip
+Source: feeds/base/luci-proto-amneziawg
+Section: luci
+Maintainer: OpenWrt LuCI community
+License: Apache-2.0
+Architecture: all
+Installed-Size: 102400
+SourceDateEpoch: 1784877710
+SourceName: luci-proto-amneziawg
+URL: https://github.com/openwrt/luci
+Filename: luci-proto-amneziawg_v24.10.8_mips_24kc_lantiq_xway.ipk
+Size: 28018
+SHA256sum: 009ba42f7dc2f81d58cecd070e19d53c96b4c635cc458e046083031cc03c7ea4
+Description: Provides support and Web UI for AmneziaWG VPN
+
